@@ -6,6 +6,8 @@ DROP TABLE IF EXISTS story;
 DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS channel;
 DROP TABLE IF EXISTS subscribed;
+DROP TABLE IF EXISTS likesStory;
+DROP TABLE IF EXISTS likesComment;
 
 CREATE TABLE user (
   username VARCHAR PRIMARY KEY,
@@ -42,5 +44,18 @@ CREATE TABLE channel (
 
 CREATE TABLE subscribed (
   user VARCHAR REFERENCES user NOT NULL,
-  channel INTEGER REFERENCES channel NOT NULL
+  channel INTEGER REFERENCES channel NOT NULL,
+  PRIMARY KEY(user, channel)
+);
+
+CREATE TABLE likesStory (
+  user VARCHAR REFERENCES user NOT NULL,
+  story INTEGER REFERENCES story NOT NULL,
+  PRIMARY KEY(user, story)
+);
+
+CREATE TABLE likesComment (
+  user VARCHAR REFERENCES user NOT NULL,
+  comment INTEGER REFERENCES comment NOT NULL,
+  PRIMARY KEY(user, comment)
 );
