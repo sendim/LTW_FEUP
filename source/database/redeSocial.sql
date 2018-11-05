@@ -19,7 +19,7 @@ CREATE TABLE story (
   id INTEGER PRIMARY KEY,
   title VARCHAR,
   published INTEGER, -- date when the article was published in epoch format
-  username VARCHAR REFERENCES users NOT NULL, -- who wrote the article
+  username VARCHAR REFERENCES user NOT NULL, -- who wrote the article
   text VARCHAR,
   likes INTEGER,
   channel INTEGER REFERENCES channel
@@ -28,7 +28,7 @@ CREATE TABLE story (
 CREATE TABLE comment (
   id INTEGER PRIMARY KEY,
   storyId INTEGER REFERENCES story NOT NULL,
-  username VARCHAR REFERENCES users NOT NULL,
+  username VARCHAR REFERENCES user NOT NULL,
   published INTEGER, -- date when news item was published in epoch format
   text VARCHAR,
   likes INTEGER,
