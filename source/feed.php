@@ -7,7 +7,7 @@ $articles = getFeed();
 
     foreach( $articles as $article) {
     echo '<h1>' . $article['title'] . '</h1>';
-    echo '<p>' . $article['fulltext'] . '</p>';
+    echo '<p>' . $article['text'] . '</p>';
    
     echo '<footer>'; 
       echo '<p>' . $article['username'] . " " . $article['published'] . '</p>';
