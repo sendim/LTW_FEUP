@@ -30,4 +30,19 @@
         $stmt->execute(array($username, sha1($password)));
         return $stmt->fetch()?true:false; // return true if a line exists
     }
+
+    function get_profile($username) {
+        global $db;
+
+        $stmt = $db->prepare('SELECT * FROM user WHERE username = ?');
+        $stmt->execute(array($username));
+        return $stmt->fetchAll();
+    }
+
+    function delete_user($username) {
+        global $db;
+
+        $stmt = $db->prepare('DELETE FROM user WHERE username = ?');
+        $stmt->execute(array($username));
+    }
 ?>
