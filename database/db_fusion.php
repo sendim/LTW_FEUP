@@ -3,7 +3,7 @@
 
     function getFeed() {
         $db = Database::instance()->db();
-        $stmt = $db->prepare('SELECT story.*, user.*, COUNT(comments.id) AS comment
+        $stmt = $db->prepare('SELECT story.*, user.*, COUNT(comment.id) AS comment
         FROM story JOIN
              user USING (username) LEFT JOIN
              comment ON comment.storyId = story.id
@@ -26,10 +26,10 @@
         $stmt->execute(array($title, date("Y/m/d"), $userId,  $fulltext, 0, ""));
     }
 
-    function action_signup($username, $password) {
+    /*function action_signup($username, $password) {
         $stmt->execute(array($username, sha1($password)));
         return $stmt->fetch()?true:false; // return true if a line exists
-    }
+    }*/
 
     function get_profile($username) {
         global $db;
