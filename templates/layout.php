@@ -22,12 +22,15 @@
         </div>
         <ul>
           <li>
+            <img src="images/repo.svg" alt="Feed">
             <a href="feed.php">Feed</a>
           </li>
           <li>
+            <img src="images/tag.svg" alt="Channels">
             <a href="#">Channels</a>
           </li>
           <li>
+            <img src="images/person.svg" alt="Profile">
             <a href="#">Profile</a>
           </li>
         </ul>

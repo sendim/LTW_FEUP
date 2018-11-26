@@ -112,12 +112,20 @@
     text-decoration: none;
   }
 
+  #menu ul li img {
+    fill: white !important;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+  }
+
   #menu #search {
     padding: 8px;
   }
 
-  #menu #search input#search-website {
+  #menu #search #search-website {
     background-color: transparent;
+    border-color: rgba(232, 233, 235, 0.35);
   }
 
   /* content */
