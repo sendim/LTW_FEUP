@@ -3,7 +3,7 @@
  include_once('../templates/layout.php');
 
  $content = function() {
-  $stories = getFeed();
+  $stories = get_feed();
   foreach( $stories as $storie) {
     echo '<h1>' . $storie['title'] . '</h1>';
     echo '<p>' . $storie['text'] . '</p>';
@@ -14,6 +14,5 @@
   }
  };
  
-
   draw_layout($content);
 ?>
