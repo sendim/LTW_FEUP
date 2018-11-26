@@ -2,7 +2,7 @@
 /**
  * Draws the login section.
  */ ?>
-    <section id="login">
+    <section id="login" class="bg-white">
 
         <header>
           <h2>Login</h2>
@@ -38,7 +38,7 @@
 /**
  * Draws the signup section.
  */ ?>
-  <section id="signup">
+  <section id="signup" class="bg-white">
 
     <header>
       <h2>Signup</h2>

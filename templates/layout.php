@@ -3,13 +3,14 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   </head>
   <body>
     <nav id="navbar">
       <h1>The Fusion Network</h1>
-      <button class="secondary">
-        <a href="login.php">
+        <a class="button" href="login.php">
+        <img src="images/sign-in.svg" alt="Login">
           Login
         </a>
       </button>
@@ -22,16 +23,22 @@
         </div>
         <ul>
           <li>
-            <img src="images/repo.svg" alt="Feed">
-            <a href="feed.php">Feed</a>
+            <a href="feed.php">
+              <img src="images/repo.svg" alt="Feed">
+              Feed
+            </a>
           </li>
           <li>
-            <img src="images/tag.svg" alt="Channels">
-            <a href="#">Channels</a>
+            <a href="#">
+              <img src="images/tag.svg" alt="Channels">
+              Channels
+            </a>
           </li>
           <li>
-            <img src="images/person.svg" alt="Profile">
-            <a href="#">Profile</a>
+            <a href="#">
+              <img src="images/person.svg" alt="Profile">
+              Profile
+            </a>
           </li>
         </ul>
       </nav>

@@ -1,18 +1,11 @@
 <?php
  include_once('../database/db_fusion.php');
  include_once('../templates/layout.php');
-
- $content = function() {
-  $stories = get_feed();
-  foreach( $stories as $storie) {
-    echo '<h1>' . $storie['title'] . '</h1>';
-    echo '<p>' . $storie['text'] . '</p>';
-    
-    echo '<footer>'; 
-      echo '<p>' . $storie['username'] . " " . $storie['published'] . '</p>';
-    echo '</footer>';
-  }
- };
+ include_once('../templates/feed.php');
  
-  draw_layout($content);
+  draw_layout(function(){
+    $stories = get_feed();
+    draw_feed($stories);
+  });
+
 ?>
