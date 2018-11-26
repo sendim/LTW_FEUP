@@ -4,16 +4,36 @@
  */ ?>
     <section id="login">
 
-        <header><h2>Login</h2></header>
+        <header>
+          <h2>Login</h2>
+        </header>
+
+        <hr />
 
         <form method="post" action="../actions/action_login.php">
-        <input type="text" name="username" placeholder="username" required>
-        <input type="password" name="password" placeholder="password" required>
-        <input type="submit" value="Login">
+          <div class="form-input">
+            <label>Username</label>
+            <div>
+              <input type="text" name="username" placeholder="username" required>
+            </div>
+          </div>
+
+          <div class="form-input">
+            <label>Password</label>
+            <div> 
+              <input type="password" name="password" placeholder="password" required>
+            </div>
+          </div>
+
+          <button class="primary" type="submit">
+            Login
+          </button>
         </form>
 
         <footer>
-        <p>Don't have an account? <a href="signup.php">Signup!</a></p>
+          <p>
+            Don't have an account? <a href="signup.php">Signup!</a>
+          </p>
         </footer>
 
     </section>
