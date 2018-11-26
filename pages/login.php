@@ -4,9 +4,9 @@
     include_once('../templates/auth.php');
 
     // verify if user session is set
-    /*if (isset($_SESSION['username']))
-        die(header('Location: feed.php'));*/
-
+    if (isset($_SESSION['username']))
+        die(header('Location: feed.php'));
+        
     $content = function () {
         draw_login();
     };

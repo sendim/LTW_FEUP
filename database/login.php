@@ -3,7 +3,7 @@
  include_once('database/db_fusion.php');
  include_once('templates/header.php');
 
-  $articles = getFeed();
+  $articles = get_feed();
   foreach( $articles as $article) {
     echo '<h1>' . $article['title'] . '</h1>';
     echo '<p>' . $article['fulltext'] . '</p>';
