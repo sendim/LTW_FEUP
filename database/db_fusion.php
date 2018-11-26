@@ -60,4 +60,33 @@
         $stmt = $db->prepare('DELETE FROM user WHERE username = ?');
         $stmt->execute(array($username));
     }
+    function get_channels() {
+        $db = Database::instance()->db();
+
+        $stmt = $db->prepare('SELECT * FROM channel' );
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    function get_profiles() {
+        $db = Database::instance()->db();
+
+        $stmt = $db->prepare('SELECT * FROM user' );
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    function get_stories() {
+        $db = Database::instance()->db();
+
+        $stmt = $db->prepare('SELECT * FROM story' );
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    function get_comments() {
+        $db = Database::instance()->db();
+
+        $stmt = $db->prepare('SELECT * FROM comment' );
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 ?>
