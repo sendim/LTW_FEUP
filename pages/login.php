@@ -1,5 +1,4 @@
 <?php
-    include_once('../database/db_fusion.php');
     include_once('../templates/layout.php');
     include_once('../templates/auth.php');
 

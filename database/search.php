@@ -1,5 +1,57 @@
 <?php
+    include_once('../includes/database.php');
 
+    function get_feed() {
+        $db = Database::instance()->db();
+        $stmt = $db->prepare(
+            'SELECT story.*, user.*, COUNT(comment.id) AS comment
+            FROM story JOIN user USING (username) 
+            LEFT JOIN comment ON comment.storyId = story.id
+            GROUP BY story.id, user.username
+            ORDER BY published DESC'
+        );
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    function get_channels() {
+        $db = Database::instance()->db();
+
+        $stmt = $db->prepare('SELECT * FROM channel' );
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    function get_profiles() {
+        $db = Database::instance()->db();
+
+        $stmt = $db->prepare('SELECT * FROM user');
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    function get_users() {
+        $db = Database::instance()->db();
+        $stmt = $db->prepare('SELECT * FROM user');
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    function get_stories() {
+        $db = Database::instance()->db();
+
+        $stmt = $db->prepare('SELECT * FROM story');
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    function get_comments() {
+        $db = Database::instance()->db();
+
+        $stmt = $db->prepare('SELECT * FROM comment' );
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 
     function searchChannels($substring) {
         $channels = get_channels();

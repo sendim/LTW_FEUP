@@ -1,6 +1,5 @@
 <?php function draw_story($story){ ?>
 
-
     <div class="story bg-white">
         <header>
         <?php
