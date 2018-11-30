@@ -30,7 +30,6 @@
           Don't have an account? <a href="signup.php">Signup!</a>
         </small>
     
-
     </section>
 <?php } ?>
 

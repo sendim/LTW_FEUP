@@ -1,5 +1,5 @@
 /*- All passwords are 1234 in SHA-1 format*/
-INSERT INTO user VALUES ("dominic", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "Dominic Woods"," ",0);
+INSERT INTO user VALUES ("dominic", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "Dominic Woods","This is my story",0);
 INSERT INTO user VALUES ("zachary", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "Zachary Young"," ",0);
 INSERT INTO user VALUES ("alicia", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "Alicia Hamilton"," ",0);
 INSERT INTO user VALUES ("abril", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "Abril Cooley"," ",0);
@@ -7,7 +7,6 @@ INSERT INTO user VALUES ("abril", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "A
 INSERT INTO channel VALUES (NULL, 
 	'theme'
 );
-
 
 INSERT INTO story VALUES (NULL,
   'Lorem ipsum dolor sit amet, consectetur',
