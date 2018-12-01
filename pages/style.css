@@ -207,12 +207,12 @@
 
   /* feed */
 
-  #feed .story {
+  /* story card */
+
+  .story-card {
     margin-top: 12px;
     padding: 12px;
   }
-
-  /* story card */
 
   .story-card header h1 {
     display: inline-block;
@@ -241,7 +241,7 @@
     margin-top: 5px;
   }
 
-  .story  footer .story-footer-right {
+  .story-card  footer .story-footer-right {
     margin-right: 12px;
     float: right;
     margin-top: 5px;

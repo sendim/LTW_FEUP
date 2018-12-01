@@ -7,7 +7,7 @@
     // TODO: get story comments, link to story comments (story page)
     
     ?>
-    <div class="story bg-white">
+    <div class="story-card bg-white">
         <header>
         <?php
             echo '<h1>' . $story['title'] . '</h1>';
