@@ -62,7 +62,7 @@
             </a>
           </li>
           <li>
-            <a href="../pages/profile.php">
+            <a href="profile.php">
               <img src="images/person.svg" alt="Profile">
               Profile
             </a>

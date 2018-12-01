@@ -198,3 +198,13 @@
     margin-top: 12px;
     padding: 12px;
   }
+
+  /* story */
+  .story h1 {
+    display: inline-block;
+  }
+
+  .story small {
+    display: inline-block;
+    margin-left: 12px;
+  }
