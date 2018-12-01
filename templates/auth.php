@@ -21,7 +21,7 @@
             <input type="password" name="password" placeholder="password" required>
           </div>
 
-          <button class="primary" type="submit">
+          <button class="button primary" type="submit">
             Login
           </button>
         </form>
@@ -64,7 +64,7 @@
         <textarea name="description" placeholder="Description"></textarea>
       </div>
       
-      <button class="primary" type="submit">Signup</button>
+      <button class="button primary" type="submit">Signup</button>
     </form>
 
     <small>

@@ -14,8 +14,8 @@ function draw_feed($stories) { ?>
                 New story
             </a>
 
-            <button>Select channel</button>
-            <button>Order</button> 
+            <button class="button secondary">Select channel</button>
+            <button class="button secondary">Order</button> 
         </section>
 
         <div>

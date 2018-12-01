@@ -9,28 +9,11 @@
   
   a {
     text-decoration: none;
+    color: #F66;
   }
 
-  button {
-    border-radius: 4px;
-    border: none;
-    min-width: 100px;
-  }
-
-  .button {
-    border-radius: 4px;
-    border: none;
-    min-width: 100px;
-    text-decoration: none;
-    padding: 6px;
-    text-align: center;
-    display: inline-block;
-  }
-
-  .button img {
-    vertical-align: middle;
-    margin-right: 10px;
-    margin-left: -5px;
+  p {
+    font-size: 16px;
   }
 
   hr {
@@ -62,12 +45,6 @@
     display: inline-block;
   }
 
-  button.primary {
-    background-color: #ff4d00;
-    color: white;
-    border: solid 1px #ff4d00;
-  }
-
   section {
     padding: 12px;
   }
@@ -92,9 +69,42 @@
 
   /* classes */
 
-  .secondary {
-    border: solid 1px rgba(232, 233, 235, 0.6);
+  .button {
+    border-radius: 4px;
+    border: none;
+    min-width: 100px;
+    text-decoration: none;
+    padding: 6px;
     text-align: center;
+    display: inline-block;
+  }
+
+  .button.icon {
+    min-width: 40px;
+    border-radius: "50%";
+  }
+
+  .button.icon img {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  .button img {
+    vertical-align: middle;
+    margin-right: 10px;
+    margin-left: -5px;
+  }
+
+  .button.primary {
+    background-color: #ff4d00;
+    color: white;
+    border: solid 1px #ff4d00;
+  }
+
+  .button.secondary {
+    background-color: white;
+    border: solid 1px rgba(232, 233, 235, 0.6);
+    color: black;
   }
 
   .form-input {
@@ -120,6 +130,9 @@
   #navbar {
     padding: 12px;
     display: flex;
+    -webkit-box-shadow: 0px 12px 27px -12px rgba(0,0,0,0.41);
+    -moz-box-shadow: 0px 12px 27px -12px rgba(0,0,0,0.41);
+    box-shadow: 0px 12px 27px -12px rgba(0,0,0,0.41);
   }
 
   #navbar h1 {
@@ -199,12 +212,37 @@
     padding: 12px;
   }
 
-  /* story */
-  .story h1 {
+  /* story card */
+
+  .story-card header h1 {
     display: inline-block;
   }
 
-  .story small {
+  .story-card header small {
     display: inline-block;
     margin-left: 12px;
+    color: gray;
+  }
+
+  .story-card footer .story-footer-left {
+    display: inline-block;
+  }
+
+  .story-card footer .story-footer-left .vote-buttons {
+    display: inline-block;
+  }
+
+  .story-card footer .story-footer-left .signature {
+    display: inline-block;
+  }
+
+  .story-card footer .story-footer-left span {
+    font-size: 20px;
+    margin-top: 5px;
+  }
+
+  .story  footer .story-footer-right {
+    margin-right: 12px;
+    float: right;
+    margin-top: 5px;
   }
