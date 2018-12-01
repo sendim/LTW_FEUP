@@ -4,49 +4,69 @@
     include_once('../templates/story.php');
     include_once('../templates/comment.php');
 
-    function draw_profile($profile) { ?> 
+    function draw_profile($profile) { 
+        $comments = get_user_comments($_SESSION['username']);
+        $stories = get_user_stories($_SESSION['username']);
+        ?> 
+        <div id="profile">
 
-        <div id="feed">
-
-            <section class="bg-white">
+            <header id="profile-header" class="container bg-white">
                 <header>
-                    <h2><?=$profile['name']?></h2>
-                    <h3><?='@'.$profile['username']?></h3>
+                    <div id="profile-header-user">
+                        <h2><?=$profile['name']?></h2>
+                        <small><?='@'.$profile['username']?></small>
+                    </div>
+
+                    <div id="profile-header-points">
+                        <img src="images/star.svg" alt="Points">
+                        <?=$profile['points']?>
+                    </div>
+    
                 </header>
-                
-                <img src="images/star.svg" alt="Points">
-                <?=$profile['points']?>
 
                 <hr />
-
+                
                 <?php echo '<p>' . $profile['description'] . '</p>'; ?>
-            </section>
+            </header>
 
             <section id="stories">
-                Stories
-                <button>Order by date</button>
-            </section>
-            <section class="bg-white">
-                <div>
+                <div id="stories-header" class="container section-header">
+                    Stories
+                    <button class="button secondary">Order by date</button>
+                </div>
+
+                <div id="stories-list">
                     <?php
-                        $stories = get_user_stories($_SESSION['username']);
-                        foreach($stories as $story) {
-                            draw_story($story);
-                        } ?>
+                        if ($stories) {
+                            foreach($stories as $story) {
+                                draw_story($story);
+                            }
+                        } else { ?>
+                            <div class="container bg-white"> No stories yet. </div>
+                            <?php
+                        } 
+                    ?>
                 </div>
             </section>
 
             <section id ="comments">
-                Comments
-                <button>Order by date</button>
-            </section>
-            <section class="bg-white">
-                <div>
+                <div id="comments-header" class="container section-header">
+                    Comments
+                    <button class="button secondary">Order by date</button>
+                </div>
+
+                <div id="comments-list">
                     <?php
-                        $comments = get_user_comments($_SESSION['username']);
-                        foreach($comments as $comment) {
-                            draw_comment($comment);
-                        } ?>
+                        if ($comments) {
+                            foreach($comments as $comment) {
+                                draw_comment($comment);
+                            } 
+                        } else {
+                            ?>
+                            <div class="container bg-white"> No comments yet. </div>
+                            <?php
+                        }
+                    ?>
                 </div>
             </section>
             

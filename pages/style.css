@@ -43,10 +43,7 @@
     margin-top: 8px;
     margin-bottom: 8px;
     display: inline-block;
-  }
-
-  section {
-    padding: 12px;
+    color: gray;
   }
 
   #messages article {
@@ -68,6 +65,16 @@
   }
 
   /* classes */
+
+  .container {
+    padding: 12px;
+  }
+
+  .section-header {
+    background-color: #E8E9EB;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
 
   .button {
     border-radius: 4px;
@@ -219,9 +226,7 @@
   }
 
   .story-card header small {
-    display: inline-block;
     margin-left: 12px;
-    color: gray;
   }
 
   .story-card footer .story-footer-left {
@@ -246,3 +251,40 @@
     float: right;
     margin-top: 5px;
   }
+
+  /* profile */
+
+  #profile #profile-header header {
+    display: flex;
+    align-items: center;
+  }
+
+  #profile #profile-header header #profile-header-user {
+    margin: auto;
+    width: 80%;
+    display: flex;
+    align-items: center;
+  }
+
+  #profile #profile-header header #profile-header-user small {
+    margin-left: 8px;
+  }
+  
+  #profile #profile-header header #profile-header-points {
+    margin: auto;
+    width: 20%;
+    display: flex;
+    align-items: center;
+  } 
+
+  #profile #profile-header header #profile-header-points img {
+    height: 30px;
+    width: 30px;
+    margin-right: 8px;
+  }
+
+  /*
+  #profile #profile-header #profile-header-points img {
+    height: 20px;
+    width: 20px;
+  }*/

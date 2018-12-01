@@ -3,7 +3,7 @@ include_once('../templates/story.php');
 
 function draw_feed($stories) { ?> 
     <div id="feed">
-        <section class="bg-white">
+        <section class="container bg-white">
             <header>
                 <h2>Feed</h2>
             </header>
