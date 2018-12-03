@@ -12,5 +12,5 @@
   draw_layout(function() {
     $profile = get_user_profile($_SESSION['username']);
     draw_profile($profile[0]);
-  });
+  }, 'profile');
 ?>

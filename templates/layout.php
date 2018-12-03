@@ -1,14 +1,14 @@
 <?php 
   include_once('../includes/session.php');
 
-  function draw_layout($draw_content) {
+  function draw_layout($draw_content, $selected) {
   /**
   * Draws a typical page section.
   */
       draw_header() ?>
       <div id="row">
         <?php
-          draw_menu(); 
+          draw_menu($selected); 
           draw_content($draw_content);
           draw_messages();
         ?>
@@ -40,29 +40,32 @@
         </nav>
   <?php } ?>
 
-  <?php function draw_menu() {
+  <?php 
   /**
   * Draws the page menu section.
-  */?>
+  */
+  function draw_menu($selected) {
+
+  ?>
       <nav id="menu">
         <div id="search">
           <input id="search-website"  name="search-website" placeholder="Search stories, comments..."/>
         </div>
         <ul>
-          <li>
+          <li <?php if ($selected == 'feed') echo "id='menu-selected'"; ?> >
             <a href="feed.php">
               <img src="images/repo.svg" alt="Feed">
               Feed
             </a>
           </li>
-          <li>
-            <a href="#">
+          <li <?php if ($selected == 'channels') echo "id='menu-selected'"; ?>>
+            <a  href="channels.php">
               <img src="images/tag.svg" alt="Channels">
               Channels
             </a>
           </li>
-          <li>
-            <a href="profile.php">
+          <li <?php if ($selected == 'profile') echo "id='menu-selected'"; ?>>
+            <a  href="profile.php">
               <img src="images/person.svg" alt="Profile">
               Profile
             </a>

@@ -46,6 +46,8 @@
     color: gray;
   }
 
+  /* messages */
+
   #messages article {
     text-align: center;
     color: white;
@@ -166,14 +168,17 @@
     background-color: #313638;
     color: white;
     min-height: 600px;
-    padding: 8px;
     min-width: 20%;
     flex: 20%;
   }
 
   #menu ul {
     list-style-type: none;
-    padding-left: 8px;
+    padding-left: 0px;
+  }
+
+  #menu ul li {
+   padding-left: 8px;
   }
 
   #menu ul li a {
@@ -204,6 +209,10 @@
   #menu #search #search-website::placeholder {
     color: white;
     opacity: 1;
+  }
+
+  #menu #menu-selected {
+    background-color: black;
   }
 
   /* content */
