@@ -1,4 +1,5 @@
 <?php
+
     include_once('../includes/session.php');
     include_once('../database/story.php');
 
@@ -13,9 +14,7 @@
         die(header('Location: ' . $_SERVER['HTTP_REFERER']));
     }
 
-    // TODO: invert vote if user has already voted
-    // TODO: correct bug of vote once user has already voted
-    update_story_votes($story_id, $vote);
+    update_story_votes($story_id, $username, $vote);
     
     header('Location: ' . $_SERVER['HTTP_REFERER']);
 ?>

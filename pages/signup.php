@@ -8,5 +8,5 @@
 
     draw_layout(function () {
         draw_signup();
-    });
+    }, 'signup');
 ?>

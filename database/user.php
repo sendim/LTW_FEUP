@@ -42,5 +42,4 @@
         $stmt->execute(array($username));
         return $stmt->fetchAll();
     }
-
 ?>

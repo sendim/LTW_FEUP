@@ -38,18 +38,13 @@
                             <img src='images/arrow-up.svg' alt="Vote up">
                         </a>
                         <span>
-                            <?php echo $story['likes']; ?>
+                            <?php echo get_story_likes($story['id']); ?>
                         </span>
                         <a class="button primary icon" href='../actions/action_vote.php?story_id=<?=$story['id']?>&vote=-1&csrf=<?=$_SESSION['csrf']?>'>
                             <img src='images/arrow-down.svg' alt="Vote down">
                         </a>
                         <span>
-                            <?php
-                                $dislikes = $story['dislikes'];
-                                if ($dislikes != 0) 
-                                    echo '-';
-                                echo $dislikes; 
-                            ?>
+                            <?php echo get_story_dislikes($story['id']); ?>
                         </span>
                     </div>
                     <div class="signature">
