@@ -283,8 +283,24 @@
     margin-right: 8px;
   }
 
-  /*
-  #profile #profile-header #profile-header-points img {
-    height: 20px;
-    width: 20px;
-  }*/
+  /* story page */
+  #story-page header h1 {
+    display: inline-block;
+  }
+
+  #story-page header small {
+    margin-left: 8px;
+  }
+
+  #story-page #comments #comments-header {
+    padding: 8px;
+  }
+
+  #story-page #comments #comments-header #comment-input {
+    width: 85%;
+  }
+
+  #story-page #comments #comments-header #send-comment-button {
+    width: 14%;
+  }
+

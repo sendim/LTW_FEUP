@@ -6,6 +6,8 @@
 
         $publishedDate = gmdate('F j, g:i a, Y', $story['published']);
 
+        $linkToStory = "story.php?id=".$story['id'];
+
         // TODO: get story channel, link to channel
 
         // TODO: get story comments, link to story comments (story page)
@@ -13,10 +15,14 @@
         ?>
         <div class="story-card bg-white">
             <header>
-            <?php
-                echo '<h1>' . $story['title'] . '</h1>';
-                echo '<small>'.$publishedDate.'</small>';
-            ?>
+                <a href=<?php echo $linkToStory ?> >
+                    <h1>
+                        <?php echo $story['title'] ?>
+                    </h1>
+                </a>
+                <?php
+                    echo '<small>'.$publishedDate.'</small>';
+                ?>
             </header>
 
             <div class="story-body">
@@ -58,4 +64,63 @@
                         
         </div>
 
-<?php } ?>
+<?php } 
+
+    function draw_story_page($story){ 
+
+        $publishedDate = gmdate('F j, g:i a, Y', $story['published']);
+        
+        // TODO: get story comments
+        $comments = []
+        ?>
+
+        <div id="story-page">
+            <header class="container bg-white">
+                <h1>
+                    <?php echo $story['title'] ?>
+                </h1>
+            
+                <?php
+                    echo '<small>'.$publishedDate.'</small>';
+                ?>
+
+                <div id="story-description">
+                    <p><?php echo $story['text']; ?></p>
+                </div>
+
+                <div class="signature">
+                    by <a href="#">@<?php echo $story['username']; ?> </a>
+                    at channel <a href="#"><?php echo $story['channel']; ?> </a>
+                </div>
+            </header>
+
+            <section id="comments">
+                <div id="comments-header" class="section-header">
+                   
+                  
+                    <input id="comment-input" placeholder="Write a comment..." />
+                    <button id="send-comment-button" class="button primary">Send</button>
+  
+                    <hr />
+
+                    <button class="button secondary">Order</button>
+                </div>
+                
+                <div id="comments-list">
+                <?php
+                    if ($comments) {
+                        foreach($comments as $comment) {
+                            draw_comment($comment);
+                        } 
+                    } else {
+                        ?>
+                        <div class="container bg-white"> No comments yet. </div>
+                        <?php
+                    }
+                ?>
+                </div>
+            </section>
+
+        </div>
+
+<?php   } ?>
