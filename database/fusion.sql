@@ -6,8 +6,8 @@ DROP TABLE IF EXISTS story;
 DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS channel;
 DROP TABLE IF EXISTS subscribed;
-DROP TABLE IF EXISTS likesStory;
-DROP TABLE IF EXISTS likesComment;
+DROP TABLE IF EXISTS votesStory;
+DROP TABLE IF EXISTS votesComment;
 
 CREATE TABLE user (
   username VARCHAR PRIMARY KEY,
@@ -24,6 +24,7 @@ CREATE TABLE story (
   username VARCHAR REFERENCES user NOT NULL, -- who wrote the article
   text VARCHAR,
   likes INTEGER,
+  dislikes INTEGER,
   channel INTEGER REFERENCES channel
 );
 
@@ -34,6 +35,7 @@ CREATE TABLE comment (
   published INTEGER, -- date when news item was published in epoch format
   text VARCHAR,
   likes INTEGER,
+  dislikes INTEGER,
   referencedComment INTEGER REFERENCES comment
 );
 
@@ -48,14 +50,16 @@ CREATE TABLE subscribed (
   PRIMARY KEY(user, channel)
 );
 
-CREATE TABLE likesStory (
+CREATE TABLE votesStory (
   user VARCHAR REFERENCES user NOT NULL,
   story INTEGER REFERENCES story NOT NULL,
+  vote INTEGER NOT NULL,
   PRIMARY KEY(user, story)
 );
 
-CREATE TABLE likesComment (
+CREATE TABLE votesComment (
   user VARCHAR REFERENCES user NOT NULL,
   comment INTEGER REFERENCES comment NOT NULL,
+  vote INTEGER NOT NULL,
   PRIMARY KEY(user, comment)
 );

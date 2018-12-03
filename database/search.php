@@ -17,7 +17,7 @@
     function get_channels() {
         $db = Database::instance()->db();
 
-        $stmt = $db->prepare('SELECT * FROM channel' );
+        $stmt = $db->prepare('SELECT * FROM channel');
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -48,7 +48,7 @@
     function get_comments() {
         $db = Database::instance()->db();
 
-        $stmt = $db->prepare('SELECT * FROM comment' );
+        $stmt = $db->prepare('SELECT * FROM comment');
         $stmt->execute();
         return $stmt->fetchAll();
     }
