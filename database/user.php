@@ -27,6 +27,20 @@
         return $stmt->fetchAll();
     }
 
+    function get_user_profile_photo($username) {
+        $db = Database::instance()->db();
+
+        // retrieve users' most recent profile picture
+        $stmt = $db->prepare(
+            "SELECT * 
+            FROM user NATURAL JOIN images 
+            WHERE username LIKE ?
+            AND title LIKE 'profile'"
+        );
+        $stmt->execute(array($username));
+        return $stmt->fetch();
+    }
+
     function get_user_stories($username) {
         $db = Database::instance()->db();
 
@@ -41,6 +55,51 @@
         $stmt = $db->prepare('SELECT * FROM comment WHERE username = ?');
         $stmt->execute(array($username));
         return $stmt->fetchAll();
+    }
+
+    function update_user_name($username,$name) {
+        $db = Database::instance()->db();
+
+        $stmt = $db->prepare(
+            'UPDATE user
+            SET name = ?
+            WHERE username LIKE ?'
+        );
+        $stmt->execute(array($name,$username));
+    }
+
+    function update_user_username($username,$newUsername) {
+        $db = Database::instance()->db();
+
+        // TODO: use UPDATE ON CASCADE on username
+        $stmt = $db->prepare(
+            'UPDATE user
+            SET username = ?
+            WHERE username LIKE ?'
+        );
+        $stmt->execute(array($newUsername,$username));
+    }
+
+    function update_user_password($username,$password) {
+        $db = Database::instance()->db();
+
+        $stmt = $db->prepare(
+            'UPDATE user
+            SET password = ?
+            WHERE username LIKE ?'
+        );
+        $stmt->execute(array(sha1($password),$username));
+    }
+
+    function update_user_description($username,$description) {
+        $db = Database::instance()->db();
+
+        $stmt = $db->prepare(
+            'UPDATE user
+            SET description = ?
+            WHERE username LIKE ?'
+        );
+        $stmt->execute(array($description,$username));
     }
 
     function update_user_points($username) {

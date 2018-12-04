@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS channel;
 DROP TABLE IF EXISTS subscribed;
 DROP TABLE IF EXISTS votesStory;
 DROP TABLE IF EXISTS votesComment;
+DROP TABLE IF EXISTS images;
 
 CREATE TABLE user (
   username VARCHAR PRIMARY KEY,
@@ -62,4 +63,10 @@ CREATE TABLE votesComment (
   comment INTEGER REFERENCES comment NOT NULL,
   vote INTEGER NOT NULL,
   PRIMARY KEY(user, comment)
+);
+
+CREATE TABLE images (
+  id INTEGER PRIMARY KEY,
+  username VARCHAR,
+  title VARCHAR
 );

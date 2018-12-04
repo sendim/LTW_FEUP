@@ -26,14 +26,13 @@
       <head>
         <link rel="stylesheet" href="style.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <script src="../js/voting_request.js" defer></script>
       </head>
       <body>
         <nav id="navbar">
           <h1>The Fusion Network</h1>
             <?php if (isset($_SESSION['username'])) { ?>
             <a class="button" href="../actions/action_logout.php">
-            <img src="images/logout.svg" alt="Logout">
+            <img src="icons/logout.svg" alt="Logout">
               Logout
             </a>
             <?php } ?>
@@ -55,21 +54,28 @@
         <ul>
           <li <?php if ($selected == 'feed') echo "id='menu-selected'"; ?> >
             <a href="feed.php">
-              <img src="images/repo.svg" alt="Feed">
+              <img src="icons/repo.svg" alt="Feed">
               Feed
             </a>
           </li>
           <li <?php if ($selected == 'channels') echo "id='menu-selected'"; ?>>
             <a  href="channels.php">
-              <img src="images/tag.svg" alt="Channels">
+              <img src="icons/tag.svg" alt="Channels">
               Channels
             </a>
           </li>
           <li <?php if ($selected == 'profile') echo "id='menu-selected'"; ?>>
-            <a  href="profile.php">
-              <img src="images/person.svg" alt="Profile">
+            <a href="profile.php">
+              <img src="icons/person.svg" alt="Profile">
               Profile
             </a>
+            <!-- added edit profile -->
+            <ul>
+              <li>
+                <a href="editProfile.php"> Edit profile</a>
+              </li>
+            </ul>
+            <!-- end of change -->
           </li>
         </ul>
     </nav>

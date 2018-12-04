@@ -35,13 +35,13 @@
                 <div class="story-footer-left">
                     <div class="vote-buttons">
                         <a class="button primary icon" href='../actions/action_vote.php?story_id=<?=$story['id']?>&vote=1&csrf=<?=$_SESSION['csrf']?>'>
-                            <img src='images/arrow-up.svg' alt="Vote up">
+                            <img src='icons/arrow-up.svg' alt="Vote up">
                         </a>
                         <span>
                             <?php echo get_story_likes($story['id']); ?>
                         </span>
                         <a class="button primary icon" href='../actions/action_vote.php?story_id=<?=$story['id']?>&vote=-1&csrf=<?=$_SESSION['csrf']?>'>
-                            <img src='images/arrow-down.svg' alt="Vote down">
+                            <img src='icons/arrow-down.svg' alt="Vote down">
                         </a>
                         <span>
                             <?php echo get_story_dislikes($story['id']); ?>

@@ -79,3 +79,5 @@ INSERT INTO comment VALUES (NULL,
   0,
 	NULL
 );
+
+INSERT INTO images VALUES (NULL,NULL,'default');
