@@ -1,7 +1,7 @@
 <?php
-
     include_once('../includes/session.php');
     include_once('../database/story.php');
+    include_once('../database/user.php');
 
     $story_id = $_GET['story_id'];
     $username = $_SESSION['username'];
@@ -14,7 +14,10 @@
         die(header('Location: ' . $_SERVER['HTTP_REFERER']));
     }
 
-    update_story_votes($story_id, $username, $vote);
+    update_story_vote($story_id, $username, $vote);
+
+    $author = get_author($story_id);
+    update_user_points($author);
     
     header('Location: ' . $_SERVER['HTTP_REFERER']);
 ?>

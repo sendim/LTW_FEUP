@@ -21,6 +21,13 @@
         return $stmt->fetchAll()[0];
     }
 
+    function get_author($story_id) {
+        $db = Database::instance()->db();
+        $stmt = $db->prepare('SELECT username FROM story WHERE id = ?');
+        $stmt->execute(array($story_id));
+        return $stmt->fetchAll()[0]['username'];
+    }
+
     function get_story_likes($story_id) {
         $db = Database::instance()->db();
         $stmt = $db->prepare(
@@ -78,7 +85,7 @@
         return null;
     }
 
-    function update_story_votes($story_id, $username, $vote) {
+    function update_story_vote($story_id, $username, $vote) {
         if (user_voted_story($story_id,$username)) {
             if ($vote == 1)
                 upvote_story($story_id, $username); 
@@ -87,6 +94,18 @@
         } else {
             add_user_vote($story_id,$username,$vote);
         }
+        
+        $db = Database::instance()->db();
+        $update_stmt = $db->prepare(
+            'UPDATE story
+            SET likes = ?, dislikes = ?
+            WHERE id = ?'
+        );
+        $update_stmt->execute(array(
+            get_story_likes($story_id),
+            -get_story_dislikes($story_id),
+            $story_id)
+        );
     }
 
     function upvote_story($story_id, $username) {

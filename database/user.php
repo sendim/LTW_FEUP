@@ -42,4 +42,41 @@
         $stmt->execute(array($username));
         return $stmt->fetchAll();
     }
+
+    function update_user_points($username) {
+        $story_points = 0;
+        $comments_points = 0;
+
+        $db = Database::instance()->db();
+
+        // get points from user stories votes
+        $stories_stmt = $db->prepare(
+            'SELECT SUM(likes) - SUM(dislikes) AS storyPoints
+            FROM story
+            WHERE username LIKE ?'
+        );
+        $stories_stmt->execute(array($username));
+        $stories_res = $stories_stmt->fetchAll();
+        if ($stories_res != null) 
+            $story_points = $stories_res[0]['storyPoints'];
+
+        // get points from user comments votes
+        $comments_stmt = $db->prepare(
+            'SELECT SUM(likes) - SUM(dislikes) AS commentPoints
+            FROM comment
+            WHERE username LIKE ?'
+        );
+        $comments_stmt->execute(array($username));
+        $comments_res = $comments_stmt->fetchAll();
+        if ($comments_res != null) 
+            $comments_points = $comments_res[0]['commentPoints'];
+
+        $final_points = $story_points + $comments_points;
+        $update_stmt = $db->prepare(
+            'UPDATE user
+            SET points = ?
+            WHERE username = ?'
+        );
+        $update_stmt->execute(array($final_points,$username));
+    }
 ?>
