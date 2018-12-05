@@ -8,8 +8,8 @@
     die(header('Location: login.php'));
   }
 
-  draw_layout(function(){
-    $channels = get_channels(); // TODO: create get channels function
-    draw_channels_page($channels);
+  drawLayout(function(){
+    $channels = getChannels(); // TODO: create get channels function
+    drawChannelsPage($channels);
   }, 'channels');
 ?>

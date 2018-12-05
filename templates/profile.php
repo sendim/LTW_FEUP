@@ -1,23 +1,26 @@
 <?php 
     include_once('../includes/session.php');
-    include_once('../database/user.php');
+    include_once('../database/db_user.php');
     include_once('../templates/story.php');
     include_once('../templates/comment.php');
 
-    function draw_profile($profile) { 
-        $comments = get_user_comments($_SESSION['username']);
-        $stories = get_user_stories($_SESSION['username']);
-        ?> 
+    function drawProfile($profile) { 
+    /**
+    * Draws the login section.
+    */        
+        $comments = getUserComments($profile['username']);
+        $stories = getUserStories($profile['username']);
+    ?>
         <div id="profile">
 
             <header id="profile-header" class="container bg-white">
                 <header>
                     <div id="profile-header-photo">
                         <?php 
-                            $image = get_user_profile_photo($profile['username']); 
+                            $image = getUserProfilePhoto($profile['username']);
                             if ($image != null) { ?>
-                                <a href="../images/originals/<?=$image['id']?>.jpeg">
-                                    <img src="../images/thumbnails/<?=$image['id']?>.jpeg" width="200" height="200">
+                                <a href="../images/originals/<?=$image['imageId']?>.jpeg">
+                                    <img src="../images/thumbnails/<?=$image['imageId']?>.jpeg" width="200" height="200">
                                 </a>
                             <?php
                             } else { ?>
@@ -33,12 +36,11 @@
 
                     <div id="profile-header-points">
                         <img src="icons/star.svg" alt="Points">
-                        <?=$profile['points']?>
+                        <span type="points"><?=$profile['points']?></span>
                     </div>
-    
                 </header>
 
-                <hr />
+                <hr/>
                 
                 <?php echo '<p>' . $profile['description'] . '</p>'; ?>
             </header>
@@ -52,14 +54,11 @@
                 <div id="stories-list">
                     <?php
                         if ($stories) {
-                            foreach($stories as $story) {
-                                draw_story($story);
-                            }
+                            foreach($stories as $story)
+                                drawStory($story);
                         } else { ?>
-                            <div class="container bg-white"> No stories yet. </div>
-                            <?php
-                        } 
-                    ?>
+                            <div class="container bg-white">No stories yet.</div>
+                        <?php } ?>
                 </div>
             </section>
 
@@ -72,23 +71,18 @@
                 <div id="comments-list">
                     <?php
                         if ($comments) {
-                            foreach($comments as $comment) {
-                                draw_comment($comment);
-                            } 
-                        } else {
-                            ?>
-                            <div class="container bg-white"> No comments yet. </div>
-                            <?php
-                        }
-                    ?>
+                            foreach($comments as $comment)
+                                drawComment($comment);
+                        } else { ?>
+                            <div class="container bg-white">No comments yet.</div> 
+                        <?php } ?>
                 </div>
             </section>
             
         </div>
+<?php }
 
-<?php } 
-
-    function draw_editProfile() {
+    function drawEditProfile() {
     /**
      * Draws the login section.
      */ ?>
@@ -98,7 +92,7 @@
               <h2>Edit profile</h2>
             </header>
     
-            <hr />
+            <hr/>
     
             <form method="post" action="../actions/action_editProfile.php">
                 <div class="form-input">
@@ -126,7 +120,7 @@
                 </button>
             </form>
 
-            <form action="../actions/action_upload.php" method="post" enctype="multipart/form-data">
+            <form action="../actions/action_imageUpload.php" method="post" enctype="multipart/form-data">
                 <div class="form-input">
                     <label>Picture</label>
                     <small>Warning: current profile picture will be overridden!</small>

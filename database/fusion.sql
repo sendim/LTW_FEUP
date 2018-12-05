@@ -11,18 +11,19 @@ DROP TABLE IF EXISTS votesComment;
 DROP TABLE IF EXISTS images;
 
 CREATE TABLE user (
-  username VARCHAR PRIMARY KEY,
-  password VARCHAR,
+  userId INTEGER PRIMARY KEY,
+  username VARCHAR NOT NULL UNIQUE,
+  password VARCHAR, 
   name VARCHAR,
   description VARCHAR,
   points INTEGER
 );
 
 CREATE TABLE story (
-  id INTEGER PRIMARY KEY,
+  storyId INTEGER PRIMARY KEY,
   title VARCHAR,
   published INTEGER, -- date when the article was published in epoch format
-  username VARCHAR REFERENCES user NOT NULL, -- who wrote the article
+  userId INTEGER REFERENCES user NOT NULL, -- who wrote the article
   text VARCHAR,
   likes INTEGER,
   dislikes INTEGER,
@@ -30,9 +31,9 @@ CREATE TABLE story (
 );
 
 CREATE TABLE comment (
-  id INTEGER PRIMARY KEY,
+  commentId INTEGER PRIMARY KEY,
   storyId INTEGER REFERENCES story NOT NULL,
-  username VARCHAR REFERENCES user NOT NULL,
+  userId INTEGER REFERENCES user NOT NULL,
   published INTEGER, -- date when news item was published in epoch format
   text VARCHAR,
   likes INTEGER,
@@ -41,32 +42,32 @@ CREATE TABLE comment (
 );
 
 CREATE TABLE channel (
-  id INTEGER PRIMARY KEY,
+  channelId INTEGER PRIMARY KEY,
   title VARCHAR
 );
 
 CREATE TABLE subscribed (
-  user VARCHAR REFERENCES user NOT NULL,
+  userId INTEGER REFERENCES user NOT NULL,
   channel INTEGER REFERENCES channel NOT NULL,
-  PRIMARY KEY(user, channel)
+  PRIMARY KEY(userId, channel)
 );
 
 CREATE TABLE votesStory (
-  user VARCHAR REFERENCES user NOT NULL,
-  story INTEGER REFERENCES story NOT NULL,
+  userId INTEGER REFERENCES user NOT NULL,
+  storyId INTEGER REFERENCES story NOT NULL,
   vote INTEGER NOT NULL,
-  PRIMARY KEY(user, story)
+  PRIMARY KEY(userId, storyId)
 );
 
 CREATE TABLE votesComment (
-  user VARCHAR REFERENCES user NOT NULL,
-  comment INTEGER REFERENCES comment NOT NULL,
+  userId INTEGER REFERENCES user NOT NULL,
+  commentId INTEGER REFERENCES comment NOT NULL,
   vote INTEGER NOT NULL,
-  PRIMARY KEY(user, comment)
+  PRIMARY KEY(userId, commentId)
 );
 
 CREATE TABLE images (
-  id INTEGER PRIMARY KEY,
-  username VARCHAR,
-  title VARCHAR
+  imageId INTEGER PRIMARY KEY,
+  userId INTEGER REFERENCES user,
+  title VARCHAR NOT NULL
 );

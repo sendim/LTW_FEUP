@@ -1,6 +1,6 @@
 <?php
     include_once('../includes/session.php');
-    include_once('../database/user.php');
+    include_once('../database/db_user.php');
     
     if (!isset($_SESSION['username']))
         die(header('Location: ../pages/login.php'));
@@ -14,20 +14,24 @@
         if (!empty($_POST[$input])) {
             switch($input) {
                 case 'name':
-                    update_user_name($username,$_POST['name']);
+                    updateUserName($username,$_POST['name']);
                     break;
                 case 'username':
-                    // TODO: update foreign key on username to be able to update it
-                    //update_user_username($username,$_POST['username']);
+                    updateUserUsername($username,$_POST['username']);
+                    $username = $_POST['username'];
+                    $usernameOutdated = true;
                     break;
                 case 'password':
-                    update_user_password($username,$_POST['password']);
+                    updateUserPassword($username,$_POST['password']);
                     break;
                 case 'description':
-                    update_user_description($username,$_POST['description']);
+                    updateUserDescription($username,$_POST['description']);
                     break;
             }
         }
+
+    if ($usernameOutdated)
+        $_SESSION['username'] = $username;
 
     header('Location: ' . $_SERVER['HTTP_REFERER']);
 ?>

@@ -1,18 +1,23 @@
 <?php
     include_once('../includes/session.php');
     include_once('../includes/database.php');
+    include_once('../database/db_user.php');
 
     $db = Database::instance()->db();
 
+    $username = $_SESSION['username'];
+    $userId = getUserId($username);
+    $title = $_POST['title'];
+
     // delete previous profile picture if it's the case
     if ($_POST['title'] == 'profile') {
-        $delete_stmt = $db->prepare('DELETE FROM images WHERE username = ? AND title = ?');
-        $delete_stmt->execute(array($_SESSION['username'],$_POST['title']));
+        $deleteStmt = $db->prepare('DELETE FROM images WHERE userId = ? AND title = ?');
+        $deleteStmt->execute(array($userId,$title));
     }
-   
+
     // insert image data into database
     $stmt = $db->prepare('INSERT INTO images VALUES(NULL,?,?)');
-    $stmt->execute(array($_SESSION['username'],$_POST['title']));
+    $stmt->execute(array($userId,$title));
 
     // get image ID
     $id = $db->lastInsertId();

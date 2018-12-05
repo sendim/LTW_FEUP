@@ -1,9 +1,11 @@
-<?php function draw_comment($comment){ ?>
+<?php function drawComment($comment){
+/**
+ * Draws the comment section.
+ */ ?>
+    <div class="story bg-white">
 
-   <div class="story bg-white">
-        <hr />
-
+        <hr/>
         <p><?='@' . $comment['username'] . ' ' . $comment['text']?></p>
-    </div>
 
+    </div>
 <?php } ?>

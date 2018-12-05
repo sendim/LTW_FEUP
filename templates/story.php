@@ -1,12 +1,12 @@
 <?php 
     include_once('../includes/session.php');
-    include_once('../database/story.php');
+    include_once('../database/db_story.php');
 
-    function draw_story($story) {
+    function drawStory($story) {
 
         $publishedDate = gmdate('F j, g:i a, Y', $story['published']);
 
-        $linkToStory = "story.php?id=".$story['id'];
+        $linkToStory = "story.php?id=".$story['storyId'];
 
         // TODO: get story channel, link to channel
 
@@ -29,22 +29,22 @@
                 <p><?php echo $story['text']; ?></p>
             </div>
 
-            <hr />
+            <hr/>
 
             <footer> 
                 <div class="story-footer-left">
                     <div class="vote-buttons">
-                        <a class="button primary icon" href='../actions/action_vote.php?story_id=<?=$story['id']?>&vote=1&csrf=<?=$_SESSION['csrf']?>'>
+                        <a class="button primary icon" storyId="<?=$story['storyId']?>" username="<?=$_SESSION['username']?>" vote="1" csrf="<?=$_SESSION['csrf']?>">
                             <img src='icons/arrow-up.svg' alt="Vote up">
                         </a>
-                        <span>
-                            <?php echo get_story_likes($story['id']); ?>
+                        <span type="likes">
+                            <?php echo getStoryLikes($story['storyId']); ?>
                         </span>
-                        <a class="button primary icon" href='../actions/action_vote.php?story_id=<?=$story['id']?>&vote=-1&csrf=<?=$_SESSION['csrf']?>'>
+                        <a class="button primary icon" storyId="<?=$story['storyId']?>" username="<?=$_SESSION['username']?>" vote="-1" csrf="<?=$_SESSION['csrf']?>">
                             <img src='icons/arrow-down.svg' alt="Vote down">
                         </a>
-                        <span>
-                            <?php echo get_story_dislikes($story['id']); ?>
+                        <span type="dislikes">
+                            <?php echo getStoryDislikes($story['storyId']); ?>
                         </span>
                     </div>
                     <div class="signature">
@@ -92,11 +92,10 @@
             <section id="comments">
                 <div id="comments-header" class="section-header">
                    
-                  
                     <input id="comment-input" placeholder="Write a comment..." />
                     <button id="send-comment-button" class="button primary">Send</button>
   
-                    <hr />
+                    <hr/>
 
                     <button class="button secondary">Order</button>
                 </div>
@@ -104,18 +103,14 @@
                 <div id="comments-list">
                 <?php
                     if ($comments) {
-                        foreach($comments as $comment) {
+                        foreach($comments as $comment)
                             draw_comment($comment);
-                        } 
-                    } else {
-                        ?>
-                        <div class="container bg-white"> No comments yet. </div>
-                        <?php
-                    }
+                    } else { ?>
+                        <div class="container bg-white">No comments yet.</div>
+                    <?php }
                 ?>
                 </div>
             </section>
 
         </div>
-
-<?php   } ?>
+<?php } ?>

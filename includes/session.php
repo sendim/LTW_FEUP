@@ -1,34 +1,33 @@
 <?php
     session_start();
 
-    function set_current_user($username) {
+    function setCurrentUser($username) {
         $_SESSION['username'] = $username;
     }
 
-    function get_error_messages() {
+    function getErrorMessages() {
         if (isset($_SESSION['error_messages']))
           return $_SESSION['error_messages'];
         else
           return array();    
     }
 
-    function get_success_messages() {
+    function getSuccessMessages() {
         if (isset($_SESSION['success_messages']))
           return $_SESSION['success_messages'];
         else
           return array();
     }
 
-    function clear_messages() {
+    function clearMessages() {
         unset($_SESSION['error_messages']);
         unset($_SESSION['success_messages']);
     }
 
-    function generate_random_token() {
+    function generateRandomToken() {
         return bin2hex(openssl_random_pseudo_bytes(32));
     }
 
-    if (!isset($_SESSION['csrf'])) {
-        $_SESSION['csrf'] = generate_random_token();
-    }
+    if (!isset($_SESSION['csrf']))
+        $_SESSION['csrf'] = generateRandomToken();
 ?>

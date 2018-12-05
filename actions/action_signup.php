@@ -1,15 +1,15 @@
 <?php 
     include_once('../includes/session.php');
-    include_once('../database/user.php');
+    include_once('../database/db_user.php');
 
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $fullName = $_POST['fullName'];
+    $name = $_POST['name'];
     $description = $_POST['description'];
 
     try {
-        insert_user($username,$password,$fullName,$description);
-        set_current_user($username);
+        insertUser($username,$password,$name,$description);
+        setCurrentUser($username);
         header('Location: ../pages/feed.php');
     } catch(PDOException $e) {
         header('Location: ../pages/signup.php');

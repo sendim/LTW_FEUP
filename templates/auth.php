@@ -1,4 +1,4 @@
-<?php function draw_login() {
+<?php function drawLogin() {
 /**
  * Draws the login section.
  */ ?>
@@ -8,47 +8,43 @@
           <h2>Login</h2>
         </header>
 
-        <hr />
+        <hr/>
 
         <form method="post" action="../actions/action_login.php">
           <div class="form-input">
             <label>Username</label>
             <input type="text" name="username" placeholder="username" required>
           </div>
-
           <div class="form-input">
             <label>Password</label>
             <input type="password" name="password" placeholder="password" required>
           </div>
-
-          <button class="button primary" type="submit">
-            Login
-          </button>
+          <button class="button primary" type="submit">Login</button>
         </form>
 
         <small>
           Don't have an account? <a href="signup.php">Signup!</a>
         </small>
-    
-    </section>
-<?php } ?>
 
-<?php function draw_signup() {
-/**
- * Draws the signup section.
- */ ?>
+    </section>
+<?php } 
+
+  function drawSignup() {
+  /**
+  * Draws the signup section.
+  */ ?>
   <section id="signup" class="container bg-white">
 
     <header>
       <h2>Signup</h2>
     </header>
 
-    <hr />
+    <hr/>
 
     <form method="post" action="../actions/action_signup.php">
       <div class="form-input">
-        <label>Full name</label>
-        <input type="text" name="fullName" placeholder="Full name" required>
+        <label>Name</label>
+        <input type="text" name="name" placeholder="Name" required>
       </div>
       <div class="form-input">
         <label>Username</label>
@@ -58,12 +54,10 @@
         <label>Password</label>
         <input type="password" name="password" placeholder="Password" required>
       </div>
-
       <div class="form-input">
         <label>Description</label>
         <textarea name="description" placeholder="Description"></textarea>
       </div>
-      
       <button class="button primary" type="submit">Signup</button>
     </form>
 

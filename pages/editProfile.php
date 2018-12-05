@@ -7,7 +7,7 @@
     if (!isset($_SESSION['username']))
         die(header('Location: ' . $_SERVER['HTTP_REFERER']));
     
-    draw_layout(function () {
-        draw_editProfile();
+    drawLayout(function () {
+        drawEditProfile();
     }, 'editProfile');
 ?>

@@ -1,31 +1,34 @@
 <?php 
   include_once('../includes/session.php');
 
-  function draw_layout($draw_content, $selected) {
+  function drawLayout($drawContent, $selected) {
   /**
   * Draws a typical page section.
   */
-      draw_header() ?>
+      drawHeader($selected) ?>
       <div id="row">
         <?php
-          draw_menu($selected); 
-          draw_content($draw_content);
-          draw_messages();
+          drawMenu($selected); 
+          drawContent($drawContent);
+          drawMessages();
         ?>
       </div>
     </body>
     </html>
   <?php } ?>
 
-  <?php function draw_header() { 
+  <?php function drawHeader($selected) {
   /**
-  * Draws the page header.
+  * Draws the page header
   */?>
     <!DOCTYPE html>
     <html lang="en-US">
       <head>
         <link rel="stylesheet" href="style.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <?php if ($selected == 'feed' || $selected == 'story' || $selected == 'profile') { ?>
+          <script src="../js/voteRequest.js" defer></script>
+        <?php } ?>
       </head>
       <body>
         <nav id="navbar">
@@ -44,9 +47,7 @@
   /**
   * Draws the page menu section.
   */
-  function draw_menu($selected) {
-
-  ?>
+  function drawMenu($selected) { ?>
       <nav id="menu">
         <div id="search">
           <input id="search-website"  name="search-website" placeholder="Search stories, comments..."/>
@@ -72,7 +73,7 @@
             <!-- added edit profile -->
             <ul>
               <li>
-                <a href="editProfile.php"> Edit profile</a>
+                <a href="editProfile.php">Edit profile</a>
               </li>
             </ul>
             <!-- end of change -->
@@ -81,27 +82,27 @@
     </nav>
   <?php } ?>
 
-  <?php function draw_content($draw_content) {
+  <?php function drawContent($drawContent) {
   /**
   * Draws the page content section.
   */?>
     <div id="content">
-        <?php $draw_content(); ?>
+        <?php $drawContent(); ?>
   <?php } ?>
 
-  <?php function draw_messages() {
+  <?php function drawMessages() {
   /**
   * Draws the page message section.
   */?>
         <section id="messages">
-          <?php $errors = get_error_messages(); foreach ($errors as $error) { ?>
+          <?php $errors = getErrorMessages(); foreach ($errors as $error) { ?>
             <article class="error">
               <p><?=$error?></p>
             </article>
-          <?php } $successes = get_success_messages(); foreach ($successes as $success) { ?>
+          <?php } $successes = getSuccessMessages(); foreach ($successes as $success) { ?>
             <article class="success">
               <p><?=$success?></p>
             </article>
-          <?php } clear_messages(); } ?>
+          <?php } clearMessages(); } ?>
         </section>
     </div>

@@ -6,7 +6,7 @@
     if (isset($_SESSION['username']))
         die(header('Location: feed.php'));
 
-    draw_layout(function () {
-        draw_signup();
+    drawLayout(function () {
+        drawSignup();
     }, 'signup');
 ?>
