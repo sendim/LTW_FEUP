@@ -1,8 +1,8 @@
 /*- All passwords are 1234 in SHA-1 format*/
-INSERT INTO user VALUES (NULL,"dominic", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "Dominic Woods","This is my story",0);
-INSERT INTO user VALUES (NULL,"zachary", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "Zachary Young"," ",0);
-INSERT INTO user VALUES (NULL,"alicia", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "Alicia Hamilton"," ",0);
-INSERT INTO user VALUES (NULL,"abril", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "Abril Cooley"," ",0);
+INSERT INTO user VALUES (NULL,"dominic", "$2y$12$cH5Hmh/4JgKSEM4ZCih1jOOSItL2WW.XZruOxkG0udohjH5xMu6FG", "Dominic Woods","This is my story",0);
+INSERT INTO user VALUES (NULL,"zachary", "$2y$12$cH5Hmh/4JgKSEM4ZCih1jOOSItL2WW.XZruOxkG0udohjH5xMu6FG", "Zachary Young"," ",0);
+INSERT INTO user VALUES (NULL,"alicia", "$2y$12$cH5Hmh/4JgKSEM4ZCih1jOOSItL2WW.XZruOxkG0udohjH5xMu6FG", "Alicia Hamilton"," ",0);
+INSERT INTO user VALUES (NULL,"abril", "$2y$12$cH5Hmh/4JgKSEM4ZCih1jOOSItL2WW.XZruOxkG0udohjH5xMu6FG", "Abril Cooley"," ",0);
 
 INSERT INTO channel VALUES (NULL,'theme');
 

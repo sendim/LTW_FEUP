@@ -6,16 +6,22 @@
         $stmt = $db->prepare(
             'SELECT * 
             FROM user 
-            WHERE username = ? AND password = ?'
+            WHERE username = ?'
         );
-        $stmt->execute(array($username,sha1($password)));
-        return $stmt->fetch() !== false;
+        $stmt->execute(array($username));
+        $user = $stmt->fetch();
+
+        return $user !== false && password_verify($password,$user['password']);
     }
 
     function insertUser($username,$password,$name,$description) {
         $db = Database::instance()->db();
+
+        $options = ['cost' => 12]; // hash length
+        $hashedPwd = password_hash($password,PASSWORD_DEFAULT,$options);
+
         $stmt = $db->prepare('INSERT INTO user VALUES(NULL,?,?,?,?,0)');
-        $stmt->execute(array($username,sha1($password),$name,$description));
+        $stmt->execute(array($username,$hashedPwd,$name,$description));
     }
 
     function deleteUserById($id) {
