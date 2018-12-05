@@ -4,7 +4,7 @@
 let voteBtns = document.querySelectorAll('div.vote-buttons a.button')
 voteBtns.forEach((voteBtn) => voteBtn.addEventListener('click', doneClicked))
 
-// what happens after login button has been clicked
+// what happens after a vote button has been clicked
 function doneClicked(event) {
   let btn = event.target
   
