@@ -23,7 +23,7 @@
     updateStoryVote($storyId, $username, $vote);
 
     // update story author points
-    $author = getAuthor($storyId);
+    $author = getStoryAuthor($storyId);
     updateUserPoints($author);
 
     // send new story likes & dislikes values

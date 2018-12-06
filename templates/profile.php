@@ -42,7 +42,7 @@
 
                 <hr/>
                 
-                <?php echo '<p>' . $profile['description'] . '</p>'; ?>
+                <?= '<p>' . $profile['description'] . '</p>'; ?>
             </header>
 
             <section id="stories">

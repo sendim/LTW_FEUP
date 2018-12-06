@@ -19,10 +19,10 @@
         $db = Database::instance()->db();
         $stmt = $db->prepare('SELECT * FROM story WHERE storyId = ?');
         $stmt->execute(array($storyId));
-        return $stmt->fetchAll()[0];
+        return $stmt->fetch();
     }
 
-    function getAuthor($storyId) {
+    function getStoryAuthor($storyId) {
         $db = Database::instance()->db();
         $stmt = $db->prepare(
             'SELECT username 
@@ -30,7 +30,18 @@
             WHERE storyId = ?'
         );
         $stmt->execute(array($storyId));
-        return $stmt->fetchAll()[0]['username'];
+        return $stmt->fetch()['username'];
+    }
+
+    function getStoryComments($storyId) {
+        $db = Database::instance()->db();
+        $stmt = $db->prepare(
+            'SELECT *
+            FROM comment
+            WHERE storyId = ?'
+        );
+        $stmt->execute(array($storyId));
+        return $stmt->fetchAll();
     }
 
     function getStoryLikes($storyId) {
@@ -42,7 +53,7 @@
         );
         $stmt->execute(array($storyId));
 
-        $result = $stmt->fetchAll()[0]['likes'];
+        $result = $stmt->fetch()['likes'];
         if ($result != null)
             return $result;
         else
@@ -58,7 +69,7 @@
         );
         $stmt->execute(array($storyId));
         
-        $result = $stmt->fetchAll()[0]['dislikes'];
+        $result = $stmt->fetch()['dislikes'];
         if ($result != null)
             return $result;
         else
@@ -89,7 +100,7 @@
                 WHERE storyId = ? AND userId = ?'
             );
             $stmt->execute(array($storyId, $username));
-            return $stmt->fetchAll()[0]['vote'];
+            return $stmt->fetch()['vote'];
         }
         return null;
     }

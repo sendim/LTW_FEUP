@@ -9,12 +9,12 @@
         die(header('Location: login.php'));
     }
 
-    drawLayout(function(){
+    drawLayout(function() {
          // get page story id argument
         $storyID = $_GET['id'];
         $story =  getStory($storyID);
 
         // draw story pages
         drawStoryPage($story);
-    });
+    }, 'story');
 ?>

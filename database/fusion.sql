@@ -43,7 +43,7 @@ CREATE TABLE comment (
 
 CREATE TABLE channel (
   channelId INTEGER PRIMARY KEY,
-  title VARCHAR
+  title VARCHAR UNIQUE
 );
 
 CREATE TABLE subscribed (

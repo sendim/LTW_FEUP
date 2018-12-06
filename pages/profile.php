@@ -7,10 +7,10 @@
   if (!isset($_SESSION['username'])) {
     $_SESSION['error_messages'][] = "Login Required!";
     die(header('Location: login.php'));
-  }
+  } 
 
   drawLayout(function() {
-    $profile = getUserProfile($_SESSION['username']);
-    drawProfile($profile[0]);
+    $profile = getUserProfile($_GET['username']);
+    drawProfile($profile);
   }, 'profile');
 ?>

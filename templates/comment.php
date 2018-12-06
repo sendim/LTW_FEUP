@@ -1,11 +1,21 @@
-<?php function drawComment($comment){
-/**
- * Draws the comment section.
- */ ?>
-    <div class="story bg-white">
+<?php 
+    include_once('../database/db_user.php');
 
-        <hr/>
-        <p><?='@' . $comment['username'] . ' ' . $comment['text']?></p>
-
-    </div>
+    function drawComment($comment) {
+    /**
+     * Draws the comment section.
+     */ 
+        $username = getUserUsername($comment['userId']);
+        $text = $comment['text'];
+    ?>
+        <div class="story bg-white">
+            <hr/>
+            
+            <p>
+                <a href="profile.php?username=<?=$username?>">@<?=$username?></a>
+                <?= ' ' . $text ?>
+            </p>
+            
+            <hr/>
+        </div>
 <?php } ?>

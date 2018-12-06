@@ -43,6 +43,13 @@
         return $stmt->fetch()['userId'];
     }
 
+    function getUserUsername($userId) {
+        $db = Database::instance()->db();
+        $stmt = $db->prepare('SELECT username FROM user WHERE userId = ?');
+        $stmt->execute(array($userId));
+        return $stmt->fetch()['username'];
+    }
+
     function getUserProfile($username) {
         $db = Database::instance()->db();
         $stmt = $db->prepare(
@@ -51,13 +58,12 @@
             WHERE username = ?'
         );
         $stmt->execute(array($username));
-        return $stmt->fetchAll();
+        return $stmt->fetch();
     }
 
     function getUserProfilePhoto($username) {
         $db = Database::instance()->db();
 
-        // retrieve users' most recent profile picture
         $stmt = $db->prepare(
             "SELECT * 
             FROM user NATURAL JOIN images
@@ -127,12 +133,15 @@
     function updateUserPassword($username,$password) {
         $db = Database::instance()->db();
 
+        $options = ['cost' => 12]; // hash length
+        $hashedPwd = password_hash($password,PASSWORD_DEFAULT,$options);
+
         $stmt = $db->prepare(
             'UPDATE user
             SET password = ?
             WHERE username LIKE ?'
         );
-        $stmt->execute(array(sha1($password),$username));
+        $stmt->execute(array($hashedPwd ,$username));
     }
 
     function updateUserDescription($username,$description) {
@@ -159,9 +168,9 @@
             WHERE username LIKE ?'
         );
         $storiesStmt->execute(array($username));
-        $storiesRes = $storiesStmt->fetchAll();
+        $storiesRes = $storiesStmt->fetch();
         if ($storiesRes != null) 
-            $storyPoints = $storiesRes[0]['storyPoints'];
+            $storyPoints = $storiesRes['storyPoints'];
 
         // get points from user comments votes
         $commentsStmt = $db->prepare(
@@ -170,9 +179,9 @@
             WHERE username LIKE ?'
         );
         $commentsStmt->execute(array($username));
-        $commentsRes = $commentsStmt->fetchAll();
+        $commentsRes = $commentsStmt->fetch();
         if ($commentsRes != null) 
-            $commentsPoints = $commentsRes[0]['commentPoints'];
+            $commentsPoints = $commentsRes['commentPoints'];
 
         $finalPoints = $storyPoints + $commentsPoints;
         $updateStmt = $db->prepare(

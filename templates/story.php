@@ -1,23 +1,25 @@
 <?php 
     include_once('../includes/session.php');
     include_once('../database/db_story.php');
+    include_once('../database/db_channel.php');
+    include_once('../templates/comment.php');
 
     function drawStory($story) {
-
+    /**
+    * Draws a story section.
+    */
+        $storyLink = "story.php?id=" . $story['storyId'];
         $publishedDate = gmdate('F j, g:i a, Y', $story['published']);
 
-        $linkToStory = "story.php?id=".$story['storyId'];
-
-        // TODO: get story channel, link to channel
-
-        // TODO: get story comments, link to story comments (story page)
-        
-        ?>
+        $author = getStoryAuthor($story['storyId']);
+        $channel = getChannelTitle($story['channel']);
+        $nrComments = sizeof(getStoryComments($story['storyId']));
+    ?>
         <div class="story-card bg-white">
             <header>
-                <a href=<?php echo $linkToStory ?> >
+                <a href=<?=$storyLink?>>
                     <h1>
-                        <?php echo $story['title'] ?>
+                        <?=$story['title']?>
                     </h1>
                 </a>
                 <?php
@@ -26,7 +28,7 @@
             </header>
 
             <div class="story-body">
-                <p><?php echo $story['text']; ?></p>
+                <p><?=$story['text']?></p>
             </div>
 
             <hr/>
@@ -38,22 +40,22 @@
                             <img src='icons/arrow-up.svg' alt="Vote up">
                         </a>
                         <span type="likes">
-                            <?php echo getStoryLikes($story['storyId']); ?>
+                            <?=getStoryLikes($story['storyId'])?>
                         </span>
                         <a class="button primary icon" storyId="<?=$story['storyId']?>" username="<?=$_SESSION['username']?>" vote="-1" csrf="<?=$_SESSION['csrf']?>">
                             <img src='icons/arrow-down.svg' alt="Vote down">
                         </a>
                         <span type="dislikes">
-                            <?php echo getStoryDislikes($story['storyId']); ?>
+                            <?=getStoryDislikes($story['storyId'])?>
                         </span>
                     </div>
                     <div class="signature">
-                        by <a href="#">@<?php echo $story['username']; ?> </a>
-                        at channel <a href="#"><?php echo $story['channel']; ?> </a>
+                        by <a href="profile.php?username=<?=$author?>">@<?=$author?></a>
+                        at channel <a href="channel.php?title=<?=$channel?>"><?=$channel?></a>
                     </div>
                 </div>
                 <div class="story-footer-right">
-                    <a href="#">20 Comments </a>
+                    <a href="<?=$storyLink?>"><?= $nrComments . ' comments' ?></a>
                 </div>
             </footer>
                         
@@ -61,18 +63,20 @@
 
 <?php } 
 
-    function draw_story_page($story){ 
-
+    function drawStoryPage($story) {
+    /**
+    * Draws a story page section.
+    */
         $publishedDate = gmdate('F j, g:i a, Y', $story['published']);
         
-        // TODO: get story comments
-        $comments = []
-        ?>
-
+        $author = getStoryAuthor($story['storyId']);
+        $comments = getStoryComments($story['storyId']);
+        $channel = getChannelTitle($story['channel']);
+    ?>
         <div id="story-page">
             <header class="container bg-white">
                 <h1>
-                    <?php echo $story['title'] ?>
+                    <?=$story['title']?>
                 </h1>
             
                 <?php
@@ -80,12 +84,12 @@
                 ?>
 
                 <div id="story-description">
-                    <p><?php echo $story['text']; ?></p>
+                    <p><?=$story['text']?></p>
                 </div>
 
                 <div class="signature">
-                    by <a href="#">@<?php echo $story['username']; ?> </a>
-                    at channel <a href="#"><?php echo $story['channel']; ?> </a>
+                    by <a href="profile.php?username=<?=$author?>">@<?=$author?></a>
+                    at channel <a href="channel.php?title=<?=$channel?>"><?=$channel?></a>
                 </div>
             </header>
 
@@ -104,7 +108,7 @@
                 <?php
                     if ($comments) {
                         foreach($comments as $comment)
-                            draw_comment($comment);
+                            drawComment($comment);
                     } else { ?>
                         <div class="container bg-white">No comments yet.</div>
                     <?php }
