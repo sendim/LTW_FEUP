@@ -19,6 +19,7 @@ function doneClicked(event) {
   // construct url with csrf security token
   request.open("post", "../api/api_voteRequest.php", true)
   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+  
   request.addEventListener("load", function () {
     let response = JSON.parse(this.responseText)
 
@@ -33,6 +34,7 @@ function doneClicked(event) {
     if (userPoints != null) 
       userPoints.innerHTML = response['userPoints']
   })
+
   request.send(
     encodeForAjax(
     {

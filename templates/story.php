@@ -12,7 +12,7 @@
         $publishedDate = gmdate('F j, g:i a, Y', $story['published']);
 
         $author = getStoryAuthor($story['storyId']);
-        $channel = getChannelTitle($story['channel']);
+        $channel = getChannelTitle($story['channelId']);
         $nrComments = sizeof(getStoryComments($story['storyId']));
     ?>
         <div class="story-card bg-white">
@@ -71,7 +71,7 @@
         
         $author = getStoryAuthor($story['storyId']);
         $comments = getStoryComments($story['storyId']);
-        $channel = getChannelTitle($story['channel']);
+        $channel = getChannelTitle($story['channelId']);
     ?>
         <div id="story-page">
             <header class="container bg-white">

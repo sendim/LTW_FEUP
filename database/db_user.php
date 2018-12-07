@@ -3,6 +3,7 @@
 
     function userLogin($username,$password) {
         $db = Database::instance()->db();
+
         $stmt = $db->prepare(
             'SELECT * 
             FROM user 
@@ -52,12 +53,14 @@
 
     function getUserProfile($username) {
         $db = Database::instance()->db();
+        
         $stmt = $db->prepare(
             'SELECT username,name,description,points 
             FROM user 
             WHERE username = ?'
         );
         $stmt->execute(array($username));
+
         return $stmt->fetch();
     }
 
@@ -70,17 +73,20 @@
             WHERE username = ? AND title = 'profile'"
         );
         $stmt->execute(array($username));
+
         return $stmt->fetch();
     }
 
     function getUserPoints($username) {
         $db = Database::instance()->db();
+
         $stmt = $db->prepare(
             'SELECT points 
             FROM user 
             WHERE username = ?'
         );
         $stmt->execute(array($username));
+
         return $stmt->fetch()['points'];
     }
 
@@ -107,6 +113,35 @@
         $stmt->execute(array($username));
         return $stmt->fetchAll();
     }
+
+    function getUserCreatedChannels($username) {
+        $db = Database::instance()->db();
+
+        $userId = getUserId($username);
+
+        $stmt = $db->prepare(
+            'SELECT *
+            FROM channel JOIN user USING(userId)
+            WHERE userId = ?'
+        );
+        $stmt->execute(array($userId));
+        return $stmt->fetchAll();
+    }
+
+    function getUserSubscribedChannels($username) {
+        $db = Database::instance()->db();
+
+        $userId = getUserId($username);
+
+        $stmt = $db->prepare(
+            'SELECT *
+            FROM channel JOIN subscribed USING(channelId)
+            WHERE subscribed.userId = ?'
+        );
+        $stmt->execute(array($userId));
+        return $stmt->fetchAll();
+    }
+
 
     function updateUserName($username,$name) {
         $db = Database::instance()->db();

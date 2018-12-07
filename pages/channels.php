@@ -1,7 +1,7 @@
 <?php
+  include_once('../database/db_search.php');
   include_once('../templates/layout.php');
-  include_once('../templates/story.php');
-  // TODO: Create channel.php include_once('../database/channel.php');
+  include_once('../templates/channel.php');
  
   if (!isset($_SESSION['username'])) {
     $_SESSION['error_messages'][] = "Login Required!";
@@ -9,7 +9,6 @@
   }
 
   drawLayout(function(){
-    $channels = getChannels(); // TODO: create get channels function
-    drawChannelsPage($channels);
+    drawChannelsPage($_SESSION['username']);
   }, 'channels');
 ?>

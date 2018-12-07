@@ -27,7 +27,7 @@ CREATE TABLE story (
   text VARCHAR,
   likes INTEGER,
   dislikes INTEGER,
-  channel INTEGER REFERENCES channel
+  channelId INTEGER REFERENCES channel
 );
 
 CREATE TABLE comment (
@@ -43,13 +43,14 @@ CREATE TABLE comment (
 
 CREATE TABLE channel (
   channelId INTEGER PRIMARY KEY,
+  userId INTEGER REFERENCES user NOT NULL,
   title VARCHAR UNIQUE
 );
 
 CREATE TABLE subscribed (
   userId INTEGER REFERENCES user NOT NULL,
-  channel INTEGER REFERENCES channel NOT NULL,
-  PRIMARY KEY(userId, channel)
+  channelId INTEGER REFERENCES channel NOT NULL,
+  PRIMARY KEY(userId, channelId)
 );
 
 CREATE TABLE votesStory (

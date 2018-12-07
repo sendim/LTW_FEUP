@@ -4,7 +4,8 @@ INSERT INTO user VALUES (NULL,"zachary", "$2y$12$cH5Hmh/4JgKSEM4ZCih1jOOSItL2WW.
 INSERT INTO user VALUES (NULL,"alicia", "$2y$12$cH5Hmh/4JgKSEM4ZCih1jOOSItL2WW.XZruOxkG0udohjH5xMu6FG", "Alicia Hamilton"," ",0);
 INSERT INTO user VALUES (NULL,"abril", "$2y$12$cH5Hmh/4JgKSEM4ZCih1jOOSItL2WW.XZruOxkG0udohjH5xMu6FG", "Abril Cooley"," ",0);
 
-INSERT INTO channel VALUES (NULL,'theme');
+INSERT INTO channel VALUES (NULL,1,'work');
+INSERT INTO channel VALUES (NULL,3,'gaming');
 
 INSERT INTO story VALUES (NULL,
   'Lorem ipsum dolor sit amet, consectetur',
@@ -24,7 +25,7 @@ INSERT INTO story VALUES (NULL,
   'Morbi bibendum volutpat pellentesque. In bibendum est et orci semper rhoncus. Sed cursus vel orci sed malesuada. Fusce ac dictum ligula, quis hendrerit ipsum. Proin hendrerit a.',
 	0,
   0,
-	1
+	2
 );
 
 INSERT INTO story VALUES (NULL,
@@ -45,7 +46,7 @@ INSERT INTO story VALUES (NULL,
   'Duis condimentum metus et ex tincidunt, faucibus aliquet ligula porttitor. In vitae posuere massa. Donec fermentum magna sit amet suscipit pulvinar. Cras in elit sapien. Vivamus nunc sem, finibus ac suscipit ullamcorper, hendrerit vitae urna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque eget tincidunt orci. Mauris congue ipsum non purus tristique, at venenatis elit pellentesque. Etiam congue euismod molestie. Mauris ex orci, lobortis a faucibus sed, sagittis eget neque.',
 	0,
   0,
-	1
+	2
 );
 
 INSERT INTO comment VALUES (NULL,
@@ -77,5 +78,11 @@ INSERT INTO comment VALUES (NULL,
   0,
 	NULL
 );
+
+INSERT INTO subscribed VALUES (1,1);
+INSERT INTO subscribed VALUES (1,2);
+INSERT INTO subscribed VALUES (2,2);
+INSERT INTO subscribed VALUES (3,1);
+INSERT INTO subscribed VALUES (4,2);
 
 INSERT INTO images VALUES (NULL,NULL,'default');

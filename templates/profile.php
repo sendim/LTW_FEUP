@@ -19,12 +19,12 @@
                         <?php 
                             $image = getUserProfilePhoto($profile['username']);
                             if ($image != null) { ?>
-                                <a href="../images/originals/<?=$image['imageId']?>.jpeg">
-                                    <img src="../images/thumbnails/<?=$image['imageId']?>.jpeg" width="200" height="200">
+                                <a href="../images/originals/<?=$image['imageId']?>.png">
+                                    <img class="profile-pic" src="../images/thumbnails/<?=$image['imageId']?>.png">
                                 </a>
                             <?php
                             } else { ?>
-                                <img src="../images/thumbnails/default.jpeg" width="200" height="200">
+                                <img src="../images/thumbnails/default.png">
                             <?php }
                         ?>
                     </div>
@@ -123,7 +123,7 @@
             <form action="../actions/action_imageUpload.php" method="post" enctype="multipart/form-data">
                 <div class="form-input">
                     <label>Picture</label>
-                    <small>Warning: current profile picture will be overridden!</small>
+                    <small>Warning: current profile picture will be overwritten!</small>
                     <input type="file" name="image">
                     <input type='hidden' name='title' value='profile'/>
                     <input type="submit" value="Upload image">

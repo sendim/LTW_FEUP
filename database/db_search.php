@@ -1,22 +1,9 @@
 <?php
     include_once('../includes/database.php');
 
-    function getFeed() {
+    function getUsers() {
         $db = Database::instance()->db();
-        $stmt = $db->prepare(
-            'SELECT story.*, user.*, COUNT(comment.commentId) AS nrComments
-            FROM story NATURAL JOIN user LEFT JOIN comment ON comment.storyId = story.storyId
-            GROUP BY story.storyId, user.username
-            ORDER BY published DESC'
-        ); 
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
-
-    function getChannels() {
-        $db = Database::instance()->db();
-
-        $stmt = $db->prepare('SELECT * FROM channel');
+        $stmt = $db->prepare('SELECT * FROM user');
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -24,13 +11,6 @@
     function getProfiles() {
         $db = Database::instance()->db();
 
-        $stmt = $db->prepare('SELECT * FROM user');
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
-
-    function getUsers() {
-        $db = Database::instance()->db();
         $stmt = $db->prepare('SELECT * FROM user');
         $stmt->execute();
         return $stmt->fetchAll();
@@ -48,6 +28,26 @@
         $db = Database::instance()->db();
 
         $stmt = $db->prepare('SELECT * FROM comment');
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    function getChannels() {
+        $db = Database::instance()->db();
+
+        $stmt = $db->prepare('SELECT * FROM channel');
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    function getFeed() {
+        $db = Database::instance()->db();
+        $stmt = $db->prepare(
+            'SELECT story.*, user.*, COUNT(comment.commentId) AS nrComments
+            FROM story NATURAL JOIN user LEFT JOIN comment ON comment.storyId = story.storyId
+            GROUP BY story.storyId, user.username
+            ORDER BY published DESC'
+        ); 
         $stmt->execute();
         return $stmt->fetchAll();
     }

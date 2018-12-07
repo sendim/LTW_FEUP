@@ -290,6 +290,11 @@
     height: 30px;
     width: 30px;
     margin-right: 8px;
+    border-radius: 50%;
+  }
+
+  img.profile-pic {
+    border-radius: 50%;
   }
 
   /* story page */

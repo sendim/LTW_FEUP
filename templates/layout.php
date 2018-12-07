@@ -32,13 +32,23 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <?php if (in_array($selected,$selectedOptions)) { ?>
           <script src="../js/voteRequest.js" defer></script>
+        <?php } else if ($selected == 'channels') { ?>
+          <script src="../js/createChannelRequest.js" defer></script>
         <?php } ?>
       </head>
       <body>
         <nav id="navbar">
           <h1>The Fusion Network</h1>
-            <?php if ($sessionSet) { 
-              echo $_SESSION['username']; ?>
+            <?php if ($sessionSet) {
+              $image = getUserProfilePhoto($_SESSION['username']);?>
+              <a href="profile.php?username=<?=$_SESSION['username']?>">
+                <?php if ($image != null) { ?>
+                  <img class="profile-pic" src="../images/icons/<?=$image['imageId']?>.png">
+                <?php } else { ?>
+                  <img src="../images/icons/default.png">
+                <?php } ?>
+              </a>
+              <?=$_SESSION['username']?>
               <a class="button" href="../actions/action_logout.php">
               <img src="icons/logout.svg" alt="Logout">
                 Logout
