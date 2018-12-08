@@ -23,16 +23,21 @@
   * Draws the page header
   */
     $sessionSet = isset($_SESSION['username']);
-    $selectedOptions = array('feed','story','profile','channel');
+    $votingPages = array('feed','story','profile','channel');
+    $channelCreationPage = 'channels';
+    $commentCreationPage = 'story';
   ?>
     <!DOCTYPE html>
     <html lang="en-US">
       <head>
         <link rel="stylesheet" href="style.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <?php if (in_array($selected,$selectedOptions)) { ?>
-          <script src="../js/voteRequest.js" defer></script>
-        <?php } else if ($selected == 'channels') { ?>
+        <?php if (in_array($selected,$votingPages)) { ?>
+          <script src="../js/storyVoteRequest.js" defer></script>
+        <?php } if ($selected == $commentCreationPage) { ?>
+          <script src="../js/addStoryCommentRequest.js" defer></script>
+          <script src="../js/addCommentCommentRequest.js" defer></script>
+        <?php } if ($selected == $channelCreationPage) { ?>
           <script src="../js/createChannelRequest.js" defer></script>
         <?php } ?>
       </head>
@@ -86,13 +91,11 @@
             <img src="icons/person.svg" alt="Profile">
             Profile
           </a>
-          <!-- added edit profile -->
           <ul>
             <li>
               <a href="<?php if($sessionSet) echo 'editProfile.php'; else echo '#';?>">Edit profile</a>
             </li>
           </ul>
-          <!-- end of change -->
         </li>
       </ul>
     </nav>

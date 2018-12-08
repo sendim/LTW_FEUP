@@ -17,7 +17,7 @@ function doneClicked(event) {
   let request = new XMLHttpRequest()
 
   // construct url with csrf security token
-  request.open("post", "../api/api_voteRequest.php", true)
+  request.open("post", "../api/api_storyVoteRequest.php", true)
   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
   
   request.addEventListener("load", function () {

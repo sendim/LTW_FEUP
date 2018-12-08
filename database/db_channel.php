@@ -4,6 +4,9 @@
     function createChannel($username,$channelTitle) {
         $db = Database::instance()->db();
 
+        if (existsChannel($channelTitle)) 
+            return false;
+
         $userId = getUserId($username);
         
         $stmt = $db->prepare('INSERT INTO channel VALUES(?,?,?)');

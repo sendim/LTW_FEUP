@@ -1,7 +1,5 @@
 <?php
     include_once('../includes/session.php');
-    include_once('../database/db_channel.php');
-    include_once('../database/db_user.php');
 
     header('Content-Type: application/json');
 
@@ -10,16 +8,18 @@
         die(json_encode(array('error' => 'not_logged_in')));
 
     // variables received for the request
-    $channelTitle = $_POST['channelTitle'];
+    $commentId = $_POST['commentId'];
+    $commentText = $_POST['commentText'];
     $csrf = $_POST['csrf'];
 
     // verifies csrf token
     if ($_SESSION['csrf'] != $csrf)
         die(json_encode(array('error' => 'incompatible_csrf')));
 
-    $success = createChannel($_SESSION['username'],$channelTitle);
+    // insert comment to the respective story
+    $success = addCommentOfComment($storyId,$commentId,$_SESSION['username'],$commentText);
     if ($success)
-        echo json_encode(array('success' => 'Channel successfully created!'));
+        echo json_encode(array('success' => 'Comment successfully added!'));
     else
-        echo json_encode(array('error' => 'Channel already exists!'));  
+        echo json_encode(array('error' => 'Comment could not be added!'));
 ?>

@@ -15,6 +15,14 @@
         $stmt->execute(array($userId, $storyId, $vote));
     }
 
+    function addStoryComment($comment,$storyId,$username) {
+        $db = Database::instance()->db();
+        $userId = getUserId($username);
+        $stmt = $db->prepare('INSERT INTO comment VALUES(NULL,?,?,?,?,?,?,NULL)');
+        $ret = $stmt->execute(array($storyId,$userId,date("Y/m/d"),$comment,0,0));
+        return $ret !== false;
+    }
+
     function getStory($storyId) {
         $db = Database::instance()->db();
         $stmt = $db->prepare('SELECT * FROM story WHERE storyId = ?');
@@ -38,10 +46,21 @@
         $stmt = $db->prepare(
             'SELECT *
             FROM comment
-            WHERE storyId = ?'
+            WHERE storyId = ? AND referencedComment IS NULL'
         );
         $stmt->execute(array($storyId));
         return $stmt->fetchAll();
+    }
+
+    function countStoryComments($storyId) {
+        $db = Database::instance()->db();
+        $stmt = $db->prepare(
+            'SELECT count(*) AS nrComments
+            FROM comment
+            WHERE storyId = ?'
+        );
+        $stmt->execute(array($storyId));
+        return $stmt->fetch()['nrComments'];
     }
 
     function getStoryLikes($storyId) {

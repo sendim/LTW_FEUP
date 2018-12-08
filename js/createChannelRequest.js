@@ -17,8 +17,8 @@ function doneClicked() {
       'beforeend',
       '<form class="story-card bg-white">'
       + '<div class="form-input">'
-      + '<label>New channel</label>'
-      + '<input type="text" name="title" placeholder="new channel title" required>'
+        + '<label>New channel</label>'
+        + '<input type="text" name="title" placeholder="new channel title" required>'
       + '</div>'
       + '<button class="button primary" type="submit">Add channel</button>' +
       '</form>'

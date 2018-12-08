@@ -79,6 +79,26 @@ INSERT INTO comment VALUES (NULL,
 	NULL
 );
 
+INSERT INTO comment VALUES (NULL,
+  3,
+  2,
+  1508247160,
+  'Pellentesque vestibulum elit libero, venenatis gravida mauris malesuada nec. Integer et velit quis tortor condimentum interdum ac non nunc.',
+	0,
+  0,
+	3
+);
+
+INSERT INTO comment VALUES (NULL,
+  3,
+  1,
+  1508247170,
+  'Sed congue blandit sagittis. Sed vel purus quam. Morbi vitae libero consequat, pretium enim non, egestas velit. Vestibulum ut felis tincidunt, finibus elit nec, sodales erat.',
+	0,
+  0,
+	4
+);
+
 INSERT INTO subscribed VALUES (1,1);
 INSERT INTO subscribed VALUES (1,2);
 INSERT INTO subscribed VALUES (2,2);
