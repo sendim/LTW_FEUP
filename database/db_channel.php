@@ -3,9 +3,27 @@
 
     function createChannel($username,$channelTitle) {
         $db = Database::instance()->db();
+
         $userId = getUserId($username);
+        
         $stmt = $db->prepare('INSERT INTO channel VALUES(?,?,?)');
-        $stmt->execute(array($channelId,$userId,$channelTitle));
+        $ret = $stmt->execute(array($channelId,$userId,$channelTitle));
+
+        return $ret !== false;
+    }
+
+    function existsChannel($channelTitle) {
+        $db = Database::instance()->db();
+        $stmt = $db->prepare('SELECT * FROM channel WHERE title = ?');
+        $stmt->execute(array($channelTitle));
+        return $stmt->fetch() !== false;
+    }
+
+    function getChannelId($channelTitle) {
+        $db = Database::instance()->db();
+        $stmt = $db->prepare('SELECT channelId FROM channel WHERE title = ?');
+        $stmt->execute(array($channelTitle));
+        return $stmt->fetch()['channelId'];
     }
 
     function getChannelTitle($channelId) {

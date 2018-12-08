@@ -14,32 +14,31 @@ function doneClicked() {
   if (createdChannelsContainer.querySelector('div.form-input') == null) {
 
     createdChannelsContainer.insertAdjacentHTML(
-        'beforeend',
-        '<form>'
-        + '<div class="form-input story-card bg-white">'
-            + '<label>New channel</label>'
-            + '<input type="text" name="title" placeholder="new channel title" required>'
-        + '</div>'
-        + '<button class="button primary" type="submit">Add channel</button>' +
-        '</form>'
+      'beforeend',
+      '<form class="story-card bg-white">'
+      + '<div class="form-input">'
+      + '<label>New channel</label>'
+      + '<input type="text" name="title" placeholder="new channel title" required>'
+      + '</div>'
+      + '<button class="button primary" type="submit">Add channel</button>' +
+      '</form>'
     )
 
-    // retrieves the 'add channel' button and sets its handler  
-    let addChannel = createdChannelsContainer.querySelector('form button')
-    addChannel.addEventListener('click', submitClicked)
+    // retrieves the form and sets its submit handler  
+    let addChannel = createdChannelsContainer.querySelector('form')
+    addChannel.addEventListener('submit', formSubmitted)
   }
 }
 
 // what happens after the 'add channel button' has been clicked
-function submitClicked(event) {
+function formSubmitted(event) {
   event.preventDefault();
 
   // required inputs for the channel request
-  let username = newChannel.getAttribute('username')
-
   let formDiv = event.target.parentNode
   let channelTitle = formDiv.querySelector('input[name="title"]').value
-  // TODO: title is required but form allows null!
+
+  let csrf = channelsDiv.getAttribute('csrf')
 
   // setup of the ajax request
   let request = new XMLHttpRequest()
@@ -48,35 +47,54 @@ function submitClicked(event) {
   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 
   request.addEventListener("load", function () {
-    
-    // remove input div
-    let inputDiv = channelsDiv.getElementsByClassName('form-input')[0]
-    let form = inputDiv.parentNode;
-    form.parentNode.removeChild(form);
 
-    // add new channel
-    createdChannelsContainer.insertAdjacentHTML(
+    let response = JSON.parse(this.responseText)
+    
+    // if channel could not be created
+    if (response['error']) {
+      let existsMessage = createdChannelsContainer.querySelector('section#messages');
+
+      if (!existsMessage) {
+        createdChannelsContainer.querySelector('form').insertAdjacentHTML(
+          'beforeend',
+          '<section id="messages">'
+          + '<article class="error">'
+          + '<p>' + response['error'] + '</p>'
+          + '</article>'
+          + '<?php } clearMessages(); ?>' +
+          '</section>'
+        )
+      }
+    } else {
+      // remove input div
+      let inputDiv = channelsDiv.getElementsByClassName('form-input')[0]
+      let form = inputDiv.parentNode;
+      form.parentNode.removeChild(form);
+
+      // add new channel
+      createdChannelsContainer.insertAdjacentHTML(
         'beforeend',
         '<a href="channel.php?title=' + channelTitle + '">'
         + '<div class="story-card bg-white">' +
-                channelTitle + ' - ' + '0 stories'
+        channelTitle + ' - ' + '0 stories'
         + '</div>' +
         '</a>'
-    )
+      )
+    }
   })
 
   request.send(
     encodeForAjax(
-    {
-      username : username,
-      channelTitle : channelTitle
-    })
+      {
+        channelTitle: channelTitle,
+        csrf: csrf
+      })
   )
 }
 
 // helper function
 function encodeForAjax(data) {
-  return Object.keys(data).map(function(k){
+  return Object.keys(data).map(function (k) {
     return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
   }).join('&')
 }

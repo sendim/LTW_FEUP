@@ -1,6 +1,7 @@
 <?php
     include_once('../includes/session.php');
     include_once('../database/db_channel.php');
+    include_once('../database/db_user.php');
 
     header('Content-Type: application/json');
 
@@ -16,5 +17,10 @@
     if ($_SESSION['csrf'] != $csrf)
         die(json_encode(array('error' => 'incompatible_csrf')));
 
-    createChannel($_SESSION['username'],$channelTitle);
+    if (!existsChannel($channelTitle)) {
+        createChannel($_SESSION['username'],$channelTitle);
+        echo json_encode(array('success' => 'Channel successfully created!'));
+    } else {
+        echo json_encode(array('error' => 'Channel already exists!'));
+    }
 ?>

@@ -23,7 +23,7 @@
   * Draws the page header
   */
     $sessionSet = isset($_SESSION['username']);
-    $selectedOptions = array('feed','story','profile');
+    $selectedOptions = array('feed','story','profile','channel');
   ?>
     <!DOCTYPE html>
     <html lang="en-US">
