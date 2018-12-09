@@ -333,5 +333,15 @@
     padding: 12px;
     margin-top: 2px;
     margin-bottom: 2px;
+    background-color: white;
+  }
+
+  #channels .channel-card .title {
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  #channels .channel-card .stories-number {
+    float: right;
   }
 

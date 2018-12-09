@@ -48,11 +48,11 @@ function drawChannelCard($channel)
 
     ?>
         <a href="channel.php?title=<?= $channel['title'] ?>">
-                        <div class="channel-card bg-white">
-                            <div>
+                        <div class="channel-card">
+                            <div class="title">
                                 <?= $channel['title'] ?>
                             </div>
-                            <div>
+                            <div class="stories-number">
                                 <?php
                                 if ($nrStories > 1) {
                                     echo $nrStories . ' stories';
@@ -60,6 +60,7 @@ function drawChannelCard($channel)
                                     echo $nrStories . ' story';
                                 } ?>
                             </div>
+                            <div class="clearfix"></div>
                         </div>
                     </a>
     <?php 
