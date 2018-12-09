@@ -1,7 +1,7 @@
 <?php
-  include_once('../database/db_search.php');
+  //include_once('../database/db_user.php');
   include_once('../templates/layout.php');
-  include_once('../templates/channel.php');
+  include_once('../templates/channel.php'); 
  
   if (!isset($_SESSION['username'])) {
     $_SESSION['error_messages'][] = "Login Required!";
@@ -9,6 +9,12 @@
   }
 
   drawLayout(function(){
-    drawChannelsPage($_SESSION['username']);
+    $username = $_SESSION['username'];
+
+    $createdChannels = getUserCreatedChannels($username);
+
+    $subscribedChannels = getUserSubscribedChannels($username);
+
+    drawChannelsPage($createdChannels, $subscribedChannels);
   }, 'channels');
 ?>

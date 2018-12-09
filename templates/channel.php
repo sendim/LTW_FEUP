@@ -1,21 +1,17 @@
 <?php
-    include_once('../includes/session.php'); 
-    include_once('../database/db_channel.php');
     include_once('../templates/story.php');
 
-    function drawChannel($channelTitle) {
+    function drawChannel($title, $stories) {
     /**
     * Draws a channel page.
     */ 
-        $channelId = getChannelId($channelTitle);
-        $stories = getChannelStories($channelId);
     ?>
     <div id="channel">
 
         <section class="container bg-white">
 
             <header>
-                <h2><?=$channelTitle?><h2>
+                <h2><?=$title?><h2>
             </header>
 
             <hr/>
@@ -39,30 +35,34 @@
 
 <?php }
 
-    function drawChannelsPage($username) {
     /**
     * Draws the channels page.
-    */  
-        $createdChannels = getUserCreatedChannels($username);
-        $subscribedChannels = getUserSubscribedChannels($username);
+    */ 
+    function drawChannelsPage($createdChannels, $subscribedChannels) { 
+
     ?>
     <section id="channels">
 
         <div id="created-channels" csrf="<?=$_SESSION['csrf']?>">
-            <section class="container">
-                <header>
-                    <h2>Created</h2>
+            <section>
+                <header class="container section-header">
+                    Created
                     <button class="button primary" csrf="<?=$_SESSION['csrf']?>">New channel</button>
                 </header>
 
-                <hr/>
-
                 <?php
+                    if (count($createdChannels) == 0){
+                        ?>
+                        <div class="container bg-white">
+                            No created channels.
+                        </div>
+                        <?php
+                    } else {
                     foreach($createdChannels as $createdChannel) {
                         $nrStories = sizeof(getChannelStories($createdChannel['channelId'])); 
                     ?>
                     <a href="channel.php?title=<?=$createdChannel['title']?>">
-                        <div class="story-card bg-white">
+                        <div class="container bg-white">
                             <?php
                                 echo $createdChannel['title'] . ' - ' . $nrStories;
                                 if ($nrStories > 1)
@@ -72,19 +72,24 @@
                             ?>
                         </div>
                     </a>
-                <?php } ?>
+                <?php } } ?>
             </section>
         </div>
 
         <div id="subscribed-channels">
-            <section class="container">
-                <header>
-                    <h2>Subscribed</h2>
+            <section>
+                <header class="container section-header">
+                    Subscribed
                 </header>
 
-                <hr/>
-
                 <?php
+                if (count($subscribedChannels) == 0){
+                    ?>
+                    <div class="container bg-white">
+                        No subscribed channels.
+                    </div>
+                    <?php
+                } else {
                     foreach($subscribedChannels as $subscribedChannel) { 
                         $nrStories = sizeof(getChannelStories($subscribedChannel['channelId'])); 
                     ?>
@@ -99,7 +104,7 @@
                             ?>
                         </div>
                     </a>
-                <?php } ?>   
+                <?php } } ?>   
             </section>
         </div>
 

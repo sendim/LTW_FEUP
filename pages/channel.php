@@ -10,7 +10,11 @@
     }
     
     drawLayout(function() {
-        $channelTitle = $_GET['title'];
-        drawChannel($channelTitle);
+        $title = $_GET['title'];
+
+        $id = getChannelId($title);
+        $stories = getChannelStories($id);
+
+        drawChannel($title, $stories);
     }, 'channel');
 ?>
