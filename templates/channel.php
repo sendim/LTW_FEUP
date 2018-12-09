@@ -1,17 +1,18 @@
 <?php
-    include_once('../templates/story.php');
+include_once('../templates/story.php');
 
-    function drawChannel($title, $stories) {
+function drawChannel($title, $stories)
+{
     /**
-    * Draws a channel page.
-    */ 
+     * Draws a channel page.
+     */
     ?>
     <div id="channel">
 
         <section class="container bg-white">
 
             <header>
-                <h2><?=$title?><h2>
+                <h2><?= $title ?><h2>
             </header>
 
             <hr/>
@@ -26,53 +27,78 @@
 
         <div>
             <?php
-                foreach($stories as $story)
-                    drawStory($story);
+            foreach ($stories as $story)
+                drawStory($story);
             ?>
         </div>
     
     </div>
 
-<?php }
+<?php 
+}
 
-    /**
-    * Draws the channels page.
-    */ 
-    function drawChannelsPage($createdChannels, $subscribedChannels) { 
+/**
+ * draws a channel card.
+ */
+function drawChannelCard($channel)
+{
+    $title = $channel['title'];
+    $stories = getChannelStories($channel['channelId']);
+    $nrStories = count($stories);
 
     ?>
+        <a href="channel.php?title=<?= $channel['title'] ?>">
+                        <div class="channel-card bg-white">
+                            <div>
+                                <?= $channel['title'] ?>
+                            </div>
+                            <div>
+                                <?php
+                                if ($nrStories > 1) {
+                                    echo $nrStories . ' stories';
+                                } else {
+                                    echo $nrStories . ' story';
+                                } ?>
+                            </div>
+                        </div>
+                    </a>
+    <?php 
+}
+
+/**
+ * Draws multiple channels cards.
+ */
+function drawChannelCards($channels) {
+    if (count($channels) == 0) {
+        ?>
+            <div class="container bg-white">
+                No channels.
+            </div>
+        <?php
+
+        } else {
+            foreach ($channels as $channel) {
+                drawChannel($channel);
+            }
+        } 
+}
+
+
+/**
+ * Draws the channels page.
+ */
+function drawChannelsPage($createdChannels, $subscribedChannels){ ?>
     <section id="channels">
 
-        <div id="created-channels" csrf="<?=$_SESSION['csrf']?>">
+        <div id="created-channels" csrf="<?= $_SESSION['csrf'] ?>">
             <section>
                 <header class="container section-header">
                     Created
-                    <button class="button primary" csrf="<?=$_SESSION['csrf']?>">New channel</button>
+                    <button class="button primary" csrf="<?= $_SESSION['csrf'] ?>">New channel</button>
+                    <div class="clearfix"></div>
                 </header>
 
-                <?php
-                    if (count($createdChannels) == 0){
-                        ?>
-                        <div class="container bg-white">
-                            No created channels.
-                        </div>
-                        <?php
-                    } else {
-                    foreach($createdChannels as $createdChannel) {
-                        $nrStories = sizeof(getChannelStories($createdChannel['channelId'])); 
-                    ?>
-                    <a href="channel.php?title=<?=$createdChannel['title']?>">
-                        <div class="container bg-white">
-                            <?php
-                                echo $createdChannel['title'] . ' - ' . $nrStories;
-                                if ($nrStories > 1)
-                                    echo ' stories';
-                                else
-                                    echo 'story';
-                            ?>
-                        </div>
-                    </a>
-                <?php } } ?>
+                <?php drawChannelCards($createdChannels); ?>
             </section>
         </div>
 
@@ -82,29 +108,7 @@
                     Subscribed
                 </header>
 
-                <?php
-                if (count($subscribedChannels) == 0){
-                    ?>
-                    <div class="container bg-white">
-                        No subscribed channels.
-                    </div>
-                    <?php
-                } else {
-                    foreach($subscribedChannels as $subscribedChannel) { 
-                        $nrStories = sizeof(getChannelStories($subscribedChannel['channelId'])); 
-                    ?>
-                    <a href="channel.php?title=<?=$subscribedChannel['title']?>">
-                        <div class="story-card bg-white">
-                            <?php
-                                echo $subscribedChannel['title'] . ' - ' . $nrStories;
-                                if ($nrStories > 1)
-                                    echo ' stories';
-                                else
-                                    echo 'story';
-                            ?>
-                        </div>
-                    </a>
-                <?php } } ?>   
+                <?php drawChannelCards($subscribedChannels); ?> 
             </section>
         </div>
 

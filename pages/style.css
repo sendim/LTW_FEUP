@@ -46,27 +46,12 @@
     color: gray;
   }
 
-  /* messages */
-
-  #messages article {
-    text-align: center;
-    color: white;
-  }
-  
-  #messages article p {
-    margin: 2px;
-    padding: 0.5em;
-  }
-  
-  #messages article.error {
-    background-color: #F66;
-  }
-  
-  #messages article.success {
-    background-color: #6D6;
-  }
-
   /* classes */
+
+  .clearfix {
+    clear: both;
+    font-size: 1px;
+  }
 
   .container {
     padding: 12px;
@@ -128,6 +113,26 @@
   .bg-white {
     background-color: white;
     color: black;
+  }
+
+  /* messages */
+
+  #messages article {
+    text-align: center;
+    color: white;
+  }
+  
+  #messages article p {
+    margin: 2px;
+    padding: 0.5em;
+  }
+  
+  #messages article.error {
+    background-color: #F66;
+  }
+  
+  #messages article.success {
+    background-color: #6D6;
   }
 
   /* navbar */
@@ -319,4 +324,14 @@
   }
 
   /* channels page */
+
+  #channels #created-channels section header button {
+    float: right;
+  }
+
+  #channels .channel-card {
+    padding: 12px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
 
