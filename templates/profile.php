@@ -4,15 +4,12 @@
     include_once('../templates/story.php');
     include_once('../templates/comment.php');
 
-    function drawProfile($profile) { 
-    /**
-    * Draws the login section.
-    */        
-        $comments = getUserComments($profile['username']);
-        $stories = getUserStories($profile['username']);
-    ?>
-        <div id="profile">
 
+
+    function drawHeaderProfile($profile) {
+        $profileLink = "profile.php?username=" . $profile['username'];
+        ?>
+        <div id="profile">
             <header id="profile-header" class="container bg-white">
                 <header>
                     <div id="profile-header-photo">
@@ -30,8 +27,10 @@
                     </div>
 
                     <div id="profile-header-user">
-                        <h2><?=$profile['name']?></h2>
-                        <small><?='@'.$profile['username']?></small>
+                        <a href=<?=$profileLink?>>
+                            <h2><?=$profile['name']?></h2>
+                            <small><?='@'.$profile['username']?></small>
+                        </a>
                     </div>
 
                     <div id="profile-header-points">
@@ -44,7 +43,21 @@
                 
                 <?= '<p>' . $profile['description'] . '</p>'; ?>
             </header>
+        </div>
+    <?php 
+}
 
+    
+    function drawProfile($profile) { 
+    /**
+    * Draws the login section.
+    */        
+        $comments = getUserComments($profile['username']);
+        $stories = getUserStories($profile['username']);
+        drawHeaderProfile($profile);
+    ?>
+        <div id="profile">
+          
             <section id="stories">
                 <div id="stories-header" class="container section-header">
                     Stories
