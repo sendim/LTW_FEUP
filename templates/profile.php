@@ -82,7 +82,7 @@
         </div>
 <?php }
 
-    function drawEditProfile() {
+    function drawEditProfile($profile) {
     /**
      * Draws the login section.
      */ ?>
@@ -94,15 +94,15 @@
     
             <hr/>
     
-            <form method="post" action="../actions/action_editProfile.php">
+            <form id="edit-profile-form" "method="post" action="../actions/action_editProfile.php" onsubmit="return (validate());">
                 <div class="form-input">
                     <label>New name</label>
-                    <input type="text" name="name" placeholder="name">
+                    <input type="text" name="name" placeholder="name" value=<?= $profile['name'] ?> >
                 </div>
 
                 <div class="form-input">
                     <label>New username</label>
-                    <input type="text" name="username" placeholder="username">
+                    <input type="text" name="username" placeholder="username" value=<?= $profile['username'] ?>>
                 </div>
         
                 <div class="form-input">
@@ -112,7 +112,7 @@
 
                 <div class="form-input">
                     <label>New description</label>
-                    <input type="text" name="description" placeholder="description">
+                    <input type="text" name="description" placeholder="description" value=<?= $profile['description'] ?>>
                 </div>
   
                 <button class="button primary" type="submit">
@@ -129,6 +129,5 @@
                     <input type="submit" value="Upload image">
                 </div>
             </form>
-
         </section>
 <?php } ?>
