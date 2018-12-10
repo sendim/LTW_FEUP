@@ -16,7 +16,7 @@
     $stories = searchStory($input);
     $comments = searchComments($input);
     $channels = searchChannels($input);
-    drawSearchFeed($profiles, $stories, $comments, $channels);
+    drawSearchFeed($profiles, $stories, $comments, $channels, $input);
   }, 'search');
   
 ?>
