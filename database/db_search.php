@@ -8,14 +8,6 @@
         return $stmt->fetchAll();
     }
 
-    function searchProfile($text) {
-        $db = Database::instance()->db();
-
-        $stmt = $db->prepare('SELECT * FROM user WHERE username LIKE'.$text.'%');
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
-
     function getStories() {
         $db = Database::instance()->db();
 
@@ -52,40 +44,27 @@
         return $stmt->fetchAll();
     }
 
-    function searchChannels($substring) {
-        $channels = get_channels();
-        $channelsSub = array();
-        foreach($channels as $channel) {
-            if (strpos($channel['title'], $substring) !== false) {
-                $channelsSub[] = $channel;
-            }
-        }
-        return $channelsSub;
+    function searchProfiles($substring) {
+        $db = Database::instance()->db();
+        $stmt = $db->prepare("SELECT * FROM user WHERE username LIKE '%$substring%'");
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
     function searchStory($substring) {
-        $stories = get_stories();
-        $storiesSub = array();
-        foreach($stories as $story) {
-            if (strpos($story['title'], $substring) !== false) {
-                $storiesSub[] = $story;
-            }
-            else if (strpos($story['text'], $substring) !== false){
-                $storiesSub[] = $story;
-            }
-        }
-        return $storiesSub;
+        $db = Database::instance()->db();
+
+        $stmt = $db->prepare("SELECT * FROM story WHERE title LIKE '%$substring%' ");
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
     function searchComments($substring) {
-        $comments = get_comments();
-        $commentsSub = array();
-        foreach($comments as $comment) {
-            if (strpos($comment['text'], $substring) !== false) {
-                $commentsSub[] = $comments;
-            }
-        }
-        return $commentsSub;
+        $db = Database::instance()->db();
+
+        $stmt = $db->prepare("SELECT * FROM comment WHERE text LIKE '%$substring%' ");
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
     
     function searchBySubstrings($substring, $array) {
