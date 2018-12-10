@@ -21,19 +21,9 @@ function doneClicked(event) {
 			'</form>'
 		)
 
-		// retrieve the comment form
+		// retrieve the comment form and set its submit handler
 		let form = footer.querySelector('form')
-
-		// set its submit handler
 		form.addEventListener('submit', formSubmitted)
-
-		/* allow ENTER to submit the comment form - not working
-		form.addEventListener('keyup', function (event) {
-				event.preventDefault()
-				console.log(form)
-				if (event.keyCode === 13)
-					form.submit()
-		})*/
 	}
 }
 
@@ -43,8 +33,14 @@ function formSubmitted(event) {
 	let footer = event.target.parentNode;
 	let link = footer.querySelector('div.story-footer-right a')
 
+	// comment needed attributes
 	let linkHref = link.getAttribute('href')
-	let commentId = linkHref.substr(1, linkHref.length)
+	let refCommentId = linkHref.substr(1, linkHref.length)
+
+	let storyId = link.getAttribute('storyId')
+
+	let form = footer.querySelector('form')
+	let text = form.querySelector('input[name="text"]').value
 
 	let csrf = link.getAttribute('csrf')
 
@@ -56,13 +52,16 @@ function formSubmitted(event) {
 
 	request.addEventListener("load", function () {
 		let response = JSON.parse(this.responseText)
-
+		// TODO: add new comment html
 	})
 
 	request.send(
 		encodeForAjax(
 			{
-				csrf: csrf
+				storyId : storyId,
+				refCommentId : refCommentId,
+				text : text,
+				csrf : csrf
 			})
 	)
 }

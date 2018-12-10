@@ -2,14 +2,12 @@
     include_once('../includes/database.php');
     include_once('../database/db_user.php');
 
-    function addCommentOfComment($storyId,$commentId,$username,$commentText) {
+    function addComment($storyId,$refCommentId,$text,$username) {
         $db = Database::instance()->db();
-
         $userId = getUserId($username);
-
         $stmt = $db->prepare('INSERT INTO comment VALUES(NULL,?,?,?,?,?,?,?)');
-        $ret = $stmt->execute(array($storyId,$userId,date("Y/m/d"),$commentText,0,0,$commentId));
-        return $ret !== false;
+        $stmt->execute(array($storyId,$userId,date('Y:m:d H:i:s'),$text,0,0,$refCommentId));
+        return $db->lastInsertId();
     }
 
     function getCommentsOfComment($commentId) {

@@ -1,5 +1,7 @@
 <?php
     include_once('../includes/session.php');
+    include_once('../database/db_comment.php');
+    include_once('../database/db_user.php');
 
     header('Content-Type: application/json');
 
@@ -8,18 +10,21 @@
         die(json_encode(array('error' => 'not_logged_in')));
 
     // variables received for the request
-    $commentId = $_POST['commentId'];
-    $commentText = $_POST['commentText'];
+    $storyId = $_POST['storyId'];
+    $refCommentId = $_POST['refCommentId'];
+    $text = $_POST['text'];
     $csrf = $_POST['csrf'];
 
     // verifies csrf token
     if ($_SESSION['csrf'] != $csrf)
         die(json_encode(array('error' => 'incompatible_csrf')));
 
-    // insert comment to the respective story
-    $success = addCommentOfComment($storyId,$commentId,$_SESSION['username'],$commentText);
-    if ($success)
+    try {
+        // insert comment to the respective referenced comment
+        addComment($storyId,$refCommentId,$text,$_SESSION['username']);
         echo json_encode(array('success' => 'Comment successfully added!'));
-    else
+    }
+    catch(PDOException $e) {
         echo json_encode(array('error' => 'Comment could not be added!'));
+    }
 ?>

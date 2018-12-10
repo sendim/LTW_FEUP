@@ -103,7 +103,7 @@
 
 			 <section id ="comments">
 				<div id="comments-header" class="section-header">
-					<form>
+					<form method="post">
 						<input id="comment-input" name="text" placeholder="Write a comment..." required>
 						<input type="hidden" name="storyId" value="<?=$story['storyId']?>">
 						<input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">

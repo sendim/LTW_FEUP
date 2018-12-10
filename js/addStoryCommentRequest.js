@@ -1,7 +1,7 @@
 'use strict'
 
-// retrieves the story 'send' comment button
-let commentForm = document.querySelector('form')
+// retrieves the story comment form
+let commentForm = document.querySelector('div#comments-header form')
 commentForm.addEventListener('submit', commentSubmitted)
 
 function commentSubmitted(event) {
@@ -10,7 +10,7 @@ function commentSubmitted(event) {
     let form = event.target.parentNode
 
     let storyId = form.querySelector('input[name="storyId"]').value
-    let commentText = form.querySelector('input[name="text"]').value
+    let text = form.querySelector('input[name="text"]').value
     let csrf = form.querySelector('input[name="csrf"]').value
 
     // setup of the ajax request
@@ -25,10 +25,9 @@ function commentSubmitted(event) {
     })
 
     request.send(
-        encodeForAjax(
-            {
+        encodeForAjax({
                 storyId : storyId,
-                commentText : commentText,
+                text : text,
                 csrf: csrf
             })
     )

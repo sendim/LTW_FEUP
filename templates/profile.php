@@ -107,7 +107,7 @@
     
             <hr/>
     
-            <form id="edit-profile-form" "method="post" action="../actions/action_editProfile.php" onsubmit="return (validate());">
+            <form id="edit-profile-form" method="post" action="../actions/action_editProfile.php" onsubmit="return (validate());">
                 <div class="form-input">
                     <label>New name</label>
                     <input type="text" name="name" placeholder="name" value=<?= $profile['name'] ?> >

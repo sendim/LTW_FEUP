@@ -16,14 +16,6 @@
         $stmt->execute(array($userId, $storyId, $vote));
     }
 
-    function addStoryComment($comment,$storyId,$username) {
-        $db = Database::instance()->db();
-        $userId = getUserId($username);
-        $stmt = $db->prepare('INSERT INTO comment VALUES(NULL,?,?,?,?,?,?,NULL)');
-        $ret = $stmt->execute(array($storyId,$userId,date('Y:m:d H:i:s'),$comment,0,0));
-        return $ret !== false;
-    }
-
     function getStory($storyId) {
         $db = Database::instance()->db();
         $stmt = $db->prepare('SELECT * FROM story WHERE storyId = ?');

@@ -33,5 +33,6 @@
     if ($usernameOutdated)
         $_SESSION['username'] = $username;
 
+    $_SESSION['success_messages'][] = 'Profile successfully edited!';
     header('Location: ' . $_SERVER['HTTP_REFERER']);
 ?>
