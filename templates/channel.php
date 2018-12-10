@@ -79,7 +79,7 @@ function drawChannelCards($channels) {
 
         } else {
             foreach ($channels as $channel) {
-                drawChannel($channel);
+                drawChannelCard($channel);
             }
         } 
 }

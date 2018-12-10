@@ -8,10 +8,10 @@
         return $stmt->fetchAll();
     }
 
-    function getProfiles() {
+    function searchProfile($text) {
         $db = Database::instance()->db();
 
-        $stmt = $db->prepare('SELECT * FROM user');
+        $stmt = $db->prepare('SELECT * FROM user WHERE username LIKE'.$text.'%');
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -61,17 +61,6 @@
             }
         }
         return $channelsSub;
-    }
-
-    function searchProfiles($substring) {
-        $profiles = get_profiles();
-        $profilesSub = array();
-        foreach($profiles as $profile) {
-            if (strpos($profile['name'], $substring) !== false) {
-                $profilesSub[] = $profile;
-            }
-        }
-        return $profilesSub;
     }
 
     function searchStory($substring) {
