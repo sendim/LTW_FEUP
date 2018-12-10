@@ -44,6 +44,15 @@
         return $stmt->fetchAll();
     }
 
+    function searchChannels($substring) {
+
+        $db = Database::instance()->db();
+
+        $stmt = $db->prepare("SELECT * FROM channel WHERE title LIKE '%$substring%' ");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     function searchProfiles($substring) {
         $db = Database::instance()->db();
         $stmt = $db->prepare("SELECT * FROM user WHERE username LIKE '%$substring%'");
