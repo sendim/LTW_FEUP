@@ -71,7 +71,10 @@
   ?>
     <nav id="menu">
       <div id="search">
-        <input id="search-website"  name="search-website" placeholder="Search stories, comments..."/>
+        <form action="../actions/action_search.php">
+          <input type="text" name="search">
+          <input type="submit" value="Search">
+        </form
       </div>
       <ul>
         <li <?php if ($selected == 'feed') echo "id='menu-selected'"; ?> >
