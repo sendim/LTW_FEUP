@@ -11,9 +11,6 @@
     if($input == null || $input == '')
         die(header('Location: ../pages/feed.php'));
 
-    
-    $_SESSION['search'] = $input;
-
-    header('Location: ../pages/search.php');
-
+    $searchLink = '../pages/search.php?input=' . $input;
+    header('Location: ' . $searchLink);
 ?>
