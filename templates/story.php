@@ -9,7 +9,7 @@
 	* Draws a story section.
 	*/
 		$storyLink = "story.php?id=" . $story['storyId'];
-		$publishedDate = gmdate('F j, g:i a, Y', $story['published']);
+		$publishedDate = gmdate('F j, g:i a, Y', strtotime($story['published']));
 
 		$author = getStoryAuthor($story['storyId']);
 		$channel = getChannelTitle($story['channelId']);
@@ -75,7 +75,7 @@
 	/**
 	* Draws a story page section.
 	*/
-		$publishedDate = gmdate('F j, g:i a, Y', $story['published']);
+		$publishedDate = gmdate('F j, g:i a, Y', strtotime($story['published']));
 		
 		$author = getStoryAuthor($story['storyId']);
 		$comments = getStoryComments($story['storyId']);

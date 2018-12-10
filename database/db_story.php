@@ -5,7 +5,7 @@
     function addStory($title, $text, $userId, $channelId) {
         $db = Database::instance()->db();
         $stmt = $db->prepare('INSERT INTO story VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)');
-        $stmt->execute(array($title,date("Y/m/d"),$userId,$text,0,0,$channelId));
+        $stmt->execute(array($title,date('Y:m:d H:i:s'),$userId,$text,0,0,$channelId));
         return $db->lastInsertId();
     }
 
@@ -20,7 +20,7 @@
         $db = Database::instance()->db();
         $userId = getUserId($username);
         $stmt = $db->prepare('INSERT INTO comment VALUES(NULL,?,?,?,?,?,?,NULL)');
-        $ret = $stmt->execute(array($storyId,$userId,date("Y/m/d"),$comment,0,0));
+        $ret = $stmt->execute(array($storyId,$userId,date('Y:m:d H:i:s'),$comment,0,0));
         return $ret !== false;
     }
 

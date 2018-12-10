@@ -13,9 +13,11 @@
     drawLayout(function() {
  
         $channels = getChannels();
+        
+        $selectedChannel = $_GET['channel'];
 
         // draw new story page
-        drawNewStory($channels);
+        drawNewStory($channels,$selectedChannel);
 
     }, 'feed');
 ?>

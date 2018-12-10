@@ -1,5 +1,6 @@
 <?php
 include_once '../templates/story.php';
+include_once '../templates/formInput.php';
 
 function drawChannel($title, $stories)
 {
@@ -17,7 +18,7 @@ function drawChannel($title, $stories)
 
             <hr/>
 
-            <a class="button secondary" href="#">
+            <a class="button secondary" href="newStory.php?channel=<?=$title?>">                
                 New story
             </a>
 
