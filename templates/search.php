@@ -1,5 +1,7 @@
 <?php 
     include_once('../templates/story.php');
+    include_once('../templates/profile.php');
+    include_once('../templates/channel.php');
 
     function drawSearchFeed($profiles, $stories, $comments, $channels) { ?>
         <div id="feed">
@@ -27,7 +29,7 @@
                 </header>
                 <?php
                     foreach($profiles as $profile)
-                        //drawProfile($profile);
+                        drawHeaderProfile($profile);
                 ?>
                 <header>
                     <h2>Stories:</h2>
@@ -40,16 +42,23 @@
                     <h2>Comments:</h2>
                 </header>
                 <?php
-                    foreach($comments as $comment)
-                        //drawComment($comment);
-                ?>
+                    foreach($comments as $comment) {
+                        drawSimpleComment($comment);
+                        ?>
+                        </div> 
+                    <?php } ?>
+                        
+                
                 <header>
                     <h2>Channels:</h2>
                 </header>
-                <?php
+                
+                <section id="channels">
+                    <?php
                     foreach($channels as $channel)
-                    //    drawChannelsPage($channel);
-                ?>
+                        drawChannelCard($channel);
+                    ?>
+                </section>
             </div>
 
         </div>
