@@ -17,7 +17,11 @@
                 </a>
 
                 <button class="button secondary">Select channel</button>
-                <button class="button secondary">Order</button> 
+
+                <select class="button secondary">
+                    <option value="date">Order by date</option>
+                    <option value="alfabetic">Order by name</option>
+                </select>
 
             </section>
 
@@ -27,6 +31,5 @@
                         drawStory($story);
                 ?>
             </div>
-
         </div>
 <?php } ?>
