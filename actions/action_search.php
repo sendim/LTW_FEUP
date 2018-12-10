@@ -5,8 +5,14 @@
     if (!isset($_SESSION['username']))
         die(header('Location: ../pages/login.php'));
 
+    $input = $_GET['search'];
+    $input = preg_replace('/%/', '', $input);
+    
+    if($input == null || $input == '')
+        die(header('Location: ../pages/feed.php'));
 
-    $_SESSION['search'] = $_GET['search'];
+    
+    $_SESSION['search'] = $input;
 
     header('Location: ../pages/search.php');
 
