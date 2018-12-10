@@ -2,6 +2,7 @@
     include_once('../templates/layout.php');
     include_once('../templates/newStory.php');
     include_once('../database/db_story.php');
+    include_once('../database/db_search.php');
 
     // verify if user session is set
     if (!isset($_SESSION['username'])) {
@@ -11,8 +12,10 @@
 
     drawLayout(function() {
  
+        $channels = getChannels();
+
         // draw new story page
-        drawNewStory();
+        drawNewStory($channels);
 
     }, 'feed');
 ?>

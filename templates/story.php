@@ -36,15 +36,15 @@
 			<footer>
 				<div class="story-footer-left">
 					<div class="vote-buttons">
-						<a class="button primary icon" storyId="<?=$story['storyId']?>" username="<?=$_SESSION['username']?>" vote="1" csrf="<?=$_SESSION['csrf']?>">
+						<button class="button primary icon" storyId="<?=$story['storyId']?>" username="<?=$_SESSION['username']?>" vote="1" csrf="<?=$_SESSION['csrf']?>">
 							<img src='icons/arrow-up.svg' alt="Vote up">
-						</a>
+						</button>
 						<span type="likes">
 							<?=getStoryLikes($story['storyId'])?>
 						</span>
-						<a class="button primary icon" storyId="<?=$story['storyId']?>" username="<?=$_SESSION['username']?>" vote="-1" csrf="<?=$_SESSION['csrf']?>">
+						<button class="button primary icon" storyId="<?=$story['storyId']?>" username="<?=$_SESSION['username']?>" vote="-1" csrf="<?=$_SESSION['csrf']?>">
 							<img src='icons/arrow-down.svg' alt="Vote down">
-						</a>
+						</button>
 						<span type="dislikes">
 							<?=getStoryDislikes($story['storyId'])?>
 						</span>

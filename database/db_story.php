@@ -2,10 +2,11 @@
     include_once('../includes/session.php');
     include_once('../includes/database.php');
 
-    function addStory($title, $text, $userId) {
+    function addStory($title, $text, $userId, $channelId) {
         $db = Database::instance()->db();
         $stmt = $db->prepare('INSERT INTO story VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)');
-        $stmt->execute(array($title,date("Y/m/d"),$userId,$text,0,0,""));
+        $stmt->execute(array($title,date("Y/m/d"),$userId,$text,0,0,$channelId));
+        return $db->lastInsertId();
     }
 
     function addUserVote($storyId, $username, $vote) {

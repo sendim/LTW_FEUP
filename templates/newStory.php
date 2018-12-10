@@ -1,12 +1,12 @@
-<?php 
+<?php
 
-include_once('../templates/formInput.php');
+include_once '../templates/formInput.php';
 
 /**
  * Draws new story page.
  */
-function drawNewStory () {
-
+function drawNewStory($channels)
+{
     ?>
 
     <section id="new-story" class="container bg-white">
@@ -16,27 +16,26 @@ function drawNewStory () {
 
         <hr />
 
-        <form method="post" action="../actions/newStory.php">
-                <?php drawTextInput("Title", "title"); ?>
+        <form method="post" action="../actions/action_addStory.php">
+                <?php drawTextInput("Title", "title");?>
 
-                <?php drawTextAreaInput("Description", "text"); ?>
+                <?php drawTextAreaInput("Description", "text");?>
 
                 <div class="form-input">
                     <label>Channel</label>
-                    <!-- TODO: Poder selecionar canais ou criar outro -->
+                    <select name="channel">
+                        <?php foreach ($channels as $channel) {?>
+                            <option value="<?=$channel['title']?>"><?=$channel['title']?></option>
+                        <?php }?>
+                        <option value="">new channel ...</option>
+                    </select>
                 </div>
-  
+
                 <button class="button primary" type="submit">
-                    Create story
-                </button>
-            </form>
+                  Create story
+            </button>
+        </form>
 
     </section>
 
-
-
-    <?php
-
-}
-
-?>
+<?php }?>

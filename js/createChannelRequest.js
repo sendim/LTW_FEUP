@@ -6,16 +6,18 @@ newChannel.addEventListener('click', doneClicked)
 
 // retrieve 'created-channels' container
 let channelsDiv = document.getElementById('created-channels')
-let createdChannelsContainer = channelsDiv.getElementsByClassName('container')[0]
+let createdChannelsSection = channelsDiv.querySelector('section')
 
 // what happens after the 'new channel' button has been clicked
 function doneClicked() {
 
-  if (createdChannelsContainer.querySelector('div.form-input') == null) {
+  if (createdChannelsSection.querySelector('div.form-input') == null) {
 
-    createdChannelsContainer.insertAdjacentHTML(
+    let header = createdChannelsSection.querySelector('header')
+
+    header.insertAdjacentHTML(
       'beforeend',
-      '<form class="story-card bg-white">'
+      '<form class="channel-card">'
       + '<div class="form-input">'
         + '<label>New channel</label>'
         + '<input type="text" name="title" placeholder="new channel title" required>'
@@ -25,7 +27,7 @@ function doneClicked() {
     )
 
     // retrieves the form and sets its submit handler  
-    let addChannel = createdChannelsContainer.querySelector('form')
+    let addChannel = createdChannelsSection.querySelector('form')
     addChannel.addEventListener('submit', formSubmitted)
   }
 }
@@ -52,10 +54,10 @@ function formSubmitted(event) {
     
     // if channel could not be created
     if (response['error']) {
-      let existsMessage = createdChannelsContainer.querySelector('section#messages');
+      let existsMessage = createdChannelsSection.querySelector('section#messages');
 
       if (!existsMessage) {
-        createdChannelsContainer.querySelector('form').insertAdjacentHTML(
+        createdChannelsSection.querySelector('form').insertAdjacentHTML(
           'beforeend',
           '<section id="messages">'
           + '<article class="error">'
@@ -72,11 +74,13 @@ function formSubmitted(event) {
       form.parentNode.removeChild(form);
 
       // add new channel
-      createdChannelsContainer.insertAdjacentHTML(
+      createdChannelsSection.insertAdjacentHTML(
         'beforeend',
         '<a href="channel.php?title=' + channelTitle + '">'
-        + '<div class="story-card bg-white">' +
-        channelTitle + ' - ' + '0 stories'
+        + '<div class="channel-card">'
+          + '<div class="title">' + channelTitle + '</div>'
+          + '<div class="stories-number">0 stories</div>'
+          + '<div class="clearfix"></div>'
         + '</div>' +
         '</a>'
       )
