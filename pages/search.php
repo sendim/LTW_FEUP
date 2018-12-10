@@ -11,7 +11,7 @@
 
   drawLayout(function(){
 
-    $input = $_SESSION['search'];
+    $input = $_GET['input'];
     $profiles = searchProfiles($input);
     $stories = searchStory($input);
     $comments = searchComments($input);
