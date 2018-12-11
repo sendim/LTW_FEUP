@@ -9,7 +9,13 @@
         return $db->lastInsertId();
     }
 
-    function addUserVote($storyId, $username, $vote) {
+    function deleteStory($storyId) {
+        $db = Database::instance()->db();
+        $stmt = $db->prepare('DELETE FROM story WHERE storyId = ?');
+        $stmt->execute(array($storyId));
+    }
+
+    function addUserStoryVote($storyId, $username, $vote) {
         $db = Database::instance()->db();
         $userId = getUserId($username);
         $stmt = $db->prepare('INSERT INTO votesStory VALUES(?,?,?)');
@@ -124,7 +130,7 @@
             else if ($vote == -1) 
                 downvoteStory($storyId, $username);
         } else {
-            addUserVote($storyId,$username,$vote);
+            addUserStoryVote($storyId,$username,$vote);
         }
         
         $db = Database::instance()->db();

@@ -10,21 +10,23 @@
         die(json_encode(array('error' => 'not_logged_in')));
 
     // variables received for the request
-    $storyId = $_POST['storyId'];
-    $refCommentId = $_POST['refCommentId'];
-    $text = $_POST['text'];
+    $username = $_POST['username'];
+    $commentId = $_POST['commentId'];
+    $vote = $_POST['vote'];
     $csrf = $_POST['csrf'];
 
     // verifies csrf token
     if ($_SESSION['csrf'] != $csrf)
         die(json_encode(array('error' => 'incompatible_csrf')));
 
-    try {
-        // insert comment to the respective referenced comment
-        $commentId = addComment($storyId,$refCommentId,$text,$_SESSION['username']);
-        echo json_encode(array('success' => $commentId));
-    }
-    catch(PDOException $e) {
-        echo json_encode(array('error' => 'Comment could not be added!'));
-    }
+    // update comment votes
+    updateCommentVote($commentId, $username, $vote);
+
+    // send new comment likes & dislikes values
+    $ret = array(
+        'likes' => getCommentLikes($commentId),
+        'dislikes' => getCommentDislikes($commentId)
+    );
+
+    echo json_encode($ret);
 ?>

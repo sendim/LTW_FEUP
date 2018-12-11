@@ -10,6 +10,20 @@
         return $db->lastInsertId();
     }
 
+    function addUserCommentVote($commentId, $username, $vote) {
+        $db = Database::instance()->db();
+        $userId = getUserId($username);
+        $stmt = $db->prepare('INSERT INTO votesComment VALUES(?,?,?)');
+        $stmt->execute(array($userId, $commentId, $vote));
+    }
+
+    function getCommentAuthor($commentId) {
+        $db = Database::instance()->db();
+        $stmt = $db->prepare('SELECT userId FROM comment WHERE commentId = ?');
+        $stmt->execute(array($commentId));
+        return $stmt->fetch()['userId'];
+    }
+
     function getCommentsOfComment($commentId) {
         $db = Database::instance()->db();
         $stmt = $db->prepare('SELECT * FROM comment WHERE referencedComment = ?');
@@ -19,16 +33,34 @@
 
     function getCommentLikes($commentId) {
         $db = Database::instance()->db();
-        $stmt = $db->prepare('SELECT likes FROM comment WHERE commentId = ?');
+        $stmt = $db->prepare(
+            'SELECT SUM(vote) as likes
+            FROM votesComment
+            WHERE commentId = ? AND vote > 0'
+        );
         $stmt->execute(array($commentId));
-        return $stmt->fetch()['likes'];
+
+        $result = $stmt->fetch()['likes'];
+        if ($result != null)
+            return $result;
+        else
+            return 0;
     }
 
     function getCommentDislikes($commentId) {
         $db = Database::instance()->db();
-        $stmt = $db->prepare('SELECT dislikes FROM comment WHERE commentId = ?');
+        $stmt = $db->prepare(
+            'SELECT SUM(vote) as dislikes
+            FROM votesComment
+            WHERE commentId = ? AND vote < 0'
+        );
         $stmt->execute(array($commentId));
-        return $stmt->fetch()['dislikes'];
+        
+        $result = $stmt->fetch()['dislikes'];
+        if ($result != null)
+            return $result;
+        else
+            return 0;
     }
 
     function getCommentStoryId($commentId) {
@@ -36,5 +68,69 @@
         $stmt = $db->prepare('SELECT storyId FROM comment WHERE commentId = ?');
         $stmt->execute(array($commentId));
         return $stmt->fetch()['storyId'];
+    }
+
+    function userVotedComment($commentId, $username) {
+        $db = Database::instance()->db();
+
+        $userId = getUserId($username);
+
+        $stmt = $db->prepare(
+            'SELECT *
+            FROM votesComment 
+            WHERE commentId = ? AND userId = ?'
+        );
+        $stmt->execute(array($commentId, $userId));
+
+        return $stmt->fetchAll() ? true : false;
+    }
+
+    function updateCommentVote($commentId, $username, $vote) {
+        if (userVotedComment($commentId,$username)) {
+            if ($vote == 1)
+                upvoteComment($commentId, $username); 
+            else if ($vote == -1) 
+                downvoteComment($commentId, $username);
+        } else {
+            addUserCommentVote($commentId,$username,$vote);
+        }
+        
+        $db = Database::instance()->db();
+        $updateStmt = $db->prepare(
+            'UPDATE comment
+            SET likes = ?, dislikes = ?
+            WHERE commentId = ?'
+        );
+        $updateStmt->execute(array(
+            getCommentLikes($commentId),
+            -getCommentDislikes($commentId),
+            $commentId)
+        );
+    }
+
+    function upvoteComment($commentId, $username) {
+        $db = Database::instance()->db();
+
+        $userId = getUserId($username);
+
+        $stmt = $db->prepare(
+            'UPDATE votesComment 
+            SET vote = ?
+            WHERE userId = ? AND commentId = ?'
+        );
+        $stmt->execute(array(1,$userId,$commentId));
+    }
+
+    function downvoteComment($commentId, $username) {
+        $db = Database::instance()->db();
+
+        $userId = getUserId($username);
+
+        $stmt = $db->prepare(
+            'UPDATE votesComment 
+            SET vote = ?
+            WHERE userId = ? AND commentId = ?'
+        );
+        $stmt->execute(array(-1,$userId,$commentId));
     }
 ?>

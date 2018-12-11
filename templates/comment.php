@@ -7,7 +7,7 @@
 			$text = $comment['text'];
 			
 			?>
-				<div class="comment story-card bg-white" id="<?=$comment['commentId']?>">   
+				<div id="<?=$comment['commentId']?>" class="comment story-card bg-white">   
 					<p>
 						<a href="profile.php?username=<?=$username?>">@<?=$username?></a>
 						<?= ' ' . $text ?>
@@ -31,7 +31,7 @@
 						<hr/>
  						<footer>
 								<div class="story-footer-left">
-										<div class="vote-buttons">
+										<div class="comment vote-buttons">
 												<button class="button primary icon" commentId="<?=$comment['commentId']?>" username="<?=$_SESSION['username']?>" vote="1" csrf="<?=$_SESSION['csrf']?>">
 														<img src='icons/arrow-up.svg' alt="Vote up">
 												</button>

@@ -52,7 +52,7 @@ function formSubmitted(event) {
 
 	request.addEventListener("load", function () {
 		let response = JSON.parse(this.responseText)
-		// TODO: add new comment html
+		location.reload()
 	})
 
 	request.send(

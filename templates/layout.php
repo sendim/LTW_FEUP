@@ -23,9 +23,10 @@
   * Draws the page header
   */
     $sessionSet = isset($_SESSION['username']);
-    $votingPages = array('feed','story','profile','channel');
+    $votingPages = array('search','feed','story','profile','channel');
     $channelCreationPage = 'channels';
     $commentCreationPage = 'story';
+    $commentVotingPage = array('story', 'profile');
   ?>
     <!DOCTYPE html>
     <html lang="en-US">
@@ -34,6 +35,8 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <?php if (in_array($selected,$votingPages)) { ?>
           <script src="../js/storyVoteRequest.js" defer></script>
+        <?php } if (in_array($selected,$commentVotingPage)) { ?>
+          <script src="../js/commentVoteRequest.js" defer></script>
         <?php } if ($selected == $commentCreationPage) { ?>
           <script src="../js/addStoryCommentRequest.js" defer></script>
           <script src="../js/addCommentCommentRequest.js" defer></script>

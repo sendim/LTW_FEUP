@@ -6,7 +6,7 @@ commentForm.addEventListener('submit', commentSubmitted)
 
 function commentSubmitted(event) {
     event.preventDefault()
-    
+
     let form = event.target.parentNode
 
     let storyId = form.querySelector('input[name="storyId"]').value
@@ -21,17 +21,18 @@ function commentSubmitted(event) {
 
     request.addEventListener("load", function () {
         let response = JSON.parse(this.responseText)
-        // TODO: add new comment html
+        location.reload()
     })
 
     request.send(
         encodeForAjax({
-                storyId : storyId,
-                text : text,
-                csrf: csrf
-            })
+            storyId: storyId,
+            text: text,
+            csrf: csrf
+        })
     )
 }
+
 
 // helper function
 function encodeForAjax(data) {

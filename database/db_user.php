@@ -25,10 +25,10 @@
         $stmt->execute(array($username,$hashedPwd,$name,$description));
     }
 
-    function deleteUserById($id) {
+    function deleteUser($id) {
         $db = Database::instance()->db();
         $stmt = $db->prepare('DELETE FROM user WHERE userId = ?');
-        $stmt->execute(array($id));
+        $ret = $stmt->execute(array($id));
     }
 
     function deleteUserByUsername($username) {

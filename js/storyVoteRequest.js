@@ -1,7 +1,7 @@
 'use strict'
 
 // retrieve all vote buttons
-let voteBtns = document.querySelectorAll('div.vote-buttons button')
+let voteBtns = document.querySelectorAll('div.story.vote-buttons button')
 voteBtns.forEach((voteBtn) => voteBtn.addEventListener('click', doneClicked))
 
 // what happens after a vote button has been clicked

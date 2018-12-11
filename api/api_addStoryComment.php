@@ -20,8 +20,8 @@
 
     try {
         // insert comment to the respective story
-        addComment($storyId,NULL,$text,$_SESSION['username']);
-        echo json_encode(array('success' => 'Comment successfully added!'));
+        $commentId = addComment($storyId,NULL,$text,$_SESSION['username']);
+        echo json_encode(array('success' => $commentId));
     }
     catch(PDOException $e) {
         echo json_encode(array('error' => 'Comment could not be added!'));

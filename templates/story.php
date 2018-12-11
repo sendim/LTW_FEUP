@@ -35,7 +35,7 @@
 
 			<footer>
 				<div class="story-footer-left">
-					<div class="vote-buttons">
+					<div class="story vote-buttons">
 						<button class="button primary icon" storyId="<?=$story['storyId']?>" username="<?=$_SESSION['username']?>" vote="1" csrf="<?=$_SESSION['csrf']?>">
 							<img src='icons/arrow-up.svg' alt="Vote up">
 						</button>

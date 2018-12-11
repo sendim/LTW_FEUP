@@ -14,7 +14,10 @@
  
         $channels = getChannels();
         
-        $selectedChannel = $_GET['channel'];
+        if (isset($_GET['channel']))
+         $selectedChannel = $_GET['channel'];
+        else
+         $selectedChannel = null;
 
         // draw new story page
         drawNewStory($channels,$selectedChannel);
