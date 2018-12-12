@@ -7,15 +7,14 @@
         <div id="feed">
 
             <section class="container bg-white">
-
                 <header>
-                    <h2>Search Results: <?php  echo $input ?> </h2>
+                    <h2>Search Results: <small><?php  echo $input ?> </small></h2>
                 </header>
             </section>
 
             <div>
-                <header>
-                    <h2>Profiles:</h2>
+                <header class="container section-header">
+                    Profiles:
                 </header>
                 <?php
                     if(count($profiles) != 0){
@@ -24,11 +23,13 @@
                     }
                     else {
                         ?>
-                        No results found.
+                        <div class="container bg-white"> 
+                            No results found. 
+                        </div>
                         <?php 
                     } ?> 
-                <header>
-                    <h2>Stories:</h2>
+                <header class="container section-header">
+                    Stories:
                 </header>
                 <?php
                     if(count($stories) != 0){
@@ -37,11 +38,13 @@
                     }
                     else {
                         ?>
-                        No results found.
+                        <div class="container bg-white"> 
+                            No results found. 
+                        </div>
                         <?php 
                     } ?> 
-                <header>
-                    <h2>Comments:</h2>
+                <header class="container section-header">
+                    Comments:
                 </header>
                 <?php
                     if(count($comments) != 0){
@@ -54,12 +57,14 @@
                     }
                     else {
                         ?>
-                        No results found.
+                        <div class="container bg-white"> 
+                            No results found. 
+                        </div>
                         <?php 
                     } ?> 
                 
-                <header>
-                    <h2>Channels:</h2>
+                <header class="container section-header">
+                    Channels:
                 </header>
                 <?php
                     if(count($channels) != 0){
@@ -72,7 +77,9 @@
                         }
                     else {
                         ?>
-                        No results found.
+                        <div class="container bg-white"> 
+                            No results found. 
+                        </div>
                         <?php 
                     } ?> 
                 </section>

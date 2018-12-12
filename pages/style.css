@@ -301,7 +301,8 @@ img.responsive {
 /* story card */
 
 .story-card {
-  margin-top: 12px;
+  margin-top: 3px;
+  margin-bottom: 3px;
   padding: 12px;
 }
 

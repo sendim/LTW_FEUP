@@ -12,7 +12,7 @@
 
                 <hr/>
 
-                <a class="button secondary" href="newStory.php">
+                <a class="button primary" href="newStory.php">
                     New story
                 </a>
 
