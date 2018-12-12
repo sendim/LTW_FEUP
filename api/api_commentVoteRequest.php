@@ -22,10 +22,15 @@
     // update comment votes
     updateCommentVote($commentId, $username, $vote);
 
+    // update story author points
+    $author = getCommentAuthor($commentId);
+    updateUserPoints($author);
+
     // send new comment likes & dislikes values
     $ret = array(
         'likes' => getCommentLikes($commentId),
-        'dislikes' => getCommentDislikes($commentId)
+        'dislikes' => getCommentDislikes($commentId),
+        'userPoints' => getUserPoints($author)
     );
 
     echo json_encode($ret);
