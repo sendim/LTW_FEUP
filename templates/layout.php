@@ -47,22 +47,6 @@
       <body>
         <nav id="navbar">
           <h1>The Fusion Network</h1>
-            <?php if ($sessionSet) {
-              $image = getUserProfilePhoto($_SESSION['username']);?>
-              <a href="profile.php?username=<?=$_SESSION['username']?>">
-                <?php if ($image != null) { ?>
-                  <img class="profile-pic" src="../images/icons/<?=$image['imageId']?>.png">
-                <?php } else { ?>
-                  <img src="../images/icons/default.png">
-                <?php } ?>
-              </a>
-              <?=$_SESSION['username']?>
-              <a class="button" href="../actions/action_logout.php">
-              <img src="icons/logout.svg" alt="Logout">
-                Logout
-              </a>
-            <?php } ?>
-          </button>
         </nav>
   <?php } 
   
@@ -72,35 +56,66 @@
   */ 
     $sessionSet = isset($_SESSION['username']);
   ?>
-    <nav id="menu">
+    <nav id="menu" >
+      <div id="user-info">
+        <?php if ($sessionSet) {
+          $image = getUserProfilePhoto($_SESSION['username']);?>
+          <div id="user-pic">
+            <a href="profile.php?username=<?=$_SESSION['username']?>">
+              <?php if ($image != null) { ?>
+                <img class="profile-pic responsive" src="../images/icons/<?=$image['imageId']?>.png">
+              <?php } else { ?>
+                <img class="profile-pic responsive" src="../images/icons/default.png">
+              <?php } ?>
+            </a>
+          </div>
+                
+          <div id="user-name">
+            @<?=$_SESSION['username']?>
+          </div>
+          
+          <div id="buttons">
+            <a class="button terciary" href="../actions/action_logout.php">
+              <img src="icons/logout.svg" alt="Logout">
+                Logout
+            </a>
+            <a class="button secondary" href="editProfile.php">
+              <img src="icons/pencil.svg" alt="Edit profile">
+                Edit
+            </a>
+          </div>
+        <?php } ?>  
+      </div>
+
       <div id="search">
         <form method="get" action="../actions/action_search.php">
-          <input type="text" name="search" placeholder="Search stories, comments..." required>
+          <input
+            type="text"
+            name="search"
+            placeholder="Search stories, comments..."
+            required
+            class=<?php if ($sessionSet) echo ""; else echo "disabled" ?>
+          >
         </form>
       </div>
       <ul>
         <li <?php if ($selected == 'feed') echo "id='menu-selected'"; ?> >
-          <a href="<?php if($sessionSet) echo 'feed.php'; else echo '#';?>">
+          <a href="feed.php" class=<?php if ($sessionSet) echo ""; else echo "disabled" ?> >
             <img src="icons/repo.svg" alt="Feed">
             Feed
           </a>
         </li>
         <li <?php if ($selected == 'channels') echo "id='menu-selected'"; ?>>
-          <a href="<?php if($sessionSet) echo 'channels.php'; else echo '#';?>">
+          <a href="channels.php" class=<?php if ($sessionSet) echo ""; else echo "disabled" ?>>
             <img src="icons/tag.svg" alt="Channels">
             Channels
           </a>
         </li>
         <li <?php if ($selected == 'profile') echo "id='menu-selected'"; ?>>
-          <a href="<?php if($sessionSet) echo 'profile.php?username=' . $_SESSION['username']; else echo '#';?>">
+          <a href="profile.php?username=' . $_SESSION['username']" class=<?php if ($sessionSet) echo ""; else echo "disabled" ?>>
             <img src="icons/person.svg" alt="Profile">
             Profile
           </a>
-          <ul>
-            <li>
-              <a href="<?php if($sessionSet) echo 'editProfile.php'; else echo '#';?>">Edit profile</a>
-            </li>
-          </ul>
         </li>
       </ul>
     </nav>
