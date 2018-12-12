@@ -3,12 +3,12 @@
 /**
  * draws a form text input.
  */
-function drawTextInput($label, $name){ 
+function drawTextInput($label, $name, $otherParams = ""){ 
     ?>
 
     <div class="form-input">
         <label><?= $label ?></label>
-        <input type="text" name=<?= $name ?> placeholder=<?= $label ?> >
+        <input type="text" name=<?= $name ?> placeholder=<?= $label ?> <?=$otherParams?>>
     </div>
 
     <?php
@@ -17,12 +17,12 @@ function drawTextInput($label, $name){
 /**
  * Draws a form textarea input.
  */
-function drawTextAreaInput($label, $name){
-    ?>
-
+function drawTextAreaInput($label, $name, $otherParams = ""){
+    ?> 
+    
     <div class="form-input">
          <label><?= $label ?></label>
-        <textarea name=<?= $name ?> placeholder=<?= $label ?>></textarea>
+        <textarea name=<?= $name ?> placeholder=<?= $label ?> <?=$otherParams?>></textarea>
     </div>
 
     <?php

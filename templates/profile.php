@@ -142,6 +142,9 @@
                     <input type="submit" value="Upload image">
                 </div>
             </form>
+            <a href="../actions/action_deleteAccount.php">
+                <button class="button primary">Delete account</button>
+            </a>
         </section>
 
 

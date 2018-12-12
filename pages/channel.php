@@ -15,6 +15,6 @@
         $id = getChannelId($title);
         $stories = getChannelStories($id);
 
-        drawChannel($title, $stories);
+        drawChannel($title, $stories, $_SESSION['username']);
     }, 'channel');
 ?>

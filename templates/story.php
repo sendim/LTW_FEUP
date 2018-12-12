@@ -61,7 +61,7 @@
 						if ($nrComments > 1)
 							echo ' comments';
 						else
-							echo 'comment';
+							echo ' comment';
 						?>
 					</a>
 				</div>

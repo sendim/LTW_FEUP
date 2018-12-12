@@ -21,10 +21,10 @@ CREATE TABLE user (
 
 CREATE TABLE story (
   storyId INTEGER PRIMARY KEY,
-  title VARCHAR,
+  title VARCHAR NOT NULL,
   published INTEGER, -- date when the article was published in epoch format
   userId INTEGER REFERENCES user ON DELETE CASCADE NOT NULL, -- who wrote the article
-  text VARCHAR,
+  text VARCHAR NOT NULL,
   likes INTEGER,
   dislikes INTEGER,
   channelId INTEGER REFERENCES channel ON DELETE CASCADE
@@ -35,7 +35,7 @@ CREATE TABLE comment (
   storyId INTEGER REFERENCES story ON DELETE CASCADE NOT NULL,
   userId INTEGER REFERENCES user ON DELETE CASCADE NOT NULL,
   published INTEGER, -- date when news item was published in epoch format
-  text VARCHAR,
+  text VARCHAR NOT NULL,
   likes INTEGER,
   dislikes INTEGER,
   referencedComment INTEGER REFERENCES comment ON DELETE CASCADE
@@ -44,7 +44,7 @@ CREATE TABLE comment (
 CREATE TABLE channel (
   channelId INTEGER PRIMARY KEY,
   userId INTEGER REFERENCES user ON DELETE SET NULL,
-  title VARCHAR UNIQUE
+  title VARCHAR UNIQUE NOT NULL
 );
 
 CREATE TABLE subscribed (

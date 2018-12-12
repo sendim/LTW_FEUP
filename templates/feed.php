@@ -1,7 +1,7 @@
 <?php 
     include_once('../templates/story.php');
 
-    function drawFeed($stories) { ?>
+    function drawFeed($stories,$channels,$currChannel) { ?>
         <div id="feed">
 
             <section class="container bg-white">
@@ -16,7 +16,17 @@
                     New story
                 </a>
 
-                <button class="button secondary">Select channel</button>
+                <select id="channel" class="button secondary">
+                    <?php if($currChannel) { ?>
+                        <option value="selectedChannel"><?=$currChannel?></option>
+                    <?php } else { ?>
+                        <option value="selectedChannel">Select channel</option>
+                    <?php } foreach($channels as $channel) { 
+                        if ($channel['title'] != $currChannel) { ?>
+                            <option value="<?=$channel['title']?>"><?=$channel['title']?></option>
+                    <?php }
+                    } ?>
+                </select>
 
                 <select class="button secondary">
                     <option value="date">Order by date</option>
@@ -32,4 +42,5 @@
                 ?>
             </div>
         </div>
+        <script src="../js/getFeedRequest.js" defer></script>
 <?php } ?>

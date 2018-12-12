@@ -32,15 +32,16 @@
         return $stmt->fetchAll();
     }
 
-    function getFeed() {
+    function getFeed($userId) {
         $db = Database::instance()->db();
         $stmt = $db->prepare(
             'SELECT story.*, user.*, COUNT(comment.commentId) AS nrComments
             FROM story NATURAL JOIN user LEFT JOIN comment ON comment.storyId = story.storyId
+            JOIN subscribed using(channelId) WHERE subscribed.userId = ?
             GROUP BY story.storyId, user.username
             ORDER BY published DESC'
-        ); 
-        $stmt->execute();
+        );
+        $stmt->execute(array($userId));
         return $stmt->fetchAll();
     }
 

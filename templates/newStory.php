@@ -16,9 +16,9 @@ function drawNewStory($channels,$selectedChannel) {
         <hr />
 
         <form method="post" action="../actions/action_addStory.php">
-                <?php drawTextInput("Title", "title");?>
+                <?php drawTextInput("Title", "title", "required");?>
 
-                <?php drawTextAreaInput("Description", "text");?>
+                <?php drawTextAreaInput("Description", "text", "required");?>
 
                 <div class="form-input">
                     <label>Channel</label>
