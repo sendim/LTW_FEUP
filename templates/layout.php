@@ -55,23 +55,24 @@
   * Draws the page menu section.
   */ 
     $sessionSet = isset($_SESSION['username']);
+
+    $username = $sessionSet? $_SESSION['username'] : null;
+
+    $image = $sessionSet ? getUserProfilePhoto($username) : null;
   ?>
     <nav id="menu" >
       <div id="user-info">
-        <?php if ($sessionSet) {
-          $image = getUserProfilePhoto($_SESSION['username']);?>
-          <div id="user-pic">
-            <a href="profile.php?username=<?=$_SESSION['username']?>">
+        <?php if ($sessionSet) { ?>
+          <div id="pic-and-name">
+            <a href="profile.php?username=<?= $username ?>">
               <?php if ($image != null) { ?>
                 <img class="profile-pic responsive" src="../images/icons/<?=$image['imageId']?>.png">
               <?php } else { ?>
                 <img class="profile-pic responsive" src="../images/icons/default.png">
               <?php } ?>
             </a>
-          </div>
-                
-          <div id="user-name">
-            @<?=$_SESSION['username']?>
+
+            <h4>@<?=$username?></h4>
           </div>
           
           <div id="buttons">
@@ -90,11 +91,12 @@
       <div id="search">
         <form method="get" action="../actions/action_search.php">
           <input
+            id="search-input"
             type="text"
             name="search"
             placeholder="Search stories, comments..."
             required
-            class=<?php if ($sessionSet) echo ""; else echo "disabled" ?>
+            class="<?php if ($sessionSet) echo ""; else echo "disabled" ?>"
           >
         </form>
       </div>
@@ -112,7 +114,7 @@
           </a>
         </li>
         <li <?php if ($selected == 'profile') echo "id='menu-selected'"; ?>>
-          <a href="profile.php?username=' . $_SESSION['username']" class=<?php if ($sessionSet) echo ""; else echo "disabled" ?>>
+          <a href="profile.php?username=<?=$username?>" class=<?php if ($sessionSet) echo ""; else echo "disabled" ?>>
             <img src="icons/person.svg" alt="Profile">
             Profile
           </a>
