@@ -19,9 +19,9 @@
 
     function getCommentAuthor($commentId) {
         $db = Database::instance()->db();
-        $stmt = $db->prepare('SELECT userId FROM comment WHERE commentId = ?');
+        $stmt = $db->prepare('SELECT username FROM comment NATURAL JOIN user WHERE commentId = ?');
         $stmt->execute(array($commentId));
-        return $stmt->fetch()['userId'];
+        return $stmt->fetch()['username'];
     }
 
     function getCommentsOfComment($commentId) {
