@@ -29,8 +29,8 @@
                     <div id="profile-header-user">
                         <a href=<?=$profileLink?>>
                             <h2><?=$profile['name']?></h2>
-                            <small><?='@'.$profile['username']?></small>
                         </a>
+                            <small><?='@'.$profile['username']?></small>
                     </div>
 
                     <div id="profile-header-points">
