@@ -2,7 +2,7 @@
 include_once '../templates/story.php';
 include_once '../templates/formInput.php';
 
-function drawChannel($title, $stories)
+function drawChannel($title, $stories, $username)
 {
     /**
      * Draws a channel page.
@@ -18,12 +18,27 @@ function drawChannel($title, $stories)
 
             <hr/>
 
-            <a class="button secondary" href="newStory.php?channel=<?=$title?>">                
-                New story
-            </a>
+            <div style="display: flex; align-items: center;">
+                <a class="button secondary" href="newStory.php?channel=<?=$title?>">                
+                    New story
+                </a>
 
-            <button class="button secondary">Order by date</button>
+                <button class="button secondary">Order by date</button>
 
+                <?php
+                        if(userAlreadySubscribedChannel($username, $title) != 0)
+                            $subscribed = "Unsubscribe";
+                        else
+                            $subscribed = "Subscribe";
+                ?>
+
+                <form id="subscribeForm" method="post" action = "../actions/action_subscribe.php" style="margin:0;">
+                    <input type="hidden" name="username" value="<?=$username?>">
+                    <input type="hidden" name="title" value="<?=$title?>">
+                    <input type="hidden" name="subscribed" value="<?=$subscribed?>"> 
+                    <input type="submit" class="button secondary" value="<?=$subscribed?>">
+                </form>
+            </div>
         </section>
 
         <div>

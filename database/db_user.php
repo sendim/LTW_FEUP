@@ -142,6 +142,38 @@
         return $stmt->fetchAll();
     }
 
+    function userAlreadySubscribedChannel($username, $channel) {
+        $db = Database::instance()->db();
+
+        $userId = getUserId($username);
+        $channelId = getChannelId($channel);
+
+        $stmt = $db->prepare('SELECT *
+            FROM subscribed 
+            WHERE userId = ? AND channelId = ?');
+        $stmt->execute(array($userId, $channelId));
+        return count($stmt->fetchAll());
+    }
+
+    function userSubscribeChannel($username, $channel) {
+        $db = Database::instance()->db();
+
+        $userId = getUserId($username);
+        $channelId = getChannelId($channel);
+
+        $stmt = $db->prepare('INSERT INTO subscribed VALUES(?,?)');
+        $stmt->execute(array($userId,$channelId));
+    }
+
+    function userUnsubscribeChannel($username, $channel) {
+        $db = Database::instance()->db();
+
+        $userId = getUserId($username);
+        $channelId = getChannelId($channel);
+        
+        $stmt = $db->prepare('DELETE FROM subscribed WHERE userId = ? AND channelId = ?');
+        $stmt->execute(array($userId, $channelId));
+    }
 
     function updateUserName($username,$name) {
         $db = Database::instance()->db();
