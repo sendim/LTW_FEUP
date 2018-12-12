@@ -8,6 +8,7 @@
             return false;
 
         $userId = getUserId($username);
+        $channelId = getChannelId($username);
         
         $stmt = $db->prepare('INSERT INTO channel VALUES(?,?,?)');
         $ret = $stmt->execute(array($channelId,$userId,$channelTitle));

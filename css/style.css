@@ -22,6 +22,10 @@ hr {
   border-color: rgba(232, 233, 235, 0.3);
 }
 
+form {
+  margin: 0;
+}
+
 input,
 textarea {
   box-sizing: border-box;
@@ -62,6 +66,14 @@ small {
   background-color: #e8e9eb;
   margin-top: 2px;
   margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: row wrap;
+}
+
+.section-header form {
+  width: 100%;
 }
 
 .button {
@@ -396,14 +408,12 @@ img.responsive {
 
 /* channels page */
 
-#channels #created-channels section header button {
-  float: right;
-}
-
 #channels .channel-card {
   padding: 12px;
   margin-top: 2px;
   margin-bottom: 2px;
+  display: flex;
+  justify-content: space-between;
   background-color: white;
 }
 

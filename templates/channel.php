@@ -77,8 +77,6 @@ function drawChannelCard($channel)
                         echo $nrStories . ' story';
                     }?>
                 </div>
-
-                <div class="clearfix"></div>
             </div>
             
         </a>
@@ -116,7 +114,6 @@ function drawChannelsPage($createdChannels, $subscribedChannels)
                 <header class="container section-header">
                     Created
                     <button class="button primary" csrf="<?=$_SESSION['csrf']?>">New channel</button>
-                    <div class="clearfix"></div>
                 </header>
 
                 <?php drawChannelCards($createdChannels);?>
