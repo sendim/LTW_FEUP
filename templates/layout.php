@@ -31,7 +31,7 @@
     <!DOCTYPE html>
     <html lang="en-US">
       <head>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="../css/style.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <?php if (in_array($selected,$votingPages)) { ?>
           <script src="../js/storyVoteRequest.js" defer></script>
