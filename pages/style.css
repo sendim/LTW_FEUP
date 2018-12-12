@@ -340,12 +340,17 @@ img.responsive {
 
 #profile #profile-header header {
   display: flex;
+  flex: 100%;
   align-items: center;
 }
 
+#profile #profile-header header #profile-header-photo {
+  flex: 20%;
+  display: flex;
+}
+
 #profile #profile-header header #profile-header-user {
-  margin: auto;
-  width: 80%;
+  flex: 60%;
   display: flex;
   align-items: center;
 }
@@ -355,8 +360,7 @@ img.responsive {
 }
 
 #profile #profile-header header #profile-header-points {
-  margin: auto;
-  width: 20%;
+  flex: 20%;
   display: flex;
   align-items: center;
 }

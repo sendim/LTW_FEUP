@@ -4,20 +4,18 @@
     include_once('../templates/story.php');
     include_once('../templates/comment.php');
 
-
-
     function drawHeaderProfile($profile) {
         $profileLink = "profile.php?username=" . $profile['username'];
         ?>
         <div id="profile">
             <header id="profile-header" class="container bg-white">
-                <header>
+                <header class="container">
                     <div id="profile-header-photo">
                         <?php 
                             $image = getUserProfilePhoto($profile['username']);
                             if ($image != null) { ?>
                                 <a href="../images/originals/<?=$image['imageId']?>.png">
-                                    <img class="profile-pic" src="../images/thumbnails/<?=$image['imageId']?>.png">
+                                    <img class="profile-pic responsive" src="../images/thumbnails/<?=$image['imageId']?>.png">
                                 </a>
                             <?php
                             } else { ?>
@@ -41,7 +39,9 @@
 
                 <hr/>
                 
-                <?= '<p>' . $profile['description'] . '</p>'; ?>
+                <div class="container">
+                    <?=   $profile['description']  ?>
+                </div>
             </header>
         </div>
     <?php 
