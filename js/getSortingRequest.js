@@ -36,8 +36,7 @@ function changedChannel(event) {
   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 
   request.addEventListener('load', function () {
-    let index = channelDroplist.selectedIndex;
-    let selectedChannel = channelDroplist.options[index].value
+    let selectedChannel = localStorage.getItem('selectedChannel')
 
     if (selectedChannel != 'none')
       location.href = '../pages/feed.php?channel=' + selectedChannel
@@ -89,13 +88,17 @@ function changedOrder(event) {
   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 
   request.addEventListener("load", function () {
-    let index = orderDroplist.selectedIndex;
-    let orderBy = orderDroplist.options[index].value
+    let orderBy = localStorage.getItem('orderBy')
+    let channel = localStorage.getItem('selectedChannel')
 
-    if (orderBy != 'none')
+    if (channel == 'none' && orderBy == 'none')
+      location.href = '../pages/feed.php'
+    else if (channel == 'none')
       location.href = '../pages/feed.php?order=' + order + '&sort=' + sort
+    else if (orderBy == 'none')
+      location.href = '../pages/feed.php?channel=' + channel
     else
-      location.href = '../pages/feed.php?channel=' + selectedChannel + '&order=' + order + '&sort=' + sort
+      location.href = '../pages/feed.php?channel=' + channel + '&order=' + order + '&sort=' + sort
   })
 
   request.send(
