@@ -10,7 +10,7 @@ function drawChannel($title, $stories, $username)
     ?>
     <div id="channel">
 
-        <section class="container bg-white">
+        <section class="container">
 
             <header>
                 <h2><?=$title?><h2>
@@ -111,7 +111,7 @@ function drawChannelsPage($createdChannels, $subscribedChannels)
 
         <div id="created-channels" csrf="<?=$_SESSION['csrf']?>">
             <section>
-                <header class="container section-header">
+                <header class="section-header">
                     Created
                     <button class="button primary" csrf="<?=$_SESSION['csrf']?>">New channel</button>
                 </header>
@@ -122,7 +122,7 @@ function drawChannelsPage($createdChannels, $subscribedChannels)
 
         <div id="subscribed-channels">
             <section>
-                <header class="container section-header">
+                <header class="section-header">
                     Subscribed
                 </header>
 

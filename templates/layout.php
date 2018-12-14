@@ -11,7 +11,6 @@
         <?php
           drawMenu($selected); 
           drawContent($drawContent);
-          drawMessages();
         ?>
       </div>
     </body>
@@ -128,7 +127,11 @@
   * Draws the page content section.
   */?>
     <div id="content">
-      <?php $drawContent(); ?>
+      <?php 
+        drawMessages(); 
+        $drawContent(); 
+      ?>
+    </div>
   <?php }
 
   function drawMessages() {
@@ -144,6 +147,7 @@
             <article class="success">
               <p><?=$success?></p>
             </article>
-          <?php } clearMessages(); } ?>
+          <?php } clearMessages();  ?>
         </section>
-    </div>
+    
+  <?php } ?>

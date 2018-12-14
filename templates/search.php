@@ -6,14 +6,14 @@
     function drawSearchFeed($profiles, $stories, $comments, $channels, $input) { ?>
         <div id="feed">
 
-            <section class="container bg-white">
+            <section class="container">
                 <header>
                     <h2>Search Results: <small><?php  echo $input ?> </small></h2>
                 </header>
             </section>
 
             <div>
-                <header class="container section-header">
+                <header class="section-header">
                     Profiles:
                 </header>
                 <?php
@@ -28,7 +28,7 @@
                         </div>
                         <?php 
                     } ?> 
-                <header class="container section-header">
+                <header class="section-header">
                     Stories:
                 </header>
                 <?php
@@ -43,7 +43,7 @@
                         </div>
                         <?php 
                     } ?> 
-                <header class="container section-header">
+                <header class="section-header">
                     Comments:
                 </header>
                 <?php
@@ -63,7 +63,7 @@
                         <?php 
                     } ?> 
                 
-                <header class="container section-header">
+                <header class="section-header">
                     Channels:
                 </header>
                 <?php
