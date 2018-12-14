@@ -8,7 +8,7 @@
         $profileLink = "profile.php?username=" . $profile['username'];
         ?>
         <div id="profile">
-            <header id="profile-header" class="container bg-white">
+            <header id="profile-header" class="container header">
                 <header class="container">
                     <div id="profile-header-photo">
                         <?php 
@@ -59,7 +59,7 @@
         <div id="profile">
           
             <section id="stories">
-                <div id="stories-header" class="container section-header">
+                <div id="stories-header" class="section-header">
                     Stories
                     <button class="button secondary">Order by date</button>
                 </div>
@@ -76,7 +76,7 @@
             </section>
 
             <section id ="comments">
-                <div id="comments-header" class="container section-header">
+                <div id="comments-header" class="section-header">
                     Comments
                     <button class="button secondary">Order by date</button>
                 </div>

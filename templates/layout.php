@@ -11,9 +11,11 @@
         <?php
           drawMenu($selected); 
           drawContent($drawContent);
-          drawMessages();
         ?>
       </div>
+      <footer id="footer">
+        LTW 2018, all rights reserved.
+      </footer>
     </body>
     </html>
   <?php }
@@ -131,7 +133,11 @@
   * Draws the page content section.
   */?>
     <div id="content">
-      <?php $drawContent(); ?>
+      <?php 
+        drawMessages(); 
+        $drawContent(); 
+      ?>
+    </div>
   <?php }
 
   function drawMessages() {
@@ -147,6 +153,7 @@
             <article class="success">
               <p><?=$success?></p>
             </article>
-          <?php } clearMessages(); } ?>
+          <?php } clearMessages();  ?>
         </section>
-    </div>
+    
+  <?php } ?>

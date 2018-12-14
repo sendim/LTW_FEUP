@@ -10,7 +10,7 @@ function drawChannel($title, $stories, $username)
     ?>
     <div id="channel">
 
-        <section class="container bg-white">
+        <section class="container header">
 
             <header>
                 <h2><?=$title?><h2>
@@ -19,23 +19,25 @@ function drawChannel($title, $stories, $username)
             <hr/>
 
             <div style="display: flex; align-items: center;">
-                <a class="button secondary" href="newStory.php?channel=<?=$title?>">                
-                    New story
-                </a>
-
                 <?php
                         if(userAlreadySubscribedChannel($username, $title) != 0)
                             $subscribed = "Unsubscribe";
                         else
                             $subscribed = "Subscribe";
                 ?>
-
                 <form id="subscribeForm" method="post" action = "../actions/action_subscribe.php" style="margin:0;">
                     <input type="hidden" name="username" value="<?=$username?>">
                     <input type="hidden" name="title" value="<?=$title?>">
                     <input type="hidden" name="subscribed" value="<?=$subscribed?>"> 
-                    <input type="submit" class="button secondary" value="<?=$subscribed?>">
+                    <input type="submit" class="button primary" value="<?=$subscribed?>">
                 </form>
+
+                <a class="button secondary" href="newStory.php?channel=<?=$title?>">                
+                    New story
+                </a>
+
+                <button class="button terciary">Order by date</button>
+
             </div>
         </section>
 
@@ -109,7 +111,7 @@ function drawChannelsPage($createdChannels, $subscribedChannels)
 
         <div id="created-channels" csrf="<?=$_SESSION['csrf']?>">
             <section>
-                <header class="container section-header">
+                <header class="section-header">
                     Created
                     <button class="button primary" csrf="<?=$_SESSION['csrf']?>">New channel</button>
                 </header>
@@ -120,7 +122,7 @@ function drawChannelsPage($createdChannels, $subscribedChannels)
 
         <div id="subscribed-channels">
             <section>
-                <header class="container section-header">
+                <header class="section-header">
                     Subscribed
                 </header>
 

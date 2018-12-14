@@ -15,8 +15,8 @@ function doneClicked() {
 
     header.insertAdjacentHTML(
       "beforeend",
-      '<form class="container" style="width: 100%;">' +
-        '<div class="container bg-white">' +
+      '<form class="container" style="width: 100%; margin-top: 4px;">' +
+        '<div class="container">' +
         '<div class="form-input">' +
         "<label>New channel</label>" +
         '<input type="text" name="title" placeholder="new channel title" required>' +
