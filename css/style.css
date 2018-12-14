@@ -12,6 +12,10 @@ a {
   color: #c05746;
 }
 
+a:hover {
+  opacity: 0.7;
+}
+
 p {
   font-size: 16px;
 }
@@ -60,6 +64,9 @@ small {
 
 .container {
   padding: 12px;
+}
+
+.container.header {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   background-color: #fff8f0;
@@ -75,6 +82,8 @@ small {
   flex-flow: row wrap;
   padding: 12px;
   border-radius: 2px;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 .section-header form {
@@ -85,8 +94,11 @@ small {
   border-radius: 4px;
   border: none;
   min-width: 100px;
+  font-size: 16px;
   text-decoration: none;
   padding: 6px;
+  padding-left: 8px;
+  padding-right: 8px;
   text-align: center;
   display: inline-block;
 }
@@ -124,7 +136,6 @@ small {
 }
 
 .button.terciary {
-  width: 70px;
   background-color: #373650;
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -210,13 +221,17 @@ img.responsive {
 
 #menu {
   color: white;
+  background-color: rgba(255, 255, 255, 0.1);
   min-height: 600px;
   min-width: 20%;
-  margin: 8px;
+  margin-top: 8px;
+  margin-bottom: 10px;
+  border-top-right-radius: 4px;
   flex: 20%;
 }
 
 #menu #user-info {
+  padding: 8px;
   display: flex;
   justify-content: space-around;
 }
@@ -316,7 +331,19 @@ img.responsive {
 
 #content {
   flex: 80%;
-  margin: 8px;
+  padding: 8px;
+}
+
+/* footer */
+
+#footer {
+  background-color: #373650;
+  padding: 12px;
+  padding-top: 15px;
+  font-weight: 16px;
+  color: #ffff;
+  min-height: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 /* feed */

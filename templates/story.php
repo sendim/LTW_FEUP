@@ -82,7 +82,7 @@
 		$channel = getChannelTitle($story['channelId']);
 	?>
 		<div id="story-page">
-			<header class="container">
+			<header class="container header">
 				<h1>
 					<?=$story['title']?>
 				</h1>

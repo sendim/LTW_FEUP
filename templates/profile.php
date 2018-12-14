@@ -8,7 +8,7 @@
         $profileLink = "profile.php?username=" . $profile['username'];
         ?>
         <div id="profile">
-            <header id="profile-header" class="container">
+            <header id="profile-header" class="container header">
                 <header class="container">
                     <div id="profile-header-photo">
                         <?php 

@@ -13,6 +13,9 @@
           drawContent($drawContent);
         ?>
       </div>
+      <footer id="footer">
+        LTW 2018, all rights reserved.
+      </footer>
     </body>
     </html>
   <?php }

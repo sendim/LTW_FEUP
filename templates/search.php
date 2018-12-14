@@ -6,7 +6,7 @@
     function drawSearchFeed($profiles, $stories, $comments, $channels, $input) { ?>
         <div id="feed">
 
-            <section class="container">
+            <section class="container header">
                 <header>
                     <h2>Search Results: <small><?php  echo $input ?> </small></h2>
                 </header>

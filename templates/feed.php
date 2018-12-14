@@ -4,7 +4,7 @@
     function drawFeed($stories,$channels,$currChannel) { ?>
         <div id="feed">
 
-            <section class="container">
+            <section class="container header">
 
                 <header>
                     <h2>Feed</h2>
