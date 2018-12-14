@@ -23,8 +23,6 @@ function drawChannel($title, $stories, $username)
                     New story
                 </a>
 
-                <button class="button secondary">Order by date</button>
-
                 <?php
                         if(userAlreadySubscribedChannel($username, $title) != 0)
                             $subscribed = "Unsubscribe";

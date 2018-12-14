@@ -14,7 +14,7 @@
 
             <div>
                 <header class="container section-header">
-                    Profiles:
+                    Profiles
                 </header>
                 <?php
                     if(count($profiles) != 0){
@@ -29,7 +29,7 @@
                         <?php 
                     } ?> 
                 <header class="container section-header">
-                    Stories:
+                    Stories
                 </header>
                 <?php
                     if(count($stories) != 0){
@@ -44,7 +44,7 @@
                         <?php 
                     } ?> 
                 <header class="container section-header">
-                    Comments:
+                    Comments
                 </header>
                 <?php
                     if(count($comments) != 0){
@@ -64,7 +64,7 @@
                     } ?> 
                 
                 <header class="container section-header">
-                    Channels:
+                    Channels
                 </header>
                 <?php
                     if(count($channels) != 0){
@@ -81,7 +81,7 @@
                             No results found. 
                         </div>
                         <?php 
-                    } ?> 
+                    } ?>
                 </section>
             </div>
 

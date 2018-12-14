@@ -14,15 +14,25 @@
 
     $username = $_SESSION['username'];
     $userId = getUserId($username);
+    
+    // display options
+    $currChannel = '';
+    $order = 'published';
+    $sort = '';
 
-    if (isset($_GET['channelTitle'])) {
-      $channelTitle = $_GET['channelTitle'];
-      $channelId = getChannelId($channelTitle);
-      $stories = getChannelStories($channelId);
-      $currChannel = $channelTitle;
+    if (isset($_GET['sort']))
+      $sort = $_GET['sort'];
+
+    if (isset($_GET['order']))
+      $order = $_GET['order'];
+
+    if (isset($_GET['channel'])) {
+      $channel = $_GET['channel'];
+      $channelId = getChannelId($channel);
+      $stories = getChannelStories($channelId,$order,$sort);
+      $currChannel = $channel;
     } else {
-      $stories = getFeed($userId);
-      $currChannel = "";
+      $stories = getFeed($userId,$order,$sort);
     }
     
     $channels = getUserSubscribedChannels($username);

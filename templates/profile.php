@@ -137,7 +137,7 @@
                 <div class="form-input">
                     <label>Picture</label>
                     <small>Warning: current profile picture will be overwritten!</small>
-                    <input type="file" name="image" accept="image/png">
+                    <input type='file' name='image' accept='image/png'>
                     <input type='hidden' name='title' value='profile'/>
                     <input type="submit" value="Upload image">
                 </div>

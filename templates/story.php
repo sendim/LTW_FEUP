@@ -9,7 +9,7 @@
 	* Draws a story section.
 	*/
 		$storyLink = "story.php?id=" . $story['storyId'];
-		$publishedDate = gmdate('F j, g:i a, Y', strtotime($story['published']));
+		$publishedDate = gmdate('F j, g:i a, Y', $story['published']);
 
 		$author = getStoryAuthor($story['storyId']);
 		$channel = getChannelTitle($story['channelId']);
@@ -58,10 +58,10 @@
 					<a href="<?=$storyLink?>">
 					<?php
 						echo $nrComments;
-						if ($nrComments > 1)
-							echo ' comments';
-						else
+						if ($nrComments == 1)
 							echo ' comment';
+						else
+							echo ' comments';
 						?>
 					</a>
 				</div>
@@ -75,7 +75,7 @@
 	/**
 	* Draws a story page section.
 	*/
-		$publishedDate = gmdate('F j, g:i a, Y', strtotime($story['published']));
+		$publishedDate = gmdate('F j, g:i a, Y', $story['published']);
 		
 		$author = getStoryAuthor($story['storyId']);
 		$comments = getStoryComments($story['storyId']);

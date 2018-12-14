@@ -27,6 +27,7 @@
     $channelCreationPage = 'channels';
     $commentCreationPage = 'story';
     $commentVotingPage = array('story', 'profile');
+    $sortingPage = 'feed';
   ?>
     <!DOCTYPE html>
     <html lang="en-US">
@@ -42,6 +43,8 @@
           <script src="../js/addCommentCommentRequest.js" defer></script>
         <?php } if ($selected == $channelCreationPage) { ?>
           <script src="../js/createChannelRequest.js" defer></script>
+        <?php } if ($selected == $sortingPage) { ?>
+             <script src="../js/getSortingRequest.js" defer></script>
         <?php } ?>
       </head>
       <body>

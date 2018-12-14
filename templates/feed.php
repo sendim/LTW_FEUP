@@ -17,20 +17,19 @@
                 </a>
 
                 <select id="channel" class="button secondary">
-                    <?php if($currChannel) { ?>
-                        <option value="selectedChannel"><?=$currChannel?></option>
-                    <?php } else { ?>
-                        <option value="selectedChannel">Select channel</option>
-                    <?php } foreach($channels as $channel) { 
-                        if ($channel['title'] != $currChannel) { ?>
+                    <option value="none">Select channel</option>
+                    <?php foreach($channels as $channel) { ?>
                             <option value="<?=$channel['title']?>"><?=$channel['title']?></option>
-                    <?php }
+                        <?php
                     } ?>
                 </select>
 
-                <select class="button secondary">
-                    <option value="date">Order by date</option>
-                    <option value="alfabetic">Order by name</option>
+                <select id="order" class="button secondary">
+                    <option value="none">Order by</option>
+                    <option value="published_asc">Order by ascending date</option>
+                    <option value="published_desc">Order by descending date</option>
+                    <option value="title_asc">Order by ascending title</option>
+                    <option value="title_desc">Order by descending title</option>
                 </select>
 
             </section>
@@ -42,5 +41,4 @@
                 ?>
             </div>
         </div>
-        <script src="../js/getFeedRequest.js" defer></script>
 <?php } ?>

@@ -32,16 +32,28 @@
         return $stmt->fetchAll();
     }
 
-    function getFeed($userId) {
+    function getFeed($userId,$order='published',$sort='') {
         $db = Database::instance()->db();
-        $stmt = $db->prepare(
+
+        // order by case-insensitive titles
+        if ($order == 'title') {
+            if ($sort == 'ASC')
+                $sort = 'COLLATE NOCASE ASC';
+            else if ($sort == 'DESC')
+                $sort = 'COLLATE NOCASE DESC';
+        }
+
+        $query = sprintf(
             'SELECT story.*, user.*, COUNT(comment.commentId) AS nrComments
             FROM story NATURAL JOIN user LEFT JOIN comment ON comment.storyId = story.storyId
-            JOIN subscribed using(channelId) WHERE subscribed.userId = ?
+            JOIN subscribed using(channelId) WHERE subscribed.userId = %d
             GROUP BY story.storyId, user.username
-            ORDER BY published DESC'
+            ORDER BY %s %s',
+            $userId, $order, $sort
         );
-        $stmt->execute(array($userId));
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+
         return $stmt->fetchAll();
     }
 
