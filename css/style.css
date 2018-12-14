@@ -178,7 +178,8 @@ img.responsive {
 /* navbar */
 
 #navbar {
-  background-color: #e8e9eb;
+  background-color: #373640;
+  color: #b6f7c1;
   padding: 12px;
   display: flex;
   -webkit-box-shadow: 0px 12px 27px -12px rgba(0, 0, 0, 0.41);
