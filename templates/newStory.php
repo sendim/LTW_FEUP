@@ -15,7 +15,7 @@ function drawNewStory($channels,$selectedChannel) {
 
         <hr />
 
-        <form method="post" action="../actions/action_addStory.php">
+        <form method="post" action="../actions/action_addStory.php" enctype="multipart/form-data">
                 <?php drawTextInput("Title", "title", "required");?>
 
                 <?php drawTextAreaInput("Description", "text", "required");?>
@@ -33,9 +33,14 @@ function drawNewStory($channels,$selectedChannel) {
                     </select>
                 </div>
 
+                <div class="form-input">
+                    <label>Picture</label>
+                    <input type='file' name='image' accept='image/jpeg'>
+                </div>
+
                 <button class="button primary" type="submit">
                   Create story
-            </button>
+                </button>
         </form>
 
     </section>

@@ -29,6 +29,13 @@
         return $stmt->fetch();
     }
 
+    function getStoryImage($storyId) {
+        $db = Database::instance()->db();
+        $stmt = $db->prepare('SELECT imageId FROM images WHERE storyId = ?');
+        $stmt->execute(array($storyId));
+        return $stmt->fetch()['imageId'];
+    }
+
     function getStoryAuthor($storyId) {
         $db = Database::instance()->db();
         $stmt = $db->prepare(

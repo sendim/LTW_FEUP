@@ -14,12 +14,12 @@
                         <?php 
                             $image = getUserProfilePhoto($profile['username']);
                             if ($image != null) { ?>
-                                <a href="../images/originals/<?=$image['imageId']?>.png">
-                                    <img class="profile-pic responsive" src="../images/thumbnails/<?=$image['imageId']?>.png">
+                                <a href="../images/originals/<?=$image['imageId']?>.jpg">
+                                    <img class="profile-pic responsive" src="../images/thumbnails/<?=$image['imageId']?>.jpg">
                                 </a>
                             <?php
                             } else { ?>
-                                <img src="../images/thumbnails/default.png">
+                                <img src="../images/thumbnails/default.jpg">
                             <?php }
                         ?>
                     </div>
@@ -133,15 +133,18 @@
                 </button>
             </form>
 
+            <hr />
+
             <form action="../actions/action_imageUpload.php" method="post" enctype="multipart/form-data">
                 <div class="form-input">
                     <label>Picture</label>
                     <small>Warning: current profile picture will be overwritten!</small>
-                    <input type='file' name='image' accept='image/png'>
+                    <input type='file' name='image' accept='image/jpeg'>
                     <input type='hidden' name='title' value='profile'/>
                     <input type="submit" value="Upload image">
                 </div>
             </form>
+
             <a href="../actions/action_deleteAccount.php">
                 <button class="button primary">Delete account</button>
             </a>

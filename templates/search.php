@@ -8,7 +8,7 @@
 
             <section class="container header">
                 <header>
-                    <h2>Search Results: <small><?php  echo $input ?> </small></h2>
+                    <h2>Search results for <small>"<?php echo $input?>"</small></h2>
                 </header>
             </section>
 

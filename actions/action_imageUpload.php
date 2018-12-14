@@ -16,22 +16,22 @@
     }
 
     // insert image data into database
-    $stmt = $db->prepare('INSERT INTO images VALUES(NULL,?,?)');
+    $stmt = $db->prepare('INSERT INTO images VALUES(NULL,?,NULL,?)');
     $stmt->execute(array($userId,$title));
 
     // get image ID
     $id = $db->lastInsertId();
 
     // generate filenames for original, thumbnail and icon picture files
-    $originalFileName = "../images/originals/$id.png";
-    $thumbnailFileName = "../images/thumbnails/$id.png";
-    $iconFileName = "../images/icons/$id.png";
+    $originalFileName = "../images/originals/$id.jpg";
+    $thumbnailFileName = "../images/thumbnails/$id.jpg";
+    $iconFileName = "../images/icons/$id.jpg";
 
     // move the uploaded file to its final destination
     move_uploaded_file($_FILES['image']['tmp_name'], $originalFileName);
 
     // create an image representation of the original image
-    $original = imagecreatefrompng($originalFileName);
+    $original = imagecreatefromjpeg($originalFileName);
 
     $width = imagesx($original);     // width of the original image
     $height = imagesy($original);    // height of the original image
@@ -45,7 +45,7 @@
         ($height>$square)? ($height-$square)/2 : 0,
         150, 150, $square, $square
     );
-    imagepng($thumbnail, $thumbnailFileName);
+    imagejpeg($thumbnail, $thumbnailFileName);
 
     // create and save a small icon
     $icon = imagecreatetruecolor(30, 30);
@@ -55,7 +55,7 @@
         ($height>$square)? ($height-$square)/2 : 0,
         30, 30, $square, $square
     );
-    imagepng($icon, $iconFileName);
+    imagejpeg($icon, $iconFileName);
 
     header('Location: ' . $_SERVER['HTTP_REFERER']);
 ?>

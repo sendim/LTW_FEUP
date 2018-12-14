@@ -105,4 +105,4 @@ INSERT INTO subscribed VALUES (2,2);
 INSERT INTO subscribed VALUES (3,1);
 INSERT INTO subscribed VALUES (4,2);
 
-INSERT INTO images VALUES (NULL,NULL,'default');
+INSERT INTO images VALUES (NULL,NULL,NULL,'default');

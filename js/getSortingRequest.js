@@ -10,11 +10,17 @@ orderDroplist.addEventListener('change', changedOrder)
 // set current channel and order by parameters on feed
 window.addEventListener('load', function () {
   // restore selected channel option
-  let channel = localStorage.getItem('selectedChannel')
-  channelDroplist.value = channel
+  let channel = sessionStorage.getItem('selectedChannel')
+  if (channel == null)
+    channelDroplist.value = 'none'
+  else
+    channelDroplist.value = channel
 
-  let order = this.localStorage.getItem('orderBy')
-  orderDroplist.value = order
+  let order = sessionStorage.getItem('orderBy')
+  if (channel == null)
+    orderDroplist.value = 'none'
+  else
+    orderDroplist.value = order
 })
 
 // what happens after selected channel changes
@@ -24,19 +30,19 @@ function changedChannel(event) {
   let selectedChannel = channelDroplist.options[index].value
 
   // store selected channel option
-  localStorage.setItem('selectedChannel',selectedChannel)
+  sessionStorage.setItem('selectedChannel',selectedChannel)
   // restart order by
-  localStorage.setItem('orderBy','none')
+  sessionStorage.setItem('orderBy','none')
 
   // setup of the ajax request
   let request = new XMLHttpRequest()
 
   // construct url with csrf security token
-  request.open("get", "../pages/feed.php", true)
+  request.open('get', '../pages/feed.php', true)
   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 
   request.addEventListener('load', function () {
-    let selectedChannel = localStorage.getItem('selectedChannel')
+    let selectedChannel = sessionStorage.getItem('selectedChannel')
 
     if (selectedChannel != 'none')
       location.href = '../pages/feed.php?channel=' + selectedChannel
@@ -59,7 +65,7 @@ function changedOrder(event) {
   let sort = '';
 
   // store selected channel option
-  localStorage.setItem('orderBy', order)
+  sessionStorage.setItem('orderBy', order)
 
   switch (order) {
     case 'published_asc':
@@ -84,12 +90,12 @@ function changedOrder(event) {
   let request = new XMLHttpRequest()
 
   // construct url with csrf security token
-  request.open("get", "../pages/feed.php", true)
+  request.open('get', '../pages/feed.php', true)
   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 
-  request.addEventListener("load", function () {
-    let orderBy = localStorage.getItem('orderBy')
-    let channel = localStorage.getItem('selectedChannel')
+  request.addEventListener('load', function () {
+    let orderBy = sessionStorage.getItem('orderBy')
+    let channel = sessionStorage.getItem('selectedChannel')
 
     if (channel == 'none' && orderBy == 'none')
       location.href = '../pages/feed.php'

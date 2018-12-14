@@ -14,6 +14,7 @@
 		$author = getStoryAuthor($story['storyId']);
 		$channel = getChannelTitle($story['channelId']);
 		$nrComments = countStoryComments($story['storyId']);
+		$storyImg = getStoryImage($story['storyId']);
 	?>
 		<div class="story-card bg-white">
 			<header>
@@ -26,6 +27,10 @@
 					echo '<small>'.$publishedDate.'</small>';
 				?>
 			</header>
+
+			<?php if ($storyImg != null) { ?>
+				<img src="../images/thumbnails/<?=$storyImg?>.jpg">
+			<?php } ?>
 
 			<div class="story-body">
 				<p><?=$story['text']?></p>
@@ -80,6 +85,7 @@
 		$author = getStoryAuthor($story['storyId']);
 		$comments = getStoryComments($story['storyId']);
 		$channel = getChannelTitle($story['channelId']);
+		$storyImg = getStoryImage($story['storyId']);
 	?>
 		<div id="story-page">
 			<header class="container header">
@@ -94,6 +100,12 @@
 				<div id="story-description">
 					<p><?=$story['text']?></p>
 				</div>
+
+				<?php if ($storyImg != null) { ?>
+					<a href="../images/originals/<?=$storyImg?>.jpg">
+						<img src="../images/thumbnails/<?=$storyImg?>.jpg">
+					</a>
+				<?php } ?>
 
 				<div class="signature">
 					by <a href="profile.php?username=<?=$author?>">@<?=$author?></a>
