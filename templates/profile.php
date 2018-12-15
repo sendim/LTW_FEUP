@@ -42,11 +42,11 @@ $image = getUserProfilePhoto($profile['username']);
 
                 <div class="container">
                     <?php 
-                    if (is_set($profile['description'])) {
+                    if (isset($profile['description'])) {
                         echo $profile['description'];
                     } else {
                         echo "No profile description yet.";
-                    }
+                    }   
                     ?>
                 </div>
             </header>
