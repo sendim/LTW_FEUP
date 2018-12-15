@@ -23,43 +23,49 @@ try {
     // add new story
     $storyId = addStory($title, $text, $userId, $channelId);
 
-    // insert image data into database
-    $stmt = $db->prepare('INSERT INTO images VALUES(NULL,?,?,?)');
-    $stmt->execute(array($userId, $storyId, $title));
+    // story uploaded img
+    $img = $_FILES['image']['tmp_name'];
 
-    // get image ID
-    $id = $db->lastInsertId();
+    if ($img) {
 
-    // generate filenames for original, thumbnail and icon picture files
-    $originalFilename = "../images/originals/$id.jpg";
-    $thumbnailFilename = "../images/thumbnails/$id.jpg";
+        // insert image data into database
+        $stmt = $db->prepare('INSERT INTO images VALUES(NULL,?,?,?)');
+        $stmt->execute(array($userId, $storyId, $title));
 
-    // move the uploaded file to its final destination
-    move_uploaded_file($_FILES['image']['tmp_name'], $originalFilename);
+        // get image ID
+        $id = $db->lastInsertId();
 
-    // create an image representation of the original image
-    $original = imagecreatefromjpeg($originalFilename);
+        // generate filenames for original, thumbnail and icon picture files
+        $originalFilename = "../images/originals/$id.jpg";
+        $thumbnailFilename = "../images/thumbnails/$id.jpg";
 
-    $width = imagesx($original); // width of the original image
-    $height = imagesy($original); // height of the original image
+        // move the uploaded file to its final destination
+        move_uploaded_file($img, $originalFilename);
 
-    // Calculate width and height of medium sized image (max width: 400)
-    $thumbnailWidth = $width;
-    $thumbnailheight = $height;
-    if ($thumbnailWidth > 400) {
-        $thumbnailWidth = 400;
-        $thumbnailheight = $thumbnailheight * ($thumbnailWidth / $width);
+        // create an image representation of the original image
+        $original = imagecreatefromjpeg($originalFilename);
+
+        $width = imagesx($original); // width of the original image
+        $height = imagesy($original); // height of the original image
+
+        // Calculate width and height of medium sized image (max width: 400)
+        $thumbnailWidth = $width;
+        $thumbnailheight = $height;
+        if ($thumbnailWidth > 400) {
+            $thumbnailWidth = 400;
+            $thumbnailheight = $thumbnailheight * ($thumbnailWidth / $width);
+        }
+
+        // Create and save a medium image
+        $thumbnail = imagecreatetruecolor($thumbnailWidth, $thumbnailheight);
+        imagecopyresized(
+            $thumbnail, $original, 0, 0,
+            0, 0, $thumbnailWidth, $thumbnailheight,
+            $width, $height
+        );
+        imagejpeg($thumbnail, $thumbnailFilename);
     }
-
-    // Create and save a medium image
-    $thumbnail = imagecreatetruecolor($thumbnailWidth, $thumbnailheight);
-    imagecopyresized(
-        $thumbnail, $original, 0, 0,
-        0, 0, $thumbnailWidth, $thumbnailheight,
-        $width, $height
-    );
-    imagejpeg($thumbnail, $thumbnailFilename);
-
+    
     // redirect to created story page
     header('Location: ../pages/story.php?id=' . $storyId);
 
