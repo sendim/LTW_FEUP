@@ -1,10 +1,9 @@
 <?php
-    include_once('../includes/session.php');
-    
-    session_destroy();
+include_once '../includes/session.php';
 
-    session_start();
-    $_SESSION['success_messages'][] = "Logged out successfully!";
+session_destroy();
 
-    header('Location: ../pages/login.php');
-?>
+session_start();
+$_SESSION['success_messages'][] = "Logged out successfully!";
+
+header('Location: ../pages/login.php');

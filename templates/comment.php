@@ -1,33 +1,35 @@
-<?php 
-		include_once('../database/db_user.php');
-		include_once('../database/db_comment.php');
+<?php
+include_once '../database/db_user.php';
+include_once '../database/db_comment.php';
 
-		function drawSimpleComment($comment) {
-			$username = getUserUsername($comment['userId']);
-			$text = $comment['text'];
-			
-			?>
-				<div id="<?=$comment['commentId']?>" class="comment story-card bg-white">   
+function drawSimpleComment($comment)
+{
+    $username = getUserUsername($comment['userId']);
+    $text = $comment['text'];
+
+    ?>
+				<div id="<?=$comment['commentId']?>" class="comment story-card bg-white">
 					<p>
 						<a href="profile.php?username=<?=$username?>">@<?=$username?></a>
-						<?= ' ' . $text ?>
+						<?=' ' . $text?>
 					</p>
-				
-			<?php 
-		}
 
+			<?php
+}
 
-		function drawComment($comment) {
-		/**
-		 * Draws the comment section.
-		 */ 
-				$username = getUserUsername($comment['userId']);
-				$text = $comment['text'];
-				$subComments = getCommentsOfComment($comment['commentId']);
-				$storyId = getCommentStoryId($comment['commentId']);
+function drawComment($comment)
+{
+    /**
+     * Draws the comment section.
+     */
+    $username = getUserUsername($comment['userId']);
+    $text = $comment['text'];
+    $subComments = getCommentsOfComment($comment['commentId']);
+    $storyId = getCommentStoryId($comment['commentId']);
+    $author = getCommentAuthor($comment['commentId']);
 
-				drawSimpleComment($comment)
-		?>  									
+    drawSimpleComment($comment)
+    ?>
 						<hr/>
  						<footer>
 								<div class="story-footer-left">
@@ -47,15 +49,22 @@
 										</div>
 								</div>
 								<div class="story-footer-right">
-										<a href="#<?=$comment['commentId']?>" storyId="<?=$storyId?>" csrf="<?=$_SESSION['csrf']?>"><?='Reply(' . sizeof($subComments) . ')'?></a>
+									<?php if ($author == $_SESSION['username']) {?>
+										<a href="../actions/action_deleteComment.php?commentId=<?=$comment['commentId']?>&csrf=<?=$_SESSION['csrf']?>">
+											<button class="button secondary">Delete comment</button>
+										</a>
+									<?php }?>
+									<a href="#<?=$comment['commentId']?>" storyId="<?=$storyId?>" csrf="<?=$_SESSION['csrf']?>"><?='Replies(' . sizeof($subComments) . ')'?></a>
 								</div>
 						</footer>
  						<div class="replies">
-								<?php foreach($subComments as $subComment)
-										drawComment($subComment);
-								?>
+								<?php foreach ($subComments as $subComment) {
+        drawComment($subComment);
+    }
+
+    ?>
 						</div>
  				</div>
-<?php 
+<?php
 
-} ?>
+}?>

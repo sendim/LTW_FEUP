@@ -58,10 +58,10 @@ function formSubmitted(event) {
 	request.send(
 		encodeForAjax(
 			{
-				storyId : storyId,
-				refCommentId : refCommentId,
-				text : text,
-				csrf : csrf
+				storyId: storyId,
+				refCommentId: refCommentId,
+				text: text,
+				csrf: csrf
 			})
 	)
 }

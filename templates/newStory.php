@@ -5,7 +5,8 @@ include_once '../templates/formInput.php';
 /**
  * Draws new story page.
  */
-function drawNewStory($channels,$selectedChannel) {
+function drawNewStory($channels, $selectedChannel)
+{
     ?>
 
     <section id="new-story" class="container bg-white">
@@ -15,7 +16,7 @@ function drawNewStory($channels,$selectedChannel) {
 
         <hr />
 
-        <form method="post" action="../actions/action_addStory.php" enctype="multipart/form-data">
+        <form method="post" action="../actions/action_addStory.php?csrf=<?=$_SESSION['csrf']?>" enctype="multipart/form-data">
                 <?php drawTextInput("Title", "title", "required");?>
 
                 <?php drawTextAreaInput("Description", "text", "required");?>
@@ -23,13 +24,13 @@ function drawNewStory($channels,$selectedChannel) {
                 <div class="form-input">
                     <label>Channel</label>
                     <select name="channel">
-                        <?php if($selectedChannel) { ?>
+                        <?php if ($selectedChannel) {?>
                             <option value="<?=$selectedChannel?>"><?=$selectedChannel?></option>
-                        <?php } else {   
-                            foreach ($channels as $channel) { ?>
+                        <?php } else {
+        foreach ($channels as $channel) {?>
                                 <option value="<?=$channel['title']?>"><?=$channel['title']?></option>
-                        <?php } 
-                        } ?>
+                        <?php }
+    }?>
                     </select>
                 </div>
 

@@ -1,7 +1,8 @@
-<?php function drawLogin() {
+<?php function drawLogin()
+{
 /**
  * Draws the login section.
- */ ?>
+ */?>
     <section id="login" class="container bg-white">
 
         <header>
@@ -27,12 +28,13 @@
         </small>
 
     </section>
-<?php } 
+<?php }
 
-  function drawSignup() {
-  /**
-  * Draws the signup section.
-  */ ?>
+function drawSignup()
+{
+    /**
+     * Draws the signup section.
+     */?>
   <section id="signup" class="container bg-white">
 
     <header>
@@ -66,4 +68,4 @@
     </small>
 
   </section>
-<?php } ?>
+<?php }?>

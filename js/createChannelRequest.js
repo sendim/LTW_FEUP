@@ -16,14 +16,14 @@ function doneClicked() {
     header.insertAdjacentHTML(
       "beforeend",
       '<form class="container" style="width: 100%; margin-top: 4px;">' +
-        '<div class="container">' +
-        '<div class="form-input">' +
-        "<label>New channel</label>" +
-        '<input type="text" name="title" placeholder="new channel title" required>' +
-        "</div>" +
-        '<button class="button primary" type="submit">Add channel</button>' +
-        "</div>" +
-        "</form>"
+      '<div class="container">' +
+      '<div class="form-input">' +
+      "<label>New channel</label>" +
+      '<input type="text" name="title" placeholder="new channel title" required>' +
+      "</div>" +
+      '<button class="button primary" type="submit">Add channel</button>' +
+      "</div>" +
+      "</form>"
     );
 
     // retrieves the form and sets its submit handler
@@ -48,7 +48,7 @@ function formSubmitted(event) {
   request.open("post", "../api/api_createChannelRequest.php", true);
   request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-  request.addEventListener("load", function() {
+  request.addEventListener("load", function () {
     console.log(this.responseText);
 
     let response = JSON.parse(this.responseText);
@@ -65,13 +65,13 @@ function formSubmitted(event) {
           .insertAdjacentHTML(
             "beforeend",
             '<section id="messages">' +
-              '<article class="error">' +
-              "<p>" +
-              response["error"] +
-              "</p>" +
-              "</article>" +
-              "<?php } clearMessages(); ?>" +
-              "</section>"
+            '<article class="error">' +
+            "<p>" +
+            response["error"] +
+            "</p>" +
+            "</article>" +
+            "<?php } clearMessages(); ?>" +
+            "</section>"
           );
       }
     } else {
@@ -84,15 +84,15 @@ function formSubmitted(event) {
       createdChannelsSection.insertAdjacentHTML(
         "beforeend",
         '<a href="channel.php?title=' +
-          channelTitle +
-          '">' +
-          '<div class="channel-card">' +
-          '<div class="title">' +
-          channelTitle +
-          "</div>" +
-          '<div class="stories-number">0 stories</div>' +
-          "</div>" +
-          "</a>"
+        channelTitle +
+        '">' +
+        '<div class="channel-card">' +
+        '<div class="title">' +
+        channelTitle +
+        "</div>" +
+        '<div class="stories-number">0 stories</div>' +
+        "</div>" +
+        "</a>"
       );
     }
   });
@@ -108,7 +108,7 @@ function formSubmitted(event) {
 // helper function
 function encodeForAjax(data) {
   return Object.keys(data)
-    .map(function(k) {
+    .map(function (k) {
       return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
     })
     .join("&");

@@ -1,34 +1,35 @@
-<?php 
-    include_once('../includes/session.php');
-    include_once('../database/db_user.php');
-    include_once('../templates/story.php');
-    include_once('../templates/comment.php');
+<?php
+include_once '../includes/session.php';
+include_once '../database/db_user.php';
+include_once '../templates/story.php';
+include_once '../templates/comment.php';
 
-    function drawHeaderProfile($profile) {
-        $profileLink = "profile.php?username=" . $profile['username'];
-        ?>
+function drawHeaderProfile($profile)
+{
+    $profileLink = "profile.php?username=" . $profile['username'];
+    ?>
         <div id="profile">
             <header id="profile-header" class="container header">
                 <header class="container">
                     <div id="profile-header-photo">
-                        <?php 
-                            $image = getUserProfilePhoto($profile['username']);
-                            if ($image != null) { ?>
+                        <?php
+$image = getUserProfilePhoto($profile['username']);
+    if ($image != null) {?>
                                 <a href="../images/originals/<?=$image['imageId']?>.jpg">
                                     <img class="profile-pic responsive" src="../images/thumbnails/<?=$image['imageId']?>.jpg">
                                 </a>
                             <?php
-                            } else { ?>
+} else {?>
                                 <img src="../images/thumbnails/default.jpg">
                             <?php }
-                        ?>
+    ?>
                     </div>
 
                     <div id="profile-header-user">
                         <a href=<?=$profileLink?>>
                             <h2><?=$profile['name']?></h2>
                         </a>
-                            <small><?='@'.$profile['username']?></small>
+                            <small><?='@' . $profile['username']?></small>
                     </div>
 
                     <div id="profile-header-points">
@@ -38,26 +39,26 @@
                 </header>
 
                 <hr/>
-                
+
                 <div class="container">
-                    <?=   $profile['description']  ?>
+                    <?=$profile['description']?>
                 </div>
             </header>
         </div>
-    <?php 
+    <?php
 }
 
-    
-    function drawProfile($profile) { 
+function drawProfile($profile)
+{
     /**
-    * Draws the login section.
-    */        
-        $comments = getUserComments($profile['username']);
-        $stories = getUserStories($profile['username']);
-        drawHeaderProfile($profile);
+     * Draws the login section.
+     */
+    $comments = getUserComments($profile['username']);
+    $stories = getUserStories($profile['username']);
+    drawHeaderProfile($profile);
     ?>
         <div id="profile">
-          
+
             <section id="stories">
                 <div id="stories-header" class="section-header">
                     Stories
@@ -66,12 +67,14 @@
 
                 <div id="stories-list">
                     <?php
-                        if ($stories) {
-                            foreach($stories as $story)
-                                drawStory($story);
-                        } else { ?>
+if ($stories) {
+        foreach ($stories as $story) {
+            drawStory($story);
+        }
+
+    } else {?>
                             <div class="container bg-white">No stories yet.</div>
-                        <?php } ?>
+                        <?php }?>
                 </div>
             </section>
 
@@ -83,41 +86,44 @@
 
                 <div id="comments-list">
                     <?php
-                        if ($comments) {
-                            foreach($comments as $comment)
-                                drawComment($comment);
-                        } else { ?>
-                            <div class="container bg-white">No comments yet.</div> 
-                        <?php } ?>
+if ($comments) {
+        foreach ($comments as $comment) {
+            drawComment($comment);
+        }
+
+    } else {?>
+                            <div class="container bg-white">No comments yet.</div>
+                        <?php }?>
                 </div>
             </section>
-            
+
         </div>
 <?php }
 
-    function drawEditProfile($profile) {
+function drawEditProfile($profile)
+{
     /**
      * Draws the login section.
-     */ ?>
+     */?>
         <section id="editProfile" class="container bg-white">
-    
+
             <header>
               <h2>Edit profile</h2>
             </header>
-    
+
             <hr/>
-    
-            <form id="edit-profile-form" method="post" action="../actions/action_editProfile.php" onsubmit="return (validate());">
+
+            <form id="edit-profile-form" method="post" action="../actions/action_editProfile.php?csrf=<?=$_SESSION['csrf']?>" onsubmit="return (validate());">
                 <div class="form-input">
                     <label>New name</label>
-                    <input type="text" name="name" placeholder="name" value=<?= $profile['name'] ?> >
+                    <input type="text" name="name" placeholder="name" value=<?=$profile['name']?> >
                 </div>
 
                 <div class="form-input">
                     <label>New username</label>
-                    <input type="text" name="username" placeholder="username" value=<?= $profile['username'] ?>>
+                    <input type="text" name="username" placeholder="username" value=<?=$profile['username']?>>
                 </div>
-        
+
                 <div class="form-input">
                     <label>New password</label>
                     <input type="password" name="password" placeholder="password">
@@ -125,9 +131,9 @@
 
                 <div class="form-input">
                     <label>New description</label>
-                    <input type="text" name="description" placeholder="description" value=<?= $profile['description'] ?>>
+                    <input type="text" name="description" placeholder="description" value=<?=$profile['description']?>>
                 </div>
-  
+
                 <button class="button primary" type="submit">
                     Save changes
                 </button>
@@ -145,7 +151,7 @@
                 </div>
             </form>
 
-            <a href="../actions/action_deleteAccount.php">
+            <a href="../actions/action_deleteAccount.php?csrf=<?=$_SESSION['csrf']?>">
                 <button class="button primary">Delete account</button>
             </a>
         </section>
@@ -158,19 +164,19 @@ function validate() {
 
     if (form.name.value === ""){
         r = form.name.value !== "";
-    } 
+    }
 
     if (form.username.value === ""){
         r = form.username.value !== "";
-    } 
+    }
 
     if (form.password.value === ""){
         r = form.password.value !== "";
-    } 
+    }
 
     if (form.description.value === ""){
         r = form.description.value !== "";
-    } 
+    }
 
     if (r == false)
         alert("It is necessary to fill all fields.");
@@ -178,4 +184,4 @@ function validate() {
     return r;
 }
 </script>
-<?php } ?>
+<?php }?>

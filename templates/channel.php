@@ -20,19 +20,21 @@ function drawChannel($title, $stories, $username)
 
             <div style="display: flex; align-items: center;">
                 <?php
-                        if(userAlreadySubscribedChannel($username, $title) != 0)
-                            $subscribed = "Unsubscribe";
-                        else
-                            $subscribed = "Subscribe";
-                ?>
-                <form id="subscribeForm" method="post" action = "../actions/action_subscribe.php" style="margin:0;">
+if (userAlreadySubscribedChannel($username, $title) != 0) {
+        $subscribed = "Unsubscribe";
+    } else {
+        $subscribed = "Subscribe";
+    }
+
+    ?>
+                <form id="subscribeForm" method="post" action = "../actions/action_subscribe.php?csrf=<?=$_SESSION['csrf']?>" style="margin:0;">
                     <input type="hidden" name="username" value="<?=$username?>">
                     <input type="hidden" name="title" value="<?=$title?>">
-                    <input type="hidden" name="subscribed" value="<?=$subscribed?>"> 
+                    <input type="hidden" name="subscribed" value="<?=$subscribed?>">
                     <input type="submit" class="button primary" value="<?=$subscribed?>">
                 </form>
 
-                <a class="button secondary" href="newStory.php?channel=<?=$title?>">                
+                <a class="button secondary" href="newStory.php?channel=<?=$title?>">
                     New story
                 </a>
 
@@ -43,8 +45,8 @@ function drawChannel($title, $stories, $username)
 
         <div>
             <?php foreach ($stories as $story) {
-                    drawStory($story);
-            } ?>
+        drawStory($story);
+    }?>
         </div>
 
     </div>
@@ -71,14 +73,14 @@ function drawChannelCard($channel)
 
                 <div class="stories-number">
                     <?php
-                    if ($nrStories > 1) {
-                        echo $nrStories . ' stories';
-                    } else {
-                        echo $nrStories . ' story';
-                    }?>
+if ($nrStories > 1) {
+        echo $nrStories . ' stories';
+    } else {
+        echo $nrStories . ' story';
+    }?>
                 </div>
             </div>
-            
+
         </a>
     <?php
 }

@@ -1,9 +1,13 @@
 <?php
-include_once('../includes/session.php');
-include_once('../database/db_user.php');
+include_once '../includes/session.php';
+include_once '../database/db_user.php';
 
 $username = $_SESSION['username'];
-$userId = getUserId($username);
+$csrf = $_GET['csrf'];
+
+if ($_SESSION['csrf'] != $csrf) {
+    die(header('Location: ' . $_SERVER['HTTP_REFERER']));
+}
 
 // get user id
 $userId = getUserId($username);
@@ -19,5 +23,3 @@ try {
     $_SESSION['error_messages'][] = "Failed deleting account";
     header('Location: ../pages/profile.php?username=' . $username);
 }
-
-?>

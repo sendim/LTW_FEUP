@@ -1,7 +1,8 @@
-<?php 
-    include_once('../templates/story.php');
+<?php
+include_once '../templates/story.php';
 
-    function drawFeed($stories,$channels,$currChannel) { ?>
+function drawFeed($stories, $channels, $currChannel)
+{?>
         <div id="feed">
 
             <section class="container header">
@@ -18,10 +19,10 @@
 
                 <select id="channel" class="button secondary">
                     <option value="none">Select channel</option>
-                    <?php foreach($channels as $channel) { ?>
+                    <?php foreach ($channels as $channel) {?>
                             <option value="<?=$channel['title']?>"><?=$channel['title']?></option>
                         <?php
-                    } ?>
+}?>
                 </select>
 
                 <select id="order" class="button secondary">
@@ -36,9 +37,11 @@
 
             <div>
                 <?php
-                    foreach($stories as $story)
-                        drawStory($story);
-                ?>
+foreach ($stories as $story) {
+    drawStory($story);
+}
+
+    ?>
             </div>
         </div>
-<?php } ?>
+<?php }?>

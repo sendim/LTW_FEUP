@@ -1,29 +1,29 @@
 <?php
-    include_once('../includes/session.php');
-    include_once('../database/db_comment.php');
-    include_once('../database/db_user.php');
+include_once '../includes/session.php';
+include_once '../database/db_comment.php';
+include_once '../database/db_user.php';
 
-    header('Content-Type: application/json');
+header('Content-Type: application/json');
 
-    // verify if user is already logged in
-    if (!isset($_SESSION['username']))
-        die(json_encode(array('error' => 'not_logged_in')));
+// verify if user is already logged in
+if (!isset($_SESSION['username'])) {
+    die(json_encode(array('error' => 'not_logged_in')));
+}
 
-    // variables received for the request
-    $storyId = $_POST['storyId'];
-    $text = $_POST['text'];
-    $csrf = $_POST['csrf'];
+// variables received for the request
+$storyId = $_POST['storyId'];
+$text = $_POST['text'];
+$csrf = $_POST['csrf'];
 
-    // verifies csrf token
-    if ($_SESSION['csrf'] != $csrf)
-        die(json_encode(array('error' => 'incompatible_csrf')));
+// verifies csrf token
+if ($_SESSION['csrf'] != $csrf) {
+    die(json_encode(array('error' => 'incompatible_csrf')));
+}
 
-    try {
-        // insert comment to the respective story
-        $commentId = addComment($storyId,NULL,$text,$_SESSION['username']);
-        echo json_encode(array('success' => $commentId));
-    }
-    catch(PDOException $e) {
-        echo json_encode(array('error' => 'Comment could not be added!'));
-    }
-?>
+try {
+    // insert comment to the respective story
+    $commentId = addComment($storyId, null, $text, $_SESSION['username']);
+    echo json_encode(array('success' => $commentId));
+} catch (PDOException $e) {
+    echo json_encode(array('error' => 'Comment could not be added!'));
+}

@@ -30,9 +30,9 @@ function changedChannel(event) {
   let selectedChannel = channelDroplist.options[index].value
 
   // store selected channel option
-  sessionStorage.setItem('selectedChannel',selectedChannel)
+  sessionStorage.setItem('selectedChannel', selectedChannel)
   // restart order by
-  sessionStorage.setItem('orderBy','none')
+  sessionStorage.setItem('orderBy', 'none')
 
   // setup of the ajax request
   let request = new XMLHttpRequest()

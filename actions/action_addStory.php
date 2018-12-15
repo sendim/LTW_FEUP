@@ -12,6 +12,11 @@ $username = $_SESSION['username'];
 $title = $_POST['title'];
 $text = $_POST['text'];
 $channel = $_POST['channel'];
+$csrf = $_GET['csrf'];
+
+if ($_SESSION['csrf'] != $csrf) {
+    die(header('Location: ' . $_SERVER['HTTP_REFERER']));
+}
 
 // get user id
 $userId = getUserId($username);
@@ -65,7 +70,7 @@ try {
         );
         imagejpeg($thumbnail, $thumbnailFilename);
     }
-    
+
     // redirect to created story page
     header('Location: ../pages/story.php?id=' . $storyId);
 

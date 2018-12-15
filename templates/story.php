@@ -1,21 +1,22 @@
-<?php 
-	include_once('../includes/session.php');
-	include_once('../database/db_story.php');
-	include_once('../database/db_channel.php');
-	include_once('../templates/comment.php');
+<?php
+include_once '../includes/session.php';
+include_once '../database/db_story.php';
+include_once '../database/db_channel.php';
+include_once '../templates/comment.php';
 
-	function drawStory($story) {
-	/**
-	* Draws a story section.
-	*/
-		$storyLink = "story.php?id=" . $story['storyId'];
-		$publishedDate = gmdate('F j, g:i a, Y', $story['published']);
+function drawStory($story)
+{
+    /**
+     * Draws a story section.
+     */
+    $storyLink = "story.php?id=" . $story['storyId'];
+    $publishedDate = gmdate('F j, g:i a, Y', $story['published']);
 
-		$author = getStoryAuthor($story['storyId']);
-		$channel = getChannelTitle($story['channelId']);
-		$nrComments = countStoryComments($story['storyId']);
-		$storyImg = getStoryImage($story['storyId']);
-	?>
+    $author = getStoryAuthor($story['storyId']);
+    $channel = getChannelTitle($story['channelId']);
+    $nrComments = countStoryComments($story['storyId']);
+    $storyImg = getStoryImage($story['storyId']);
+    ?>
 		<div class="story-card bg-white">
 			<header>
 				<a href=<?=$storyLink?>>
@@ -24,13 +25,13 @@
 					</h1>
 				</a>
 				<?php
-					echo '<small>'.$publishedDate.'</small>';
-				?>
+echo '<small>' . $publishedDate . '</small>';
+    ?>
 			</header>
 
-			<?php if ($storyImg != null) { ?>
+			<?php if ($storyImg != null) {?>
 				<img src="../images/thumbnails/<?=$storyImg?>.jpg">
-			<?php } ?>
+			<?php }?>
 
 			<div class="story-body">
 				<p><?=$story['text']?></p>
@@ -62,50 +63,59 @@
 				<div class="story-footer-right">
 					<a href="<?=$storyLink?>">
 					<?php
-						echo $nrComments;
-						if ($nrComments == 1)
-							echo ' comment';
-						else
-							echo ' comments';
-						?>
+echo $nrComments;
+    if ($nrComments == 1) {
+        echo ' comment';
+    } else {
+        echo ' comments';
+    }
+
+    ?>
 					</a>
 				</div>
 			</footer>
-						
+
 		</div>
 
-<?php } 
+<?php }
 
-	function drawStoryPage($story) {
-	/**
-	* Draws a story page section.
-	*/
-		$publishedDate = gmdate('F j, g:i a, Y', $story['published']);
-		
-		$author = getStoryAuthor($story['storyId']);
-		$comments = getStoryComments($story['storyId']);
-		$channel = getChannelTitle($story['channelId']);
-		$storyImg = getStoryImage($story['storyId']);
-	?>
+function drawStoryPage($story)
+{
+    /**
+     * Draws a story page section.
+     */
+    $publishedDate = gmdate('F j, g:i a, Y', $story['published']);
+
+    $author = getStoryAuthor($story['storyId']);
+    $comments = getStoryComments($story['storyId']);
+    $channel = getChannelTitle($story['channelId']);
+    $storyImg = getStoryImage($story['storyId']);
+    ?>
 		<div id="story-page">
 			<header class="container header">
 				<h1>
 					<?=$story['title']?>
 				</h1>
-			
+
 				<?php
-					echo '<small>'.$publishedDate.'</small>';
-				?>
+echo '<small>' . $publishedDate . '</small>';
+    ?>
+
+				<?php if ($author == $_SESSION['username']) {?>
+					<a href="../actions/action_deleteStory.php?storyId=<?=$story['storyId']?>&csrf=<?=$_SESSION['csrf']?>">
+            <button class="button secondary">Delete story</button>
+          </a>
+				<?php }?>
 
 				<div id="story-description">
 					<p><?=$story['text']?></p>
 				</div>
 
-				<?php if ($storyImg != null) { ?>
+				<?php if ($storyImg != null) {?>
 					<a href="../images/originals/<?=$storyImg?>.jpg">
 						<img src="../images/thumbnails/<?=$storyImg?>.jpg">
 					</a>
-				<?php } ?>
+				<?php }?>
 
 				<div class="signature">
 					by <a href="profile.php?username=<?=$author?>">@<?=$author?></a>
@@ -121,7 +131,7 @@
 						<input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
 						<button id="send-comment-button" class="button primary">Send</button>
 					</form>
-				  
+
 					<hr/>
 
 				  <button class="button secondary">Order</button>
@@ -129,14 +139,16 @@
 
 				<div id="comments-list">
 					<?php
-						if ($comments) {
-							foreach($comments as $comment)
-								drawComment($comment);
-						} else { ?>
-							<div class="container bg-white">No comments yet.</div> 
-						<?php } ?>
+if ($comments) {
+        foreach ($comments as $comment) {
+            drawComment($comment);
+        }
+
+    } else {?>
+							<div class="container bg-white">No comments yet.</div>
+						<?php }?>
 				</div>
 			</section>
 
 		</div>
-<?php } ?>
+<?php }?>
