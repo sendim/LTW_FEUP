@@ -9,34 +9,35 @@ function drawHeaderProfile($profile)
     $profileLink = "profile.php?username=" . $profile['username'];
     ?>
         <div id="profile">
-            <header id="profile-header" class="container header">
-                <header class="container">
+            <header class="container header">
+                <div id="profile-header" class="container">
                     <div id="profile-header-photo">
                         <?php
-$image = getUserProfilePhoto($profile['username']);
-    if ($image != null) {?>
+                            $image = getUserProfilePhoto($profile['username']);
+                            if ($image != null) {?>
                                 <a href="../images/originals/<?=$image['imageId']?>.jpg">
                                     <img class="profile-pic responsive" src="../images/thumbnails/<?=$image['imageId']?>.jpg">
                                 </a>
                             <?php
-} else {?>
+                            } else {?>
                                 <img src="../images/thumbnails/default.jpg">
                             <?php }
-    ?>
+                            ?>
                     </div>
 
-                    <div id="profile-header-user">
-                        <a href=<?=$profileLink?>>
-                            <h2><?=$profile['name']?></h2>
-                        </a>
-                            <small><?='@' . $profile['username']?></small>
+                    <div id="profile-info">
+                        <div id="profile-header-user">
+                            <a href=<?=$profileLink?>>
+                                <h2><?=$profile['name']?></h2>
+                            </a>
+                                <small><?='@' . $profile['username']?></small>
+                        </div>
+                        <div id="profile-header-points">
+                            <img id="user-points" src="icons/star.svg" alt="Points">
+                            <span type="points"><?=$profile['points']?></span>
+                        </div>
                     </div>
-
-                    <div id="profile-header-points">
-                        <img src="icons/star.svg" alt="Points">
-                        <span type="points"><?=$profile['points']?></span>
-                    </div>
-                </header>
+                </div>
 
                 <hr/>
 
