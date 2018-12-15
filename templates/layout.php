@@ -53,7 +53,9 @@ function drawHeader($selected)
       </head>
       <body>
         <nav id="navbar">
-          <h1>The Fusion Network</h1>
+          <a href="../pages/feed.php">
+            <h1>The Fusion Network</h1>
+          </a>
         </nav>
   <?php }
 
