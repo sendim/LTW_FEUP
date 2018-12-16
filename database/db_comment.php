@@ -139,9 +139,8 @@ function downvoteComment($commentId, $username)
 }
 
 function getUserCommentVote($commentId, $username)
-{
-    
-    if (userVotedStory($commentId, $username)) {
+{   
+    if (userVotedComment($commentId, $username)) {
         $userId = getUserId($username);
         $db = Database::instance()->db();
         $stmt = $db->prepare(
