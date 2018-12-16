@@ -137,3 +137,20 @@ function downvoteComment($commentId, $username)
     );
     $stmt->execute(array(-1, $userId, $commentId));
 }
+
+function getUserCommentVote($commentId, $username)
+{
+    
+    if (userVotedStory($commentId, $username)) {
+        $userId = getUserId($username);
+        $db = Database::instance()->db();
+        $stmt = $db->prepare(
+            'SELECT vote
+                FROM votesComment
+                WHERE commentId = ? AND userId = ?'
+        );
+        $stmt->execute(array($commentId, $userId));
+        return $stmt->fetch()['vote'];
+    }
+    return null;
+}

@@ -27,6 +27,15 @@ function doneClicked(event) {
     var likesSpan = btn.parentNode.querySelector('span[type="likes"]')
     likesSpan.innerHTML = response['likes']
 
+    // updates the button
+    if(response['likes'] > 0) {
+      btn.className = "button primary upVote icon"
+      btn.parentNode.querySelector('button[id="downButton"]').className = "button primary icon"
+    }
+    else {
+      btn.className = "button primary downVote icon"
+      btn.parentNode.querySelector('button[id="upButton"]').className = "button primary icon"
+    }
     // update user points if on profile
     var userPoints = document.querySelector('span[type="points"]')
     if (userPoints != null)

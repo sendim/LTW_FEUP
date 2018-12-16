@@ -143,7 +143,8 @@ function drawStoryPage($story)
 					<?php 
 						if ($comments) {
 							foreach ($comments as $comment) {
-									drawComment($comment);
+								$picked = userVotedComment($comment['commentId'], $_SESSION['username']);
+								drawComment($comment, $picked);
 							}
     				} else {?>
 							<div class="container bg-white">No comments yet.</div>

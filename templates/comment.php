@@ -18,7 +18,7 @@ function drawSimpleComment($comment)
 	<?php
 }
 
-function drawComment($comment)
+function drawComment($comment, $picked = false)
 {
     /**
      * Draws the comment section.
@@ -27,7 +27,15 @@ function drawComment($comment)
     $text = $comment['text'];
     $subComments = getCommentsOfComment($comment['commentId']);
     $storyId = getCommentStoryId($comment['commentId']);
-    $author = getCommentAuthor($comment['commentId']);
+	$author = getCommentAuthor($comment['commentId']);
+	$downButton = "button primary icon";
+	$upButton = "button primary icon";
+	if($picked){
+		if(getUserCommentVote($comment['commentId'], $_SESSION['username']) > 0)
+			$upButton = "button primary upVote icon";
+		else
+			$downButton = "button primary downVote icon";
+	}
 
     drawSimpleComment($comment)
     ?>
@@ -35,13 +43,13 @@ function drawComment($comment)
  			<footer>
 				<div class="story-footer-left">
 					<div class="comment vote-buttons">
-						<button class="button primary icon" commentId="<?=$comment['commentId']?>" username="<?=$_SESSION['username']?>" vote="1" csrf="<?=$_SESSION['csrf']?>">
+						<button id="upButton" class="<?=$upButton?>" commentId="<?=$comment['commentId']?>" username="<?=$_SESSION['username']?>" vote="1" csrf="<?=$_SESSION['csrf']?>">
 							<img src='icons/arrow-up.svg' alt="Vote up">
 						</button>
 						<span type="likes">
 							<?=getCommentLikes($comment['commentId'])?>
 						</span>
-							<button class="button primary icon" commentId="<?=$comment['commentId']?>" username="<?=$_SESSION['username']?>" vote="-1" csrf="<?=$_SESSION['csrf']?>">
+							<button id="downButton" class="<?=$downButton?>" commentId="<?=$comment['commentId']?>" username="<?=$_SESSION['username']?>" vote="-1" csrf="<?=$_SESSION['csrf']?>">
 								<img src='icons/arrow-down.svg' alt="Vote down">
 							</button>
 					</div>
@@ -57,7 +65,8 @@ function drawComment($comment)
 			</footer>
  			<div class="replies">
 				<?php foreach ($subComments as $subComment) {
-					drawComment($subComment); } ?>
+					$picked = userVotedComment($subComment['commentId'], $_SESSION['username']);
+					drawComment($subComment, $picked); } ?>
 			</div>
  		</div>
 <?php } ?>
