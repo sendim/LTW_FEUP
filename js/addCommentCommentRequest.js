@@ -1,7 +1,7 @@
 'use strict'
 
 // retrieves the comment form and sets its submit handler  
-let replyLinks = document.querySelectorAll('div.story-footer-right a')
+let replyLinks = document.querySelectorAll('div.story-footer-right a:nth-child(2)')
 replyLinks.forEach((replyLink) => replyLink.addEventListener('click', doneClicked))
 
 // what happens after the 'reply' comment link has been clicked
@@ -12,9 +12,9 @@ function doneClicked(event) {
 	if (footer.querySelector('form') == null) {
 		footer.insertAdjacentHTML(
 			'beforeend',
-			'<form action="" class="story-card bg-white">'
+			'<form class="story-card bg-white">'
 			+ '<div class="form-input">'
-			+ '<label>Insert comment:</label>'
+			+ '<label>Insert comment</label>'
 			+ '<input type="textarea" name="text" placeholder="insert your comment here ..." required>'
 			+ '<button class="button primary" type="submit">Add comment</button>'
 			+ '</div>' +
@@ -31,7 +31,7 @@ function formSubmitted(event) {
 	event.preventDefault()
 
 	let footer = event.target.parentNode;
-	let link = footer.querySelector('div.story-footer-right a')
+	let link = footer.querySelector('div.story-footer-right a:nth-child(2)')
 
 	// comment needed attributes
 	let linkHref = link.getAttribute('href')

@@ -5,8 +5,8 @@ include_once '../includes/database.php';
 function addStory($title, $text, $userId, $channelId)
 {
     $db = Database::instance()->db();
-    $stmt = $db->prepare('INSERT INTO story VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)');
-    $stmt->execute(array($title, strtotime(date('Y:m:d H:i:s')), $userId, $text, 0, 0, $channelId));
+    $stmt = $db->prepare('INSERT INTO story VALUES (NULL, ?, ?, ?, ?, ?, ?)');
+    $stmt->execute(array($title, strtotime(date('Y:m:d H:i:s')), $userId, $text, 0, $channelId));
     return $db->lastInsertId();
 }
 
@@ -31,6 +31,14 @@ function getStory($storyId)
     $stmt = $db->prepare('SELECT * FROM story WHERE storyId = ?');
     $stmt->execute(array($storyId));
     return $stmt->fetch();
+}
+
+function getStoryTitle($storyId)
+{
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT title FROM story WHERE storyId = ?');
+    $stmt->execute(array($storyId));
+    return $stmt->fetch()['title'];
 }
 
 function getStoryImage($storyId)

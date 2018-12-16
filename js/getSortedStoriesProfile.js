@@ -19,9 +19,6 @@ function changedOrder(event) {
   let order = orderDroplist.options[orderDroplist.selectedIndex].value
   let sort = '';
 
-  //alert(user );
-
-
   // store selected channel option
   sessionStorage.setItem('orderBy', order)
 
@@ -44,7 +41,7 @@ function changedOrder(event) {
       break;
     case 'likes':
       order = 'likes'
-      sort = 'ASC';
+      sort = 'DESC';
       break;
   }
 

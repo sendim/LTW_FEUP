@@ -23,4 +23,4 @@ drawLayout(function () {
     // draw new story page
     drawNewStory($channels, $selectedChannel);
 
-}, 'feed');
+}, 'newStory');

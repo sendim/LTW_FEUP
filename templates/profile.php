@@ -96,7 +96,6 @@ if ($stories) {
             <section id ="comments">
                 <div id="comments-header" class="section-header">
                     Comments
-                    <button class="button secondary">Order by date</button>
                 </div>
 
                 <div id="comments-list">

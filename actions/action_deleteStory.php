@@ -1,6 +1,7 @@
 <?php
 include_once '../includes/session.php';
 include_once '../database/db_story.php';
+include_once '../database/db_user.php';
 
 $username = $_SESSION['username'];
 $storyId = $_GET['storyId'];
@@ -20,6 +21,8 @@ try {
 
     // delete story
     deleteStory($storyId);
+    updateUserPoints($username);
+
     $_SESSION['success_messages'][] = "Story deleted successfully!";
     header('Location: ../pages/feed.php');
 
