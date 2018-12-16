@@ -5,8 +5,8 @@ include_once '../includes/database.php';
 function addStory($title, $text, $userId, $channelId)
 {
     $db = Database::instance()->db();
-    $stmt = $db->prepare('INSERT INTO story VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)');
-    $stmt->execute(array($title, strtotime(date('Y:m:d H:i:s')), $userId, $text, 0, 0, $channelId));
+    $stmt = $db->prepare('INSERT INTO story VALUES (NULL, ?, ?, ?, ?, ?, ?)');
+    $stmt->execute(array($title, strtotime(date('Y:m:d H:i:s')), $userId, $text, 0, $channelId));
     return $db->lastInsertId();
 }
 
