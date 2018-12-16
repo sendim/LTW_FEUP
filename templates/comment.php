@@ -6,8 +6,8 @@ include_once '../database/db_story.php';
 function drawSimpleComment($comment)
 {
     $username = getUserUsername($comment['userId']);
-		$text = $comment['text'];
-		$publishedDate = gmdate('F j, g:i a, Y', $comment['published']);
+    $text = $comment['text'];
+    $publishedDate = gmdate('F j, g:i a, Y', $comment['published']);
     ?>
 				<div id="<?=$comment['commentId']?>" class="comment story-card bg-white">
 					<p>
@@ -27,8 +27,7 @@ function drawComment($comment)
     $text = $comment['text'];
     $subComments = getCommentsOfComment($comment['commentId']);
     $storyId = getCommentStoryId($comment['commentId']);
-		$author = getCommentAuthor($comment['commentId']);
-		
+    $author = getCommentAuthor($comment['commentId']);
 
     drawSimpleComment($comment)
     ?>

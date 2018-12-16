@@ -25,8 +25,8 @@ function drawStory($story)
 					</h1>
 				</a>
 				<?php
-					echo '<small>' . $publishedDate . '</small>';
-				?>
+echo '<small>' . $publishedDate . '</small>';
+    ?>
 			</header>
 
 			<?php if ($storyImg != null) {?>
@@ -65,13 +65,13 @@ function drawStory($story)
 						<?php }?>
 					<a href="<?=$storyLink?>">
 					<?php
-						echo $nrComments;
-						if ($nrComments == 1) {
-								echo ' comment';
-						} else {
-								echo ' comments';
-						}
-    			?>
+echo $nrComments;
+    if ($nrComments == 1) {
+        echo ' comment';
+    } else {
+        echo ' comments';
+    }
+    ?>
 					</a>
 				</div>
 			</footer>
@@ -100,7 +100,7 @@ function drawStoryPage($story)
 
 				<?php
 echo '<small>' . $publishedDate . '</small>';
-		?>
+    ?>
 		<?php if ($author == $_SESSION['username']) {?>
 						<a href="../actions/action_deleteStory.php?storyId=<?=$story['storyId']?>&csrf=<?=$_SESSION['csrf']?>">
 							<button class="button secondary">Delete story</button>

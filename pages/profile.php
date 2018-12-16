@@ -11,7 +11,7 @@ if (!isset($_SESSION['username'])) {
 
 drawLayout(function () {
     $profile = getUserProfile($_GET['username']);
-    
+
     // display options
     $order = 'published';
     $sort = '';

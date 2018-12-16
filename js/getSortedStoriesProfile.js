@@ -5,7 +5,7 @@ let orderDroplist = document.getElementById('order')
 orderDroplist.addEventListener('change', changedOrder)
 
 // set current channel and order by parameters on feed
-window.addEventListener('load', function () { 
+window.addEventListener('load', function () {
   let order = sessionStorage.getItem('orderBy')
   if (order == null)
     orderDroplist.value = 'none'
