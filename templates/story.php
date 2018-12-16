@@ -67,6 +67,11 @@ echo '<small>' . $publishedDate . '</small>';
 					</div>
 				</div>
 				<div class="story-footer-right">
+						<?php if ($author == $_SESSION['username']) {?>
+							<a href="../actions/action_deleteStory.php?storyId=<?=$story['storyId']?>&csrf=<?=$_SESSION['csrf']?>">
+								<button class="button secondary">Delete story</button>
+							</a>
+						<?php }?>
 					<a href="<?=$storyLink?>">
 					<?php
 echo $nrComments;
@@ -75,7 +80,6 @@ echo $nrComments;
     } else {
         echo ' comments';
     }
-
     ?>
 					</a>
 				</div>
@@ -106,13 +110,11 @@ function drawStoryPage($story)
 				<?php
 echo '<small>' . $publishedDate . '</small>';
     ?>
-
-				<?php if ($author == $_SESSION['username']) {?>
-					<a href="../actions/action_deleteStory.php?storyId=<?=$story['storyId']?>&csrf=<?=$_SESSION['csrf']?>">
-            <button class="button secondary">Delete story</button>
-          </a>
-				<?php }?>
-
+		<?php if ($author == $_SESSION['username']) {?>
+						<a href="../actions/action_deleteStory.php?storyId=<?=$story['storyId']?>&csrf=<?=$_SESSION['csrf']?>">
+							<button class="button secondary">Delete story</button>
+						</a>
+					<?php }?>
 				<div id="story-description">
 					<p><?=$story['text']?></p>
 				</div>
@@ -138,9 +140,6 @@ echo '<small>' . $publishedDate . '</small>';
 						<button id="send-comment-button" class="button primary">Send</button>
 					</form>
 
-					<hr/>
-
-				  <button class="button secondary">Order</button>
 			   </div>
 
 				<div id="comments-list">

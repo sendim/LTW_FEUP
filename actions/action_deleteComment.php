@@ -3,7 +3,6 @@ include_once '../includes/session.php';
 include_once '../database/db_comment.php';
 include_once '../database/db_user.php';
 
-
 $username = $_SESSION['username'];
 $commentId = $_GET['commentId'];
 $csrf = $_GET['csrf'];
@@ -22,9 +21,8 @@ try {
 
     // delete comment
     deleteComment($commentId);
-    // updates user points
     updateUserPoints($username);
-    
+
     $_SESSION['success_messages'][] = "Comment deleted successfully!";
     header('Location: ' . $_SERVER['HTTP_REFERER']);
 

@@ -8,21 +8,21 @@ function drawHeaderProfile($profile)
 {
     $profileLink = "profile.php?username=" . $profile['username'];
     ?>
-        <div id="profile" value = <?= $profile['username'] ?> >
+        <div id="profile" value = <?=$profile['username']?> >
             <header class="container header">
                 <div id="profile-header" class="container">
                     <div id="profile-header-photo">
                         <?php
-                            $image = getUserProfilePhoto($profile['username']);
-                            if ($image != null) {?>
+$image = getUserProfilePhoto($profile['username']);
+    if ($image != null) {?>
                                 <a href="../images/originals/<?=$image['imageId']?>.jpg">
                                     <img class="profile-pic responsive" src="../images/thumbnails/<?=$image['imageId']?>.jpg">
                                 </a>
                             <?php
-                            } else {?>
+} else {?>
                                 <img src="../images/thumbnails/default.jpg">
                             <?php }
-                            ?>
+    ?>
                     </div>
 
                     <div id="profile-info">
@@ -42,34 +42,34 @@ function drawHeaderProfile($profile)
                 <hr/>
 
                 <div class="container">
-                    <?php 
-                    if (isset($profile['description'])) {
-                        echo $profile['description'];
-                    } else {
-                        echo "No profile description yet.";
-                    }   
-                    ?>
+                    <?php
+if (isset($profile['description'])) {
+        echo $profile['description'];
+    } else {
+        echo "No profile description yet.";
+    }
+    ?>
                 </div>
             </header>
         </div>
     <?php
 }
 
-function drawProfile($profile,$order, $sort)
+function drawProfile($profile, $order, $sort)
 {
     /**
      * Draws the login section.
      */
     $comments = getUserComments($profile['username']);
-    $stories = getUserStories($profile['username'],$order,$sort);
+    $stories = getUserStories($profile['username'], $order, $sort);
     drawHeaderProfile($profile);
     ?>
         <div id="profile">
-    
+
             <section id="stories">
                 <div id="stories-header" class="section-header">
                     Stories
-                            
+
                     <select id="order" class="button secondary">
                         <option value="none">Order by</option>
                         <option value="published_asc">Order by ascending date</option>
@@ -97,7 +97,6 @@ if ($stories) {
             <section id ="comments">
                 <div id="comments-header" class="section-header">
                     Comments
-                    <button class="button secondary">Order by date</button>
                 </div>
 
                 <div id="comments-list">

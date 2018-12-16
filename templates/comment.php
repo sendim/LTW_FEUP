@@ -1,19 +1,20 @@
 <?php
 include_once '../database/db_user.php';
 include_once '../database/db_comment.php';
+include_once '../database/db_story.php';
 
 function drawSimpleComment($comment)
 {
     $username = getUserUsername($comment['userId']);
     $text = $comment['text'];
-
+    $publishedDate = gmdate('F j, g:i a, Y', $comment['published']);
     ?>
 				<div id="<?=$comment['commentId']?>" class="comment story-card bg-white">
 					<p>
 						<a href="profile.php?username=<?=$username?>">@<?=$username?></a>
 						<?=' ' . $text?>
+						<?='<small>' . $publishedDate . '</small>'?>
 					</p>
-
 			<?php
 }
 

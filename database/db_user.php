@@ -104,15 +104,16 @@ function getUserStories($username, $order = 'published', $sort = 'DESC')
     $db = Database::instance()->db();
     $userId = getUserId($username);
     // order by case-insensitive titles
-    if ($order == 'title') 
+    if ($order == 'title') {
         $order = 'story.title';
-        
-        if ($sort == 'ASC') {
-            $sort = 'COLLATE NOCASE ASC';
-        } else if ($sort == 'DESC') {
-            $sort = 'COLLATE NOCASE DESC';
-        }
-    
+    }
+
+    if ($sort == 'ASC') {
+        $sort = 'COLLATE NOCASE ASC';
+    } else if ($sort == 'DESC') {
+        $sort = 'COLLATE NOCASE DESC';
+    }
+
     $query = sprintf(
         'SELECT story.*
         FROM story NATURAL JOIN user
@@ -123,7 +124,7 @@ function getUserStories($username, $order = 'published', $sort = 'DESC')
     $stmt = $db->prepare($query);
     $stmt->execute();
 
-    return $stmt->fetchAll();;
+    return $stmt->fetchAll();
 }
 
 function getUserComments($username)

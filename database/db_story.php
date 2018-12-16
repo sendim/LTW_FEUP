@@ -33,6 +33,14 @@ function getStory($storyId)
     return $stmt->fetch();
 }
 
+function getStoryTitle($storyId)
+{
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT title FROM story WHERE storyId = ?');
+    $stmt->execute(array($storyId));
+    return $stmt->fetch()['title'];
+}
+
 function getStoryImage($storyId)
 {
     $db = Database::instance()->db();

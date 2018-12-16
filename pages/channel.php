@@ -13,7 +13,7 @@ drawLayout(function () {
     $title = $_GET['title'];
 
     $id = getChannelId($title);
-    $stories = getChannelStories($id);
+    $stories = getChannelStories($id, 'published', 'DESC');
 
     drawChannel($title, $stories, $_SESSION['username']);
 }, 'channel');

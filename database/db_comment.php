@@ -7,7 +7,7 @@ function addComment($storyId, $refCommentId, $text, $username)
     $db = Database::instance()->db();
     $userId = getUserId($username);
     $stmt = $db->prepare('INSERT INTO comment VALUES(NULL,?,?,?,?,?,?)');
-    $stmt->execute(array($storyId, $userId, date('Y:m:d H:i:s'), $text, 0, $refCommentId));
+    $stmt->execute(array($storyId, $userId, strtotime(date('Y:m:d H:i:s')), $text, 0, $refCommentId));
     return $db->lastInsertId();
 }
 

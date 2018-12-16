@@ -21,7 +21,6 @@ try {
 
     // delete story
     deleteStory($storyId);
-    // updates user points
     updateUserPoints($username);
 
     $_SESSION['success_messages'][] = "Story deleted successfully!";

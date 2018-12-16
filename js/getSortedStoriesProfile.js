@@ -5,7 +5,7 @@ let orderDroplist = document.getElementById('order')
 orderDroplist.addEventListener('change', changedOrder)
 
 // set current channel and order by parameters on feed
-window.addEventListener('load', function () { 
+window.addEventListener('load', function () {
   let order = sessionStorage.getItem('orderBy')
   if (order == null)
     orderDroplist.value = 'none'
@@ -18,9 +18,6 @@ function changedOrder(event) {
 
   let order = orderDroplist.options[orderDroplist.selectedIndex].value
   let sort = '';
-
-  //alert(user );
-
 
   // store selected channel option
   sessionStorage.setItem('orderBy', order)
@@ -44,7 +41,7 @@ function changedOrder(event) {
       break;
     case 'likes':
       order = 'likes'
-      sort = 'ASC';
+      sort = 'DESC';
       break;
   }
 
