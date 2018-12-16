@@ -20,9 +20,17 @@ foreach ($inputs as $input) {
     if (!empty($_POST[$input])) {
         switch ($input) {
             case 'name':
+                if (!preg_match('/^[a-zA-Z]+$/', $_POST[$input])) {
+                    $_SESSION['error_messages'][] = 'Name can only contain letters!';
+                    die(header('Location: ' . $_SERVER['HTTP_REFERER']));
+                }
                 updateUserName($username, $_POST['name']);
                 break;
             case 'username':
+                if (!preg_match('/^[a-zA-Z0-9]+$/', $_POST[$input])) {
+                    $_SESSION['error_messages'][] = 'Username can only contain letters and numbers!';
+                    die(header('Location: ' . $_SERVER['HTTP_REFERER']));
+                }
                 updateUserUsername($username, $_POST['username']);
                 $username = $_POST['username'];
                 $usernameOutdated = true;
@@ -31,6 +39,10 @@ foreach ($inputs as $input) {
                 updateUserPassword($username, $_POST['password']);
                 break;
             case 'description':
+                if (!preg_match('/^[a-zA-Z0-9]+$/', $_POST[$input])) {
+                    $_SESSION['error_messages'][] = 'Description can only contain letters and numbers!';
+                    die(header('Location: ../pages/signup.php'));
+                }
                 updateUserDescription($username, $_POST['description']);
                 break;
         }

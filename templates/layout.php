@@ -4,22 +4,22 @@ include_once '../database/db_user.php';
 
 function drawLayout($drawContent, $selected)
 {
-    /**
-     * Draws a typical page section.
-     */
-    drawHeader($selected)?>
+  /**
+  * Draws a typical page section.
+  */
+      drawHeader($selected)?>
       <div id="row">
         <?php
-drawMenu($selected);
-    drawContent($drawContent);
-    ?>
+          drawMenu($selected);
+          drawContent($drawContent);
+        ?>
       </div>
       <footer id="footer">
         LTW 2018, all rights reserved.
       </footer>
     </body>
-    </html>
-  <?php }
+  </html>
+<?php }
 
 function drawHeader($selected)
 {
@@ -85,7 +85,7 @@ function drawMenu($selected)
               <?php }?>
             </a>
 
-            <h4>@<?=$username?></h4>
+            <h4>@<?=htmlspecialchars($username)?></h4>
           </div>
 
           <div id="buttons">
@@ -109,54 +109,46 @@ function drawMenu($selected)
             name="search"
             placeholder="Search stories, comments..."
             required
-            class="<?php if ($sessionSet) {
-        echo "";
-    } else {
-        echo "disabled";
-    }
-    ?>"
-          >
+            class="
+            <?php if ($sessionSet) {
+                echo "";
+              } else {
+                echo "disabled";
+              } ?>">
         </form>
       </div>
       <ul>
         <li <?php if ($selected == 'feed') {
-        echo "id='menu-selected'";
-    }
-    ?> >
-          <a href="feed.php" class=<?php if ($sessionSet) {
-        echo "";
-    } else {
-        echo "disabled";
-    }
-    ?> >
+            echo "id='menu-selected'";
+          } ?>>
+        <a href="feed.php" class=
+          <?php if ($sessionSet) {
+              echo "";
+            } else {
+              echo "disabled";
+            } ?>>
             <img src="icons/repo.svg" alt="Feed">
             Feed
           </a>
         </li>
-        <li <?php if ($selected == 'channels') {
-        echo "id='menu-selected'";
-    }
-    ?>>
-          <a href="channels.php" class=<?php if ($sessionSet) {
-        echo "";
-    } else {
-        echo "disabled";
-    }
-    ?>>
-            <img src="icons/tag.svg" alt="Channels">
-            Channels
-          </a>
+        <li <?php if ($selected == 'channels') { echo "id='menu-selected'";} ?>>
+        <a href="channels.php" class=
+          <?php if ($sessionSet) {
+            echo "";
+          } else {
+              echo "disabled";
+          } ?>>
+          <img src="icons/tag.svg" alt="Channels">
+          Channels
+        </a>
         </li>
-        <li <?php if ($selected == 'profile') {
-        echo "id='menu-selected'";
-    }
-    ?>>
-          <a href="profile.php?username=<?=$username?>" class=<?php if ($sessionSet) {
-        echo "";
-    } else {
-        echo "disabled";
-    }
-    ?>>
+        <li <?php if ($selected == 'profile') { echo "id='menu-selected'";} ?>>
+          <a href="profile.php?username=<?=$username?>" class=
+            <?php if ($sessionSet) {
+                echo "";
+              } else {
+                echo "disabled";
+              } ?>>
             <img src="icons/person.svg" alt="Profile">
             Profile
           </a>
@@ -167,34 +159,32 @@ function drawMenu($selected)
 
 function drawContent($drawContent)
 {
-    /**
-     * Draws the page content section.
-     */?>
-    <div id="content">
-      <?php
-drawMessages();
-    $drawContent();
+  /**
+  * Draws the page content section.
+  */?>
+  <div id="content">
+    <?php
+      drawMessages();
+      $drawContent();
     ?>
-    </div>
-  <?php }
+  </div>
+<?php }
 
 function drawMessages()
 {
-    /**
-     * Draws the page message section.
-     */?>
-        <section id="messages">
-          <?php $errors = getErrorMessages();foreach ($errors as $error) {?>
-            <article class="error">
-              <p><?=$error?></p>
-            </article>
-          <?php }
-    $successes = getSuccessMessages();foreach ($successes as $success) {?>
-            <article class="success">
-              <p><?=$success?></p>
-            </article>
-          <?php }
-    clearMessages();?>
-        </section>
-
-  <?php }?>
+  /**
+  * Draws the page message section.
+  */?>
+    <section id="messages">
+      <?php $errors = getErrorMessages(); foreach ($errors as $error) {?>
+        <article class="error">
+          <p><?=$error?></p>
+        </article>
+      <?php }
+        $successes = getSuccessMessages();foreach ($successes as $success) {?>
+        <article class="success">
+        <p><?=$success?></p>
+      </article>
+    <?php } clearMessages(); ?>
+  </section>
+<?php } ?>

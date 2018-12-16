@@ -12,7 +12,6 @@ if ($_SESSION['csrf'] != $csrf) {
 }
 
 try {
-
     if (getStoryAuthor($storyId) != $username) {
         // redirect to last page showing error
         $_SESSION['error_messages'][] = "No permission to delete story!";

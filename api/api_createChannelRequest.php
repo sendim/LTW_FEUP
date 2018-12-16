@@ -14,6 +14,11 @@ if (!isset($_SESSION['username'])) {
 $channelTitle = $_POST['channelTitle'];
 $csrf = $_POST['csrf'];
 
+$channelTitle = preg_replace('/[^a-zA-Z]/', '', $channelTitle);
+if ($channelTitle == '') {
+    die(json_encode(array('error' => "Channel title can only contain letters!")));
+}
+
 // verifies csrf token
 if ($_SESSION['csrf'] != $csrf) {
     die(json_encode(array('error' => 'incompatible_csrf')));
@@ -21,7 +26,7 @@ if ($_SESSION['csrf'] != $csrf) {
 
 $success = createChannel($_SESSION['username'], $channelTitle);
 if ($success) {
-    echo json_encode(array('success' => 'Channel successfully created!'));
+    echo json_encode(array('success' => $channelTitle));
 } else {
     echo json_encode(array('error' => 'Channel already exists!'));
 }

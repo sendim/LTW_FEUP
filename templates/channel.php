@@ -13,20 +13,17 @@ function drawChannel($title, $stories, $username)
         <section class="container header">
 
             <header>
-                <h2><?=$title?><h2>
+                <h2><?=htmlspecialchars($title)?><h2>
             </header>
 
             <hr/>
 
             <div style="display: flex; align-items: center;">
-                <?php
-if (userAlreadySubscribedChannel($username, $title) != 0) {
-        $subscribed = "Unsubscribe";
-    } else {
-        $subscribed = "Subscribe";
-    }
-
-    ?>
+                <?php if (userAlreadySubscribedChannel($username, $title) != 0) {
+                    $subscribed = "Unsubscribe";
+                } else {
+                    $subscribed = "Subscribe";
+                } ?>
                 <form id="subscribeForm" method="post" action = "../actions/action_subscribe.php?csrf=<?=$_SESSION['csrf']?>" style="margin:0;">
                     <input type="hidden" name="username" value="<?=$username?>">
                     <input type="hidden" name="title" value="<?=$title?>">
@@ -39,14 +36,12 @@ if (userAlreadySubscribedChannel($username, $title) != 0) {
                 </a>
 
                 <button class="button terciary">Order by date</button>
-
             </div>
         </section>
 
         <div>
             <?php foreach ($stories as $story) {
-        drawStory($story);
-    }?>
+                drawStory($story); }?>
         </div>
 
     </div>
@@ -65,19 +60,16 @@ function drawChannelCard($channel)
 
     ?>
         <a href="channel.php?title=<?=$channel['title']?>">
-
             <div class="channel-card">
                 <div class="title">
-                    <?=$channel['title']?>
+                    <?=htmlspecialchars($channel['title'])?>
                 </div>
-
                 <div class="stories-number">
-                    <?php
-if ($nrStories > 1) {
-        echo $nrStories . ' stories';
-    } else {
-        echo $nrStories . ' story';
-    }?>
+                    <?php if ($nrStories > 1) {
+                        echo $nrStories . ' stories';
+                    } else {
+                        echo $nrStories . ' story';
+                    } ?> 
                 </div>
             </div>
 

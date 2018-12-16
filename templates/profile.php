@@ -8,29 +8,27 @@ function drawHeaderProfile($profile)
 {
     $profileLink = "profile.php?username=" . $profile['username'];
     ?>
-        <div id="profile" value = <?=$profile['username']?> >
+        <div id="profile" value=<?=$profile['username']?> >
             <header class="container header">
                 <div id="profile-header" class="container">
                     <div id="profile-header-photo">
-                        <?php
-$image = getUserProfilePhoto($profile['username']);
-    if ($image != null) {?>
+                        <?php 
+                            $image = getUserProfilePhoto($profile['username']);
+                            if ($image != null) {?>
                                 <a href="../images/originals/<?=$image['imageId']?>.jpg">
                                     <img class="profile-pic responsive" src="../images/thumbnails/<?=$image['imageId']?>.jpg">
                                 </a>
-                            <?php
-} else {?>
+                            <?php } else { ?>
                                 <img src="../images/thumbnails/default.jpg">
-                            <?php }
-    ?>
+                            <?php } ?>
                     </div>
 
                     <div id="profile-info">
                         <div id="profile-header-user">
                             <a href=<?=$profileLink?>>
-                                <h2><?=$profile['name']?></h2>
+                                <h2><?=htmlspecialchars($profile['name'])?></h2>
                             </a>
-                                <small id = username value = '1' ><?='@' . $profile['username']?></small>
+                                <small id = username value = '1' ><?='@' . htmlspecialchars($profile['username'])?></small>
                         </div>
                         <div id="profile-header-points">
                             <img id="user-points" src="icons/star.svg" alt="Points">
@@ -42,13 +40,11 @@ $image = getUserProfilePhoto($profile['username']);
                 <hr/>
 
                 <div class="container">
-                    <?php
-if (isset($profile['description'])) {
-        echo $profile['description'];
-    } else {
-        echo "No profile description yet.";
-    }
-    ?>
+                    <?php if (isset($profile['description'])) {
+                        echo htmlspecialchars($profile['description']);
+                    } else {
+                        echo "No profile description yet.";
+                    } ?>
                 </div>
             </header>
         </div>
@@ -81,15 +77,13 @@ function drawProfile($profile, $order, $sort)
                 </div>
 
                 <div id="stories-list">
-                    <?php
-if ($stories) {
-        foreach ($stories as $story) {
-            drawStory($story);
-        }
-
-    } else {?>
+                    <?php if ($stories) {
+                        foreach ($stories as $story) {
+                            drawStory($story);
+                        }
+                        } else { ?>
                             <div class="container bg-white">No stories yet.</div>
-                        <?php }?>
+                        <?php } ?>
                 </div>
             </section>
 
@@ -99,18 +93,15 @@ if ($stories) {
                 </div>
 
                 <div id="comments-list">
-                    <?php
-if ($comments) {
-        foreach ($comments as $comment) {
-            drawComment($comment);
-        }
-
-    } else {?>
+                    <?php if ($comments) {
+                        foreach ($comments as $comment) {
+                            drawComment($comment);
+                        }
+                        } else { ?>
                             <div class="container bg-white">No comments yet.</div>
-                        <?php }?>
+                        <?php } ?>
                 </div>
             </section>
-
         </div>
 <?php }
 

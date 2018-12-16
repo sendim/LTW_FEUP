@@ -6,8 +6,7 @@ include_once '../templates/formInput.php';
  * Draws new story page.
  */
 function drawNewStory($channels, $selectedChannel)
-{
-    ?>
+{ ?>
 
     <section id="new-story" class="container bg-white">
         <header>
@@ -25,12 +24,10 @@ function drawNewStory($channels, $selectedChannel)
                     <label>Channel</label>
                     <select name="channel">
                         <?php if ($selectedChannel) {?>
-                            <option value="<?=$selectedChannel?>"><?=$selectedChannel?></option>
-                        <?php } else {
-        foreach ($channels as $channel) {?>
-                                <option value="<?=$channel['title']?>"><?=$channel['title']?></option>
-                        <?php }
-    }?>
+                            <option value="<?=$selectedChannel?>"><?=htmlspecialchars($selectedChannel)?></option>
+                        <?php } else { foreach ($channels as $channel) {?>
+                                <option value="<?=$channel['title']?>"><?=htmlspecialchars($channel['title'])?></option>
+                        <?php } }?>
                     </select>
                 </div>
 

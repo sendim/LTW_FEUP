@@ -21,12 +21,10 @@ function drawStory($story)
 			<header>
 				<a href=<?=$storyLink?>>
 					<h1>
-						<?=$story['title']?>
+						<?=htmlspecialchars($story['title'])?>
 					</h1>
 				</a>
-				<?php
-echo '<small>' . $publishedDate . '</small>';
-    ?>
+				<?= '<small>' . $publishedDate . '</small>'; ?>
 			</header>
 
 			<?php if ($storyImg != null) {?>
@@ -34,7 +32,7 @@ echo '<small>' . $publishedDate . '</small>';
 			<?php }?>
 
 			<div class="story-body">
-				<p><?=$story['text']?></p>
+				<p><?=htmlspecialchars($story['text'])?></p>
 			</div>
 
 			<hr/>
@@ -64,14 +62,12 @@ echo '<small>' . $publishedDate . '</small>';
 							</a>
 						<?php }?>
 					<a href="<?=$storyLink?>">
-					<?php
-echo $nrComments;
-    if ($nrComments == 1) {
-        echo ' comment';
-    } else {
-        echo ' comments';
-    }
-    ?>
+					<?php echo $nrComments;
+						if ($nrComments == 1) {
+								echo ' comment';
+						} else {
+								echo ' comments';
+						} ?>
 					</a>
 				</div>
 			</footer>
@@ -95,19 +91,19 @@ function drawStoryPage($story)
 		<div id="story-page">
 			<header class="container header">
 				<h1>
-					<?=$story['title']?>
+					<?=htmlspecialchars($story['title'])?>
 				</h1>
 
-				<?php
-echo '<small>' . $publishedDate . '</small>';
-    ?>
-		<?php if ($author == $_SESSION['username']) {?>
-						<a href="../actions/action_deleteStory.php?storyId=<?=$story['storyId']?>&csrf=<?=$_SESSION['csrf']?>">
-							<button class="button secondary">Delete story</button>
-						</a>
-					<?php }?>
+				<?='<small>' . $publishedDate . '</small>'?>;
+
+				<?php if ($author == $_SESSION['username']) {?>
+					<a href="../actions/action_deleteStory.php?storyId=<?=$story['storyId']?>&csrf=<?=$_SESSION['csrf']?>">
+						<button class="button secondary">Delete story</button>
+					</a>
+				<?php }?>
+
 				<div id="story-description">
-					<p><?=$story['text']?></p>
+					<p><?=htmlspecialchars($story['text'])?></p>
 				</div>
 
 				<?php if ($storyImg != null) {?>
@@ -117,8 +113,8 @@ echo '<small>' . $publishedDate . '</small>';
 				<?php }?>
 
 				<div class="signature">
-					by <a href="profile.php?username=<?=$author?>">@<?=$author?></a>
-					at channel <a href="channel.php?title=<?=$channel?>"><?=$channel?></a>
+					by <a href="profile.php?username=<?=$author?>">@<?=htmlspecialchars($author)?></a>
+					at channel <a href="channel.php?title=<?=$channel?>"><?=htmlspecialchars($channel)?></a>
 				</div>
 			</header>
 
@@ -134,17 +130,15 @@ echo '<small>' . $publishedDate . '</small>';
 			   </div>
 
 				<div id="comments-list">
-					<?php
-if ($comments) {
-        foreach ($comments as $comment) {
-            drawComment($comment);
-        }
-
-    } else {?>
+					<?php 
+						if ($comments) {
+							foreach ($comments as $comment) {
+									drawComment($comment);
+							}
+    				} else {?>
 							<div class="container bg-white">No comments yet.</div>
-						<?php }?>
+						<?php } ?>
 				</div>
 			</section>
-
 		</div>
-<?php }?>
+<?php } ?>

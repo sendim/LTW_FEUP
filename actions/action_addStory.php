@@ -24,6 +24,19 @@ $userId = getUserId($username);
 // get channel id
 $channelId = getChannelId($channel);
 
+// remove all disallowed characters
+$title = preg_replace('/[^a-zA-Z\s]/', '', $title);
+if ($title == '') {
+    $_SESSION['error_messages'][] = "Story title can only contain letters!";
+    die(header('Location: ../pages/newStory.php'));
+}
+
+$text = preg_replace('/[^a-zA-Z0-9]/', '', $text);
+if ($text == '') {
+    $_SESSION['error_messages'][] = "Story description can only contain letters and numbers!";
+    die(header('Location: ../pages/newStory.php'));
+}
+
 try {
     // add new story
     $storyId = addStory($title, $text, $userId, $channelId);

@@ -6,11 +6,9 @@ if (!isset($_SESSION['username'])) {
     die(header('Location: ../pages/login.php'));
 }
 
-$input = $_GET['search'];
-$input = preg_replace('/%/', '', $input);
-//$input = preg_replace('\'', '', $input);
-
-if ($input == null || $input == '') {
+$input = preg_replace('/[^a-zA-Z0-9]/', '', $_GET['search']);
+if ($input == '') {
+    $_SESSION['error_messages'][] = "Search keywords can only contain letters and numbers!";
     die(header('Location: ../pages/feed.php'));
 }
 

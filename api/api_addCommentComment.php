@@ -16,6 +16,12 @@ $refCommentId = $_POST['refCommentId'];
 $text = $_POST['text'];
 $csrf = $_POST['csrf'];
 
+$text = preg_replace('/[^a-zA-Z0-9]/', '', $text);
+if ($text == '') {
+    $_SESSION['error_messages'][] = "Comment can only contain letters and numbers!";
+    die(json_encode(array('error' => 'invalid_chars')));
+}
+
 // verifies csrf token
 if ($_SESSION['csrf'] != $csrf) {
     die(json_encode(array('error' => 'incompatible_csrf')));

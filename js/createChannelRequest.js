@@ -55,11 +55,9 @@ function formSubmitted(event) {
 
     // if channel could not be created
     if (response["error"]) {
-      let existsMessage = createdChannelsSection.querySelector(
-        "section#messages"
-      );
+      let message = createdChannelsSection.querySelector("section#messages");
 
-      if (!existsMessage) {
+      if (!message) {
         createdChannelsSection
           .querySelector("form")
           .insertAdjacentHTML(
@@ -73,22 +71,33 @@ function formSubmitted(event) {
             "<?php } clearMessages(); ?>" +
             "</section>"
           );
+      } else {
+        // update msg
+        message.innerHTML =
+          '<section id="messages">' +
+          '<article class="error">' +
+          "<p>" +
+          response["error"] +
+          "</p>" +
+          "</article>" +
+          "<?php } clearMessages(); ?>" +
+          "</section>";
       }
     } else {
-      // remove input div
+      // remove input & msg divs
       let inputDiv = channelsDiv.getElementsByClassName("form-input")[0];
-      let form = inputDiv.parentNode;
-      form.parentNode.removeChild(form);
+      let form = inputDiv.parentNode.parentNode
+      form.parentNode.removeChild(form)
 
       // add new channel
       createdChannelsSection.insertAdjacentHTML(
         "beforeend",
         '<a href="channel.php?title=' +
-        channelTitle +
+        response['success'] +
         '">' +
         '<div class="channel-card">' +
         '<div class="title">' +
-        channelTitle +
+        response['success'] +
         "</div>" +
         '<div class="stories-number">0 stories</div>' +
         "</div>" +
