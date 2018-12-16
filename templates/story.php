@@ -14,18 +14,19 @@ function drawStory($story, $picked = false)
 
     $author = getStoryAuthor($story['storyId']);
     $channel = getChannelTitle($story['channelId']);
-	$nrComments = countStoryComments($story['storyId']);
-	$downButton = "button primary icon";
-	$upButton = "button primary icon";
-	if($picked){
-		if(getUserVote($story['storyId'], $_SESSION['username']) > 0)
-			$upButton = "button primary picked icon";
-		else
-			$downButton = "button primary picked icon";
-	}
+		$nrComments = countStoryComments($story['storyId']);
+		$storyImg = getStoryImage($story['storyId']);
 
-    $storyImg = getStoryImage($story['storyId']);
+		$downButton = "button primary icon";
+		$upButton = "button primary icon";
+		if ($picked){
+			if(getUserVote($story['storyId'], $_SESSION['username']) > 0)
+				$upButton = "button primary upVote icon";
+			else
+				$downButton = "button primary downVote icon";
+		}
     ?>
+		
 		<div class="story-card bg-white">
 			<header>
 				<a href=<?=$storyLink?>>

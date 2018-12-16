@@ -125,8 +125,14 @@ small {
   border: solid 1px rgba(0, 0, 0, 0.2);
 }
 
-.button.primary.picked {
+.button.primary.upVote {
   background-color: #06f02d;
+  color: #373640;
+  border: solid 1px rgba(0, 0, 0, 0.2);
+}
+
+.button.primary.downVote {
+  background-color: #f01a06;
   color: #373640;
   border: solid 1px rgba(0, 0, 0, 0.2);
 }

@@ -44,14 +44,14 @@ function drawHeader($selected)
         <?php }if (in_array($selected, $commentVotingPage)) {?>
           <script src="../js/commentVoteRequest.js" defer></script>
         <?php }if ($selected == $commentCreationPage) {?>
-          <script src="../js/addStoryCommentRequest.js" defer></script>
-          <script src="../js/addCommentCommentRequest.js" defer></script>
+          <script src="../js/addCommentRequest.js" defer></script>
+          <script src="../js/addSubcomentRequest.js" defer></script>
         <?php }if ($selected == $channelCreationPage) {?>
           <script src="../js/createChannelRequest.js" defer></script>
         <?php }if ($selected == $profilePage) {?>
-          <script src="../js/getSortedStoriesProfile.js" defer></script>
+          <script src="../js/profileSortingRequest.js" defer></script>
         <?php }if ($selected == $sortingPage) {?>
-             <script src="../js/getSortingRequest.js" defer></script>
+             <script src="../js/feedSortingRequest.js" defer></script>
         <?php }?>
       </head>
       <body>

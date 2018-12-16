@@ -37,6 +37,5 @@ function drawFeed($stories, $channels, $currChannel)
                 drawStory($story, $picked);
             } ?>
         </div>
-
     </div>
 <?php }?>

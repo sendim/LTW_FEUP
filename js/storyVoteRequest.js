@@ -26,15 +26,19 @@ function doneClicked(event) {
     // update likes & dislikes values of story button
     var likesSpan = btn.parentNode.querySelector('span[type="likes"]')
     likesSpan.innerHTML = response['likes']
+
     // updates the button
-    btn.className = "button primary picked icon"
-    if(response['likes'] > 0)
+    if(response['likes'] > 0) {
+      btn.className = "button primary upVote icon"
       btn.parentNode.querySelector('button[id="downButton"]').className = "button primary icon"
-    else 
+    }
+    else {
+      btn.className = "button primary downVote icon"
       btn.parentNode.querySelector('button[id="upButton"]').className = "button primary icon"
-    
+    }
+
     // update user points if on profile
-    var userPoints = document.querySelector('span[type="points"]');
+    var userPoints = document.querySelector('span[type="points"]')
     if (userPoints != null)
       userPoints.innerHTML = response['userPoints']
   })

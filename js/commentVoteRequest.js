@@ -22,16 +22,15 @@ function doneClicked(event) {
 
   request.addEventListener("load", function () {
     let response = JSON.parse(this.responseText)
-    console.log(response);
+
     // update likes & dislikes values of story button
     var likesSpan = btn.parentNode.querySelector('span[type="likes"]')
     likesSpan.innerHTML = response['likes']
 
     // update user points if on profile
-    var userPoints = document.querySelector('span[type="points"]');
+    var userPoints = document.querySelector('span[type="points"]')
     if (userPoints != null)
       userPoints.innerHTML = response['userPoints']
-
   })
 
   request.send(
