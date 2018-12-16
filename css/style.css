@@ -454,6 +454,54 @@ img.responsive {
   height: 30px;
 }
 
+/* profile card */
+
+.profile-card {
+  background-color: white;
+  display: flex;
+  margin-bottom: 2px;
+}
+
+.profile-card .profile-picture {
+  display: flex;
+  flex: 20%;
+}
+
+.profile-card .profile-picture img {
+  max-height: 100px;
+  width: auto;
+}
+
+.profile-card .profile-info {
+  display: flex;
+  flex: 80%;
+  flex-direction: column;
+}
+
+.profile-card .profile-info .user-info {
+  display: flex;
+  align-items: center;
+}
+.profile-card .profile-info .user-info small {
+  margin-left: 8px;
+}
+
+.profile-card .profile-info .user-points {
+  display: flex;
+  align-items: center;
+}
+
+.profile-card .profile-info .user-points .user-points-star {
+  margin-right: 8px;
+  width: 30px;
+  height: 30px;
+}
+
+.profile-card .profile-info .user-points span {
+  font-weight: bold;
+  font-size: 16px;
+}
+
 /* story page */
 #story-page header h1 {
   display: inline-block;

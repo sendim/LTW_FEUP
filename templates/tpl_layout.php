@@ -53,6 +53,8 @@ function drawHeader($selected)
         <?php }if ($selected == $sortingPage) {?>
              <script src="../js/feedSortingRequest.js" defer></script>
         <?php }?>
+
+        <title>The Fusion Network - <?= $selected ?> </title>
       </head>
       <body>
         <nav id="navbar">

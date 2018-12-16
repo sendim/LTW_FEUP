@@ -191,4 +191,37 @@ function validate() {
     return r;
 }
 </script>
-<?php }?>
+<?php }
+
+function drawProfileCard($profile){
+    $profileLink = "profile.php?username=" . $profile['username'];
+
+    ?>
+
+    <article class="profile-card container bg-white">
+        <div class="profile-picture">
+                <?php 
+                $image = getUserProfilePhoto($profile['username']);
+                if ($image != null) {?>
+                    <a href="../images/originals/<?=$image['imageId']?>.jpg">
+                        <img class="profile-pic responsive" src="../images/thumbnails/<?=$image['imageId']?>.jpg">
+                    </a>
+                <?php } else { ?>
+                    <img src="../images/thumbnails/default.jpg">
+                <?php } ?>
+        </div>
+        <div class="profile-info">
+            <div class="user-info">
+                <a href=<?=$profileLink?>>
+                    <h2><?=htmlspecialchars($profile['name'])?></h2>
+                </a>
+                    <small><?='@' . htmlspecialchars($profile['username'])?></small>
+            </div>
+            <div class="user-points">
+                <img class="user-points-star" src="icons/star.svg" alt="Points">
+                <span type="points"><?=$profile['points']?></span>
+            </div>
+        </div>
+    </article>
+
+<?php } ?>
