@@ -20,7 +20,7 @@ function drawSearchFeed($profiles, $stories, $comments, $channels, $input)
                 <?php 
                     if (count($profiles) != 0) {
                         foreach ($profiles as $profile) {
-                            drawHeaderProfile($profile);
+                            drawProfileCard($profile);
                         }
                     } else { ?>
                         <div class="container bg-white">
