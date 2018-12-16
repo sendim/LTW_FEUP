@@ -61,7 +61,7 @@ function drawProfile($profile,$order, $sort)
      * Draws the login section.
      */
     $comments = getUserComments($profile['username']);
-    $stories = getUserStories($profile['username'],'dislikes',$sort);
+    $stories = getUserStories($profile['username'],$order,$sort);
     drawHeaderProfile($profile);
     ?>
         <div id="profile">
@@ -77,7 +77,6 @@ function drawProfile($profile,$order, $sort)
                         <option value="title_asc">Order by ascending title</option>
                         <option value="title_desc">Order by descending title</option>
                         <option value="likes">Order by likes</option>
-                        <option value="dislikes">Order by dislikes</option>
                     </select>
                 </div>
 

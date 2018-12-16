@@ -265,7 +265,7 @@ function updateUserPoints($username)
 
     // get points from user stories votes
     $storiesStmt = $db->prepare(
-        'SELECT SUM(likes) - SUM(dislikes) AS storyPoints
+        'SELECT SUM(likes) AS storyPoints
             FROM story NATURAL JOIN user
             WHERE username LIKE ?'
     );
@@ -277,7 +277,7 @@ function updateUserPoints($username)
 
     // get points from user comments votes
     $commentsStmt = $db->prepare(
-        'SELECT SUM(likes) - SUM(dislikes) AS commentPoints
+        'SELECT SUM(likes) AS commentPoints
             FROM comment NATURAL JOIN user
             WHERE username LIKE ?'
     );

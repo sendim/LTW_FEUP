@@ -43,9 +43,6 @@ function drawComment($comment)
 												<button class="button primary icon" commentId="<?=$comment['commentId']?>" username="<?=$_SESSION['username']?>" vote="-1" csrf="<?=$_SESSION['csrf']?>">
 														<img src='icons/arrow-down.svg' alt="Vote down">
 												</button>
-												<span type="dislikes">
-														<?=getCommentDislikes($comment['commentId'])?>
-												</span>
 										</div>
 								</div>
 								<div class="story-footer-right">

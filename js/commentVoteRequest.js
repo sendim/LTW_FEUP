@@ -25,9 +25,7 @@ function doneClicked(event) {
     console.log(response);
     // update likes & dislikes values of story button
     var likesSpan = btn.parentNode.querySelector('span[type="likes"]')
-    var dislikesSpan = btn.parentNode.querySelector('span[type="dislikes"]')
     likesSpan.innerHTML = response['likes']
-    dislikesSpan.innerHTML = response['dislikes']
 
     // update user points if on profile
     var userPoints = document.querySelector('span[type="points"]');

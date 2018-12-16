@@ -51,9 +51,6 @@ echo '<small>' . $publishedDate . '</small>';
 						<button class="button primary icon" storyId="<?=$story['storyId']?>" username="<?=$_SESSION['username']?>" vote="-1" csrf="<?=$_SESSION['csrf']?>">
 							<img src='icons/arrow-down.svg' alt="Vote down">
 						</button>
-						<span type="dislikes">
-							<?=getStoryDislikes($story['storyId'])?>
-						</span>
 					</div>
 					<div class="signature">
 						by <a href="profile.php?username=<?=$author?>">@<?=$author?></a>

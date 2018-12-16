@@ -48,30 +48,11 @@ function getCommentLikes($commentId)
     $stmt = $db->prepare(
         'SELECT SUM(vote) as likes
             FROM votesComment
-            WHERE commentId = ? AND vote > 0'
+            WHERE commentId = ?'
     );
     $stmt->execute(array($commentId));
 
     $result = $stmt->fetch()['likes'];
-    if ($result != null) {
-        return $result;
-    } else {
-        return 0;
-    }
-
-}
-
-function getCommentDislikes($commentId)
-{
-    $db = Database::instance()->db();
-    $stmt = $db->prepare(
-        'SELECT SUM(vote) as dislikes
-            FROM votesComment
-            WHERE commentId = ? AND vote < 0'
-    );
-    $stmt->execute(array($commentId));
-
-    $result = $stmt->fetch()['dislikes'];
     if ($result != null) {
         return $result;
     } else {
@@ -120,12 +101,11 @@ function updateCommentVote($commentId, $username, $vote)
     $db = Database::instance()->db();
     $updateStmt = $db->prepare(
         'UPDATE comment
-            SET likes = ?, dislikes = ?
+            SET likes = ?
             WHERE commentId = ?'
     );
     $updateStmt->execute(array(
         getCommentLikes($commentId),
-        -getCommentDislikes($commentId),
         $commentId)
     );
 }

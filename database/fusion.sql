@@ -26,7 +26,6 @@ CREATE TABLE story (
   userId INTEGER REFERENCES user ON DELETE CASCADE NOT NULL, -- who wrote the article
   text VARCHAR NOT NULL,
   likes INTEGER,
-  dislikes INTEGER,
   channelId INTEGER REFERENCES channel ON DELETE CASCADE
 );
 
@@ -37,7 +36,6 @@ CREATE TABLE comment (
   published INTEGER, -- date when news item was published in epoch format
   text VARCHAR NOT NULL,
   likes INTEGER,
-  dislikes INTEGER,
   referencedComment INTEGER REFERENCES comment ON DELETE CASCADE
 );
 

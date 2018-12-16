@@ -31,7 +31,6 @@ updateUserPoints($author);
 // send new story likes & dislikes values
 $ret = array(
     'likes' => getStoryLikes($storyId),
-    'dislikes' => getStoryDislikes($storyId),
     'userPoints' => getUserPoints($author),
 );
 

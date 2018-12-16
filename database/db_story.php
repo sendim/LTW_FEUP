@@ -83,30 +83,11 @@ function getStoryLikes($storyId)
     $stmt = $db->prepare(
         'SELECT SUM(vote) as likes
             FROM votesStory
-            WHERE storyId = ? AND vote > 0'
+            WHERE storyId = ?'
     );
     $stmt->execute(array($storyId));
 
     $result = $stmt->fetch()['likes'];
-    if ($result != null) {
-        return $result;
-    } else {
-        return 0;
-    }
-
-}
-
-function getStoryDislikes($storyId)
-{
-    $db = Database::instance()->db();
-    $stmt = $db->prepare(
-        'SELECT SUM(vote) as dislikes
-            FROM votesStory
-            WHERE storyId = ? AND vote < 0'
-    );
-    $stmt->execute(array($storyId));
-
-    $result = $stmt->fetch()['dislikes'];
     if ($result != null) {
         return $result;
     } else {
@@ -162,12 +143,11 @@ function updateStoryVote($storyId, $username, $vote)
     $db = Database::instance()->db();
     $updateStmt = $db->prepare(
         'UPDATE story
-            SET likes = ?, dislikes = ?
+            SET likes = ?
             WHERE storyId = ?'
     );
     $updateStmt->execute(array(
         getStoryLikes($storyId),
-        -getStoryDislikes($storyId),
         $storyId)
     );
 }

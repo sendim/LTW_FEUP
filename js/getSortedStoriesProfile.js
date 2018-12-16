@@ -46,10 +46,6 @@ function changedOrder(event) {
       order = 'likes'
       sort = 'ASC';
       break;
-    case 'dislikes':
-      order = 'dislikes'
-      sort = 'DESC'
-      break;
   }
 
   // setup of the ajax request
