@@ -1,6 +1,6 @@
 <?php
-include_once '../templates/layout.php';
-include_once '../templates/story.php';
+include_once '../templates/tpl_layout.php';
+include_once '../templates/tpl_story.php';
 include_once '../database/db_story.php';
 
 // verify if user session is set

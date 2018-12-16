@@ -1,6 +1,6 @@
 <?php
-include_once '../templates/story.php';
-include_once '../templates/formInput.php';
+include_once '../templates/tpl_story.php';
+include_once '../templates/tpl_formInput.php';
 
 function drawChannel($title, $stories, $username)
 {

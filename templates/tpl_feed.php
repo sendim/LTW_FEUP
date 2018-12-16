@@ -1,5 +1,5 @@
 <?php
-include_once '../templates/story.php';
+include_once '../templates/tpl_story.php';
 
 function drawFeed($stories, $channels, $currChannel)
 { ?>

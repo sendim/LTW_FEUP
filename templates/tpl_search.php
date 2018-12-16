@@ -1,7 +1,7 @@
 <?php
-include_once '../templates/story.php';
-include_once '../templates/profile.php';
-include_once '../templates/channel.php';
+include_once '../templates/tpl_story.php';
+include_once '../templates/tpl_profile.php';
+include_once '../templates/tpl_channel.php';
 
 function drawSearchFeed($profiles, $stories, $comments, $channels, $input)
 {?>
