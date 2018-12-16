@@ -84,7 +84,8 @@ function drawProfile($profile,$order, $sort)
                     <?php
 if ($stories) {
         foreach ($stories as $story) {
-            drawStory($story);
+            $picked = userVotedStory($story['storyId'], $_SESSION['username']);
+            drawStory($story,$picked);
         }
 
     } else {?>
