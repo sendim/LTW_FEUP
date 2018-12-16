@@ -38,7 +38,8 @@ function drawFeed($stories, $channels, $currChannel)
             <div>
                 <?php
 foreach ($stories as $story) {
-    drawStory($story);
+    $picked = userVotedStory($story['storyId'], $_SESSION['username']);
+    drawStory($story, $picked);
 }
 
     ?>

@@ -114,14 +114,16 @@ function userVotedStory($storyId, $username)
 
 function getUserVote($storyId, $username)
 {
+    
     if (userVotedStory($storyId, $username)) {
+        $userId = getUserId($username);
         $db = Database::instance()->db();
         $stmt = $db->prepare(
             'SELECT vote
                 FROM votesStory
                 WHERE storyId = ? AND userId = ?'
         );
-        $stmt->execute(array($storyId, $username));
+        $stmt->execute(array($storyId, $userId));
         return $stmt->fetch()['vote'];
     }
     return null;

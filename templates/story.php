@@ -4,7 +4,7 @@ include_once '../database/db_story.php';
 include_once '../database/db_channel.php';
 include_once '../templates/comment.php';
 
-function drawStory($story)
+function drawStory($story, $picked = false)
 {
     /**
      * Draws a story section.
@@ -14,7 +14,16 @@ function drawStory($story)
 
     $author = getStoryAuthor($story['storyId']);
     $channel = getChannelTitle($story['channelId']);
-    $nrComments = countStoryComments($story['storyId']);
+	$nrComments = countStoryComments($story['storyId']);
+	$downButton = "button primary icon";
+	$upButton = "button primary icon";
+	if($picked){
+		if(getUserVote($story['storyId'], $_SESSION['username']) > 0)
+			$upButton = "button primary picked icon";
+		else
+			$downButton = "button primary picked icon";
+	}
+
     $storyImg = getStoryImage($story['storyId']);
     ?>
 		<div class="story-card bg-white">
@@ -42,13 +51,13 @@ echo '<small>' . $publishedDate . '</small>';
 			<footer>
 				<div class="story-footer-left">
 					<div class="story vote-buttons">
-						<button class="button primary icon" storyId="<?=$story['storyId']?>" username="<?=$_SESSION['username']?>" vote="1" csrf="<?=$_SESSION['csrf']?>">
+						<button id="upButton" class="<?=$upButton?>" storyId="<?=$story['storyId']?>" username="<?=$_SESSION['username']?>" vote="1" csrf="<?=$_SESSION['csrf']?>">
 							<img src='icons/arrow-up.svg' alt="Vote up">
 						</button>
 						<span type="likes">
 							<?=getStoryLikes($story['storyId'])?>
 						</span>
-						<button class="button primary icon" storyId="<?=$story['storyId']?>" username="<?=$_SESSION['username']?>" vote="-1" csrf="<?=$_SESSION['csrf']?>">
+						<button id="downButton" class="<?=$downButton?>" storyId="<?=$story['storyId']?>" username="<?=$_SESSION['username']?>" vote="-1" csrf="<?=$_SESSION['csrf']?>">
 							<img src='icons/arrow-down.svg' alt="Vote down">
 						</button>
 					</div>
