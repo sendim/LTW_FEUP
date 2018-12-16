@@ -8,6 +8,7 @@ if (!isset($_SESSION['username'])) {
 
 $input = $_GET['search'];
 $input = preg_replace('/%/', '', $input);
+//$input = preg_replace('\'', '', $input);
 
 if ($input == null || $input == '') {
     die(header('Location: ../pages/feed.php'));

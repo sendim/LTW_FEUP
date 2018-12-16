@@ -11,5 +11,18 @@ if (!isset($_SESSION['username'])) {
 
 drawLayout(function () {
     $profile = getUserProfile($_GET['username']);
-    drawProfile($profile);
+    
+    // display options
+    $order = 'published';
+    $sort = '';
+
+    if (isset($_GET['sort'])) {
+        $sort = $_GET['sort'];
+    }
+
+    if (isset($_GET['order'])) {
+        $order = $_GET['order'];
+    }
+
+    drawProfile($profile, $order, $sort);
 }, 'profile');

@@ -99,17 +99,31 @@ function getUserPoints($username)
     return $stmt->fetch()['points'];
 }
 
-function getUserStories($username)
+function getUserStories($username, $order = 'published', $sort = 'DESC')
 {
     $db = Database::instance()->db();
-
-    $stmt = $db->prepare(
-        'SELECT *
-            FROM story NATURAL JOIN user
-            WHERE username = ?'
+    $userId = getUserId($username);
+    // order by case-insensitive titles
+    if ($order == 'title') 
+        $order = 'story.title';
+        
+        if ($sort == 'ASC') {
+            $sort = 'COLLATE NOCASE ASC';
+        } else if ($sort == 'DESC') {
+            $sort = 'COLLATE NOCASE DESC';
+        }
+    
+    $query = sprintf(
+        'SELECT story.*
+        FROM story NATURAL JOIN user
+        WHERE userId = %s
+        ORDER BY %s %s',
+        $userId, $order, $sort
     );
-    $stmt->execute(array($username));
-    return $stmt->fetchAll();
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+
+    return $stmt->fetchAll();;
 }
 
 function getUserComments($username)

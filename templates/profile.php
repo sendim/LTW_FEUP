@@ -8,7 +8,7 @@ function drawHeaderProfile($profile)
 {
     $profileLink = "profile.php?username=" . $profile['username'];
     ?>
-        <div id="profile">
+        <div id="profile" value = <?= $profile['username'] ?> >
             <header class="container header">
                 <div id="profile-header" class="container">
                     <div id="profile-header-photo">
@@ -30,7 +30,7 @@ function drawHeaderProfile($profile)
                             <a href=<?=$profileLink?>>
                                 <h2><?=$profile['name']?></h2>
                             </a>
-                                <small><?='@' . $profile['username']?></small>
+                                <small id = username value = '1' ><?='@' . $profile['username']?></small>
                         </div>
                         <div id="profile-header-points">
                             <img id="user-points" src="icons/star.svg" alt="Points">
@@ -55,21 +55,30 @@ function drawHeaderProfile($profile)
     <?php
 }
 
-function drawProfile($profile)
+function drawProfile($profile,$order, $sort)
 {
     /**
      * Draws the login section.
      */
     $comments = getUserComments($profile['username']);
-    $stories = getUserStories($profile['username']);
+    $stories = getUserStories($profile['username'],'dislikes',$sort);
     drawHeaderProfile($profile);
     ?>
         <div id="profile">
-
+    
             <section id="stories">
                 <div id="stories-header" class="section-header">
                     Stories
-                    <button class="button secondary">Order by date</button>
+                            
+                    <select id="order" class="button secondary">
+                        <option value="none">Order by</option>
+                        <option value="published_asc">Order by ascending date</option>
+                        <option value="published_desc">Order by descending date</option>
+                        <option value="title_asc">Order by ascending title</option>
+                        <option value="title_desc">Order by descending title</option>
+                        <option value="likes">Order by likes</option>
+                        <option value="dislikes">Order by dislikes</option>
+                    </select>
                 </div>
 
                 <div id="stories-list">

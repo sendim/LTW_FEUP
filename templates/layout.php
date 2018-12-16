@@ -32,6 +32,7 @@ function drawHeader($selected)
     $commentCreationPage = 'story';
     $commentVotingPage = array('story', 'profile');
     $sortingPage = 'feed';
+    $profilePage = 'profile';
     ?>
     <!DOCTYPE html>
     <html lang="en-US">
@@ -47,6 +48,8 @@ function drawHeader($selected)
           <script src="../js/addCommentCommentRequest.js" defer></script>
         <?php }if ($selected == $channelCreationPage) {?>
           <script src="../js/createChannelRequest.js" defer></script>
+        <?php }if ($selected == $profilePage) {?>
+          <script src="../js/getSortedStoriesProfile.js" defer></script>
         <?php }if ($selected == $sortingPage) {?>
              <script src="../js/getSortingRequest.js" defer></script>
         <?php }?>
