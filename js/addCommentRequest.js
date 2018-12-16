@@ -16,7 +16,7 @@ function commentSubmitted(event) {
     // setup of the ajax request
     let request = new XMLHttpRequest()
 
-    request.open("post", "../api/api_addStoryComment.php", true)
+    request.open("post", "../api/api_addComment.php", true)
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 
     request.addEventListener("load", function () {
