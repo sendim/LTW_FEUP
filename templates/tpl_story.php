@@ -2,7 +2,7 @@
 include_once '../includes/session.php';
 include_once '../database/db_story.php';
 include_once '../database/db_channel.php';
-include_once '../templates/comment.php';
+include_once '../templates/tpl_comment.php';
 
 function drawStory($story, $picked = false)
 {

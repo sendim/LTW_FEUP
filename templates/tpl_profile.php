@@ -1,8 +1,8 @@
 <?php
 include_once '../includes/session.php';
 include_once '../database/db_user.php';
-include_once '../templates/story.php';
-include_once '../templates/comment.php';
+include_once '../templates/tpl_story.php';
+include_once '../templates/tpl_comment.php';
 
 function drawHeaderProfile($profile)
 {

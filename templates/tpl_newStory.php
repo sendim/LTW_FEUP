@@ -1,6 +1,6 @@
 <?php
 
-include_once '../templates/formInput.php';
+include_once '../templates/tpl_formInput.php';
 
 /**
  * Draws new story page.
