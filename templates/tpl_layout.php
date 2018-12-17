@@ -81,7 +81,7 @@ function drawMenu($selected)
           <div id="pic-and-name">
             <a href="profile.php?username=<?=$username?>">
               <?php if ($image != null) {?>
-                <img class="profile-pic responsive" src="../images/icons/<?=$image['imageId']?>jpg">
+                <img class="profile-pic responsive" src="../images/icons/<?=$image['imageId']?>.jpg">
               <?php } else {?>
                 <img class="profile-pic responsive" src="../images/icons/default.jpg">
               <?php }?>
