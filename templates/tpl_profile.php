@@ -72,7 +72,6 @@ function drawProfile($profile, $order, $sort)
                         <option value="published_desc">Order by descending date</option>
                         <option value="title_asc">Order by ascending title</option>
                         <option value="title_desc">Order by descending title</option>
-                        <option value="likes">Order by likes</option>
                     </select>
                 </div>
 
